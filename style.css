@@ -1,6 +1,6 @@
 /* ============================================================
    JOEVER L. SAYSON — PORTFOLIO STYLES
-   Theme: Ocean Blue · Mobile Menu with Close Button
+   Theme: Ocean Blue · Mobile Optimized
    ============================================================ */
 
 
@@ -16,7 +16,6 @@
     --text: #ececf1;
     --text-muted: #8b8ba3;
     --text-soft: #b4b4c8;
-    /* 🎨 OCEAN BLUE THEME */
     --primary: #3b82f6;
     --primary-soft: rgba(59, 130, 246, 0.12);
     --primary-line: rgba(59, 130, 246, 0.28);
@@ -48,6 +47,9 @@
     --container-max: 1200px;
     --container-pad: clamp(16px, 4vw, 24px);
     --section-pad-y: clamp(56px, 8vw, 88px);
+    /* Safe area for mobile (iPhone notch, home indicator) */
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
 }
 
 
@@ -336,7 +338,7 @@ button {
 
 
 /* ============================================================
-   NAV OVERLAY (Mobile Menu Backdrop)
+   NAV OVERLAY
    ============================================================ */
 
 .nav-overlay {
@@ -534,8 +536,8 @@ button {
 
 .image-frame {
     position: relative;
-    width: clamp(240px, 30vw, 320px);
-    height: clamp(240px, 40vw, 320px);
+    width: clamp(240px, 28vw, 320px);
+    height: clamp(240px, 28vw, 320px);
     border-radius: 50%;
     padding: 4px;
     background: var(--gradient);
@@ -1205,6 +1207,7 @@ button {
 
 .footer {
     padding: var(--space-lg) var(--container-pad);
+    padding-bottom: calc(var(--space-lg) + var(--safe-bottom));
     border-top: 1px solid var(--border);
     background: var(--bg-alt);
     transition: var(--theme-transition);
@@ -1241,13 +1244,13 @@ button {
 
 
 /* ============================================================
-   FLOATING SCROLL BUTTONS
+   FLOATING SCROLL BUTTONS — SAME STYLE (BLUE GRADIENT)
    ============================================================ */
 
 .scroll-down-btn,
 .scroll-top {
     position: fixed;
-    right: 24px;
+    right: calc(24px + var(--safe-right));
     width: 44px;
     height: 44px;
     border-radius: var(--radius-sm);
@@ -1260,45 +1263,41 @@ button {
     transform: translateY(16px);
     transition: all var(--transition);
     z-index: 999;
-}
-
-.scroll-down-btn {
-    bottom: 80px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text-soft);
-}
-
-.scroll-down-btn:hover {
-    color: var(--primary);
-    border-color: var(--primary-line);
-    background: var(--primary-soft);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
-}
-
-.scroll-down-btn.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.scroll-top {
-    bottom: 24px;
+    /* ✅ SAME STYLE SA DUHA */
     background: var(--gradient);
     color: #fff;
     box-shadow: var(--shadow-glow);
+    border: none;
 }
 
+.scroll-down-btn {
+    bottom: calc(80px + var(--safe-bottom));
+}
+
+.scroll-top {
+    bottom: calc(24px + var(--safe-bottom));
+}
+
+.scroll-down-btn.visible,
 .scroll-top.visible {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
+.scroll-down-btn:hover,
 .scroll-top:hover {
     transform: translateY(-3px);
-    box-shadow: 0 16px 44px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 16px 44px rgba(59, 130, 246, 0.45);
+}
+
+
+/* Pressed state for mobile */
+
+.scroll-down-btn:active,
+.scroll-top:active {
+    transform: translateY(-1px) scale(0.96);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
 }
 
 
@@ -1319,7 +1318,7 @@ button {
 
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE — LARGE DESKTOP (1440px+)
    ============================================================ */
 
 @media (min-width: 1440px) {
@@ -1333,6 +1332,11 @@ button {
         grid-template-columns: 1.2fr 1fr;
     }
 }
+
+
+/* ============================================================
+   RESPONSIVE — TABLET (max 968px)
+   ============================================================ */
 
 @media (max-width: 968px) {
      :root {
@@ -1366,7 +1370,6 @@ button {
     .menu-toggle {
         display: grid;
     }
-    /* SHOW close button only on mobile */
     .nav-close {
         display: flex;
     }
@@ -1399,6 +1402,11 @@ button {
         justify-content: flex-start;
     }
 }
+
+
+/* ============================================================
+   RESPONSIVE — MOBILE (max 768px)
+   ============================================================ */
 
 @media (max-width: 768px) {
      :root {
@@ -1454,6 +1462,11 @@ button {
     }
 }
 
+
+/* ============================================================
+   RESPONSIVE — SMALL MOBILE (max 480px)
+   ============================================================ */
+
 @media (max-width: 480px) {
      :root {
         --space-2xl: 56px;
@@ -1492,18 +1505,19 @@ button {
     .contact-card {
         padding: var(--space-md) var(--space-sm);
     }
+    /* Scroll buttons — slightly smaller on small phones */
     .scroll-down-btn,
     .scroll-top {
-        right: 16px;
+        right: calc(16px + var(--safe-right));
         width: 42px;
         height: 42px;
         font-size: 0.95rem;
     }
     .scroll-down-btn {
-        bottom: 74px;
+        bottom: calc(72px + var(--safe-bottom));
     }
     .scroll-top {
-        bottom: 20px;
+        bottom: calc(18px + var(--safe-bottom));
     }
     .theme-toggle {
         width: 36px;
@@ -1530,6 +1544,11 @@ button {
     }
 }
 
+
+/* ============================================================
+   RESPONSIVE — EXTRA SMALL (max 360px)
+   ============================================================ */
+
 @media (max-width: 360px) {
      :root {
         --container-pad: 12px;
@@ -1550,6 +1569,11 @@ button {
     }
 }
 
+
+/* ============================================================
+   RESPONSIVE — LANDSCAPE PHONE
+   ============================================================ */
+
 @media (max-height: 500px) and (orientation: landscape) {
     .hero {
         min-height: auto;
@@ -1563,7 +1587,24 @@ button {
     .hero-content {
         gap: 24px;
     }
+    .scroll-down-btn,
+    .scroll-top {
+        width: 38px;
+        height: 38px;
+        font-size: 0.85rem;
+    }
+    .scroll-down-btn {
+        bottom: calc(60px + var(--safe-bottom));
+    }
+    .scroll-top {
+        bottom: calc(14px + var(--safe-bottom));
+    }
 }
+
+
+/* ============================================================
+   RESPONSIVE — ULTRA-WIDE (1920px+)
+   ============================================================ */
 
 @media (min-width: 1920px) {
      :root {
