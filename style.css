@@ -1,6 +1,6 @@
 /* ============================================================
    JOEVER L. SAYSON — PORTFOLIO STYLES
-   Theme: Ocean Blue · Clean & Production Ready
+   Theme: Ocean Blue · Fully Responsive (PC + Mobile)
    ============================================================ */
 
 
@@ -175,46 +175,52 @@ button {
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: clamp(6px, 1vw, 10px);
     font-weight: 700;
-    font-size: 1.05rem;
     color: var(--text);
     flex-shrink: 0;
 }
 
 
 /* ============================================================
-   LOGO IMAGE — Clean Transparent Logo
+   LOGO IMAGE — Clean & Responsive
    ============================================================ */
 
 .logo-img {
-    width: 38px;
-    height: 38px;
+    width: clamp(32px, 4vw, 42px);
+    height: clamp(32px, 4vw, 42px);
     border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
     background: transparent;
     border: none;
+    display: block;
     box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
     transition: transform var(--transition), box-shadow var(--transition);
+    flex-shrink: 0;
+    object-fit: contain;
 }
 
 .logo:hover .logo-img {
     transform: scale(1.06) rotate(-4deg);
-    box-shadow: 0 6px 22px rgba(59, 130, 246, 0.5);
+    box-shadow: 0 6px 22px rgba(59, 130, 246, 0.55);
 }
 
 .logo-mark {
     display: grid;
     place-items: center;
-    width: 38px;
-    height: 38px;
+    width: clamp(32px, 4vw, 42px);
+    height: clamp(32px, 4vw, 42px);
     border-radius: 50%;
     background: var(--gradient);
     color: #fff;
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.5px;
+}
+
+.logo-text {
+    font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+    font-weight: 700;
+    white-space: nowrap;
 }
 
 .logo-text span {
@@ -1251,7 +1257,7 @@ button {
 
 
 /* ============================================================
-   FLOATING SCROLL BUTTONS — SAME STYLE (BLUE GRADIENT)
+   FLOATING SCROLL BUTTONS
    ============================================================ */
 
 .scroll-down-btn,
@@ -1423,15 +1429,6 @@ button {
     .navbar.scrolled {
         padding: 10px 0;
     }
-    .logo-img,
-    .logo-mark {
-        width: 34px;
-        height: 34px;
-        font-size: 0.78rem;
-    }
-    .logo-text {
-        font-size: 0.95rem;
-    }
     .section-head {
         margin-bottom: 40px;
     }
@@ -1530,14 +1527,6 @@ button {
         width: 36px;
         height: 36px;
         font-size: 1.15rem;
-    }
-    .logo-img,
-    .logo-mark {
-        width: 32px;
-        height: 32px;
-    }
-    .logo-text {
-        font-size: 0.9rem;
     }
     .footer-inner {
         flex-direction: column;
