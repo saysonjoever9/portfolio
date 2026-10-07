@@ -1,6 +1,6 @@
 /* ============================================================
    JOEVER L. SAYSON — PORTFOLIO STYLES
-   Theme: Ocean Blue · Mobile Optimized
+   Theme: Ocean Blue · Clean & Production Ready
    ============================================================ */
 
 
@@ -47,7 +47,6 @@
     --container-max: 1200px;
     --container-pad: clamp(16px, 4vw, 24px);
     --section-pad-y: clamp(56px, 8vw, 88px);
-    /* Safe area for mobile (iPhone notch, home indicator) */
     --safe-bottom: env(safe-area-inset-bottom, 0px);
     --safe-right: env(safe-area-inset-right, 0px);
 }
@@ -183,11 +182,19 @@ button {
     flex-shrink: 0;
 }
 
+
+/* ============================================================
+   LOGO IMAGE — Clean Transparent Logo
+   ============================================================ */
+
 .logo-img {
     width: 38px;
     height: 38px;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center;
+    background: transparent;
+    border: none;
     box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
     transition: transform var(--transition), box-shadow var(--transition);
 }
@@ -1263,7 +1270,6 @@ button {
     transform: translateY(16px);
     transition: all var(--transition);
     z-index: 999;
-    /* ✅ SAME STYLE SA DUHA */
     background: var(--gradient);
     color: #fff;
     box-shadow: var(--shadow-glow);
@@ -1290,9 +1296,6 @@ button {
     transform: translateY(-3px);
     box-shadow: 0 16px 44px rgba(59, 130, 246, 0.45);
 }
-
-
-/* Pressed state for mobile */
 
 .scroll-down-btn:active,
 .scroll-top:active {
@@ -1505,7 +1508,6 @@ button {
     .contact-card {
         padding: var(--space-md) var(--space-sm);
     }
-    /* Scroll buttons — slightly smaller on small phones */
     .scroll-down-btn,
     .scroll-top {
         right: calc(16px + var(--safe-right));
