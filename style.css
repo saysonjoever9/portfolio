@@ -1,6 +1,6 @@
 /* ============================================================
    JOEVER L. SAYSON — PORTFOLIO STYLES
-   Theme: Ocean Blue · Fully Responsive (PC + Mobile)
+   Theme: Ocean Blue · Animated · Fully Responsive
    ============================================================ */
 
 
@@ -21,6 +21,7 @@
     --primary-line: rgba(59, 130, 246, 0.28);
     --secondary: #0ea5e9;
     --gradient: linear-gradient(135deg, #3b82f6 0%, #0ea5e9 100%);
+    --gradient-animated: linear-gradient(135deg, #3b82f6 0%, #0ea5e9 50%, #3b82f6 100%);
     --space-xs: 8px;
     --space-sm: 12px;
     --space-md: 20px;
@@ -69,6 +70,7 @@
     --primary-line: rgba(37, 99, 235, 0.25);
     --secondary: #0284c7;
     --gradient: linear-gradient(135deg, #2563eb 0%, #0284c7 100%);
+    --gradient-animated: linear-gradient(135deg, #2563eb 0%, #0284c7 50%, #2563eb 100%);
     --shadow-sm: 0 2px 10px rgba(60, 60, 100, 0.06);
     --shadow: 0 8px 30px rgba(60, 60, 100, 0.10);
     --shadow-glow: 0 12px 40px rgba(37, 99, 235, 0.20);
@@ -139,6 +141,124 @@ button {
 
 
 /* ============================================================
+   GLOBAL KEYFRAMES
+   ============================================================ */
+
+@keyframes gradientShift {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-14px);
+    }
+}
+
+@keyframes floatSlow {
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+        transform: translate(20px, -20px) rotate(5deg);
+    }
+    66% {
+        transform: translate(-15px, 15px) rotate(-5deg);
+    }
+}
+
+@keyframes pulseGlow {
+    0%,
+    100% {
+        opacity: 0.28;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.45;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translate(-50%, 0);
+    }
+    50% {
+        transform: translate(-50%, 10px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes iconBounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+
+/* ============================================================
    NAVBAR
    ============================================================ */
 
@@ -154,6 +274,7 @@ button {
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid transparent;
     transition: padding var(--transition), border-color var(--transition), background var(--transition);
+    animation: fadeInUp 0.6s var(--ease) backwards;
 }
 
 .navbar.scrolled {
@@ -183,7 +304,7 @@ button {
 
 
 /* ============================================================
-   LOGO IMAGE — Clean & Responsive
+   LOGO
    ============================================================ */
 
 .logo-img {
@@ -200,7 +321,7 @@ button {
 }
 
 .logo:hover .logo-img {
-    transform: scale(1.06) rotate(-4deg);
+    transform: scale(1.1) rotate(-8deg);
     box-shadow: 0 6px 22px rgba(59, 130, 246, 0.55);
 }
 
@@ -210,7 +331,9 @@ button {
     width: clamp(32px, 4vw, 42px);
     height: clamp(32px, 4vw, 42px);
     border-radius: 50%;
-    background: var(--gradient);
+    background: var(--gradient-animated);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
     color: #fff;
     font-weight: 700;
     font-size: 0.85rem;
@@ -244,20 +367,39 @@ button {
     color: var(--text-muted);
     transition: all var(--transition);
     white-space: nowrap;
+    position: relative;
 }
 
 .nav-link i {
     font-size: 0.9rem;
+    transition: transform 0.3s var(--ease);
+}
+
+.nav-link:hover i {
+    animation: iconBounce 0.5s ease;
 }
 
 .nav-link:hover {
     color: var(--text);
     background: var(--surface);
+    transform: translateY(-2px);
 }
 
 .nav-link.active {
     color: var(--primary);
     background: var(--primary-soft);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--gradient);
+    border-radius: 2px;
 }
 
 .nav-actions {
@@ -287,7 +429,8 @@ button {
     color: var(--primary);
     border-color: var(--primary-line);
     background: var(--primary-soft);
-    transform: translateY(-2px);
+    transform: translateY(-2px) rotate(-8deg);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
 }
 
 .theme-toggle i {
@@ -317,7 +460,7 @@ button {
 
 
 /* ============================================================
-   MOBILE NAV CLOSE BUTTON
+   MOBILE NAV CLOSE
    ============================================================ */
 
 .nav-close {
@@ -340,6 +483,7 @@ button {
 
 .nav-close i {
     font-size: 1rem;
+    transition: transform var(--transition);
 }
 
 .nav-close:hover {
@@ -347,6 +491,10 @@ button {
     color: #fff;
     transform: translateX(-4px);
     box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+}
+
+.nav-close:hover i {
+    transform: translateX(-4px);
 }
 
 
@@ -394,6 +542,36 @@ button {
     z-index: 0;
     background: radial-gradient(circle at 20% 25%, var(--hero-glow-1), transparent 50%), radial-gradient(circle at 80% 75%, var(--hero-glow-2), transparent 50%);
     transition: background var(--theme-transition);
+    background-size: 200% 200%;
+    animation: gradientShift 12s ease infinite;
+}
+
+.hero-bg::before,
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.hero-bg::before {
+    width: 320px;
+    height: 320px;
+    top: 15%;
+    left: 10%;
+    background: radial-gradient(circle, var(--primary), transparent 70%);
+    animation: floatSlow 14s ease-in-out infinite;
+}
+
+.hero-bg::after {
+    width: 280px;
+    height: 280px;
+    bottom: 15%;
+    right: 10%;
+    background: radial-gradient(circle, var(--secondary), transparent 70%);
+    animation: floatSlow 18s ease-in-out infinite reverse;
 }
 
 .hero-content {
@@ -407,6 +585,34 @@ button {
     align-items: center;
 }
 
+.hero-text>* {
+    animation: fadeInLeft 0.8s var(--ease) backwards;
+}
+
+.hero-greeting {
+    animation-delay: 0.1s;
+}
+
+.hero-name {
+    animation-delay: 0.2s;
+}
+
+.hero-role {
+    animation-delay: 0.3s;
+}
+
+.hero-desc {
+    animation-delay: 0.4s;
+}
+
+.hero-cta {
+    animation-delay: 0.5s;
+}
+
+.hero-socials {
+    animation-delay: 0.6s;
+}
+
 .hero-greeting {
     display: inline-block;
     color: var(--primary);
@@ -417,6 +623,19 @@ button {
     background: var(--primary-soft);
     border: 1px solid var(--primary-line);
     border-radius: var(--radius-full);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-greeting::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    animation: shimmer 3s ease-in-out infinite;
 }
 
 .hero-name {
@@ -444,12 +663,6 @@ button {
     margin-left: 2px;
     color: var(--primary);
     animation: blink 1s steps(2) infinite;
-}
-
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
 }
 
 .hero-desc {
@@ -485,21 +698,45 @@ button {
     border: 1px solid transparent;
     white-space: nowrap;
     min-height: 44px;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn i {
     font-size: 0.95rem;
+    transition: transform var(--transition);
+}
+
+.btn:hover i {
+    transform: translateX(3px);
 }
 
 .btn-primary {
-    background: var(--gradient);
+    background: var(--gradient-animated);
+    background-size: 200% 200%;
     color: #fff;
     box-shadow: var(--shadow-glow);
+    animation: gradientShift 4s ease infinite;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: left 0.5s var(--ease);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 16px 44px rgba(59, 130, 246, 0.32);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 44px rgba(59, 130, 246, 0.45);
+}
+
+.btn-primary:hover::before {
+    animation: shimmer 1.5s ease-in-out;
 }
 
 .btn-outline {
@@ -510,9 +747,10 @@ button {
 
 .btn-outline:hover {
     color: var(--text);
-    border-color: var(--border-hover);
-    background: var(--surface);
-    transform: translateY(-2px);
+    border-color: var(--primary);
+    background: var(--primary-soft);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
 }
 
 .hero-socials {
@@ -535,16 +773,20 @@ button {
 }
 
 .hero-socials a:hover {
-    color: var(--text);
-    border-color: var(--primary-line);
-    background: var(--surface-hover);
-    transform: translateY(-3px);
+    color: #fff;
+    border-color: var(--primary);
+    background: var(--gradient-animated);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+    transform: translateY(-5px) rotate(-5deg);
+    box-shadow: 0 10px 28px rgba(59, 130, 246, 0.4);
 }
 
 .hero-image {
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: fadeInRight 0.8s var(--ease) 0.3s backwards;
 }
 
 .image-frame {
@@ -553,22 +795,13 @@ button {
     height: clamp(240px, 28vw, 320px);
     border-radius: 50%;
     padding: 4px;
-    background: var(--gradient);
-    animation: float 7s ease-in-out infinite;
+    background: var(--gradient-animated);
+    background-size: 200% 200%;
+    animation: float 7s ease-in-out infinite, gradientShift 6s ease infinite;
     flex-shrink: 0;
     overflow: hidden;
     display: grid;
     place-items: center;
-}
-
-@keyframes float {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-14px);
-    }
 }
 
 .image-frame img {
@@ -589,9 +822,9 @@ button {
     border-radius: 50%;
     background: var(--gradient);
     filter: blur(38px);
-    opacity: 0.28;
     z-index: -1;
     pointer-events: none;
+    animation: pulseGlow 4s ease-in-out infinite;
 }
 
 .scroll-down {
@@ -608,16 +841,6 @@ button {
 
 .scroll-down:hover {
     color: var(--primary);
-}
-
-@keyframes bounce {
-    0%,
-    100% {
-        transform: translate(-50%, 0);
-    }
-    50% {
-        transform: translate(-50%, 10px);
-    }
 }
 
 
@@ -660,9 +883,10 @@ button {
 }
 
 .section-head:hover .section-icon {
-    transform: translateY(-4px) rotate(-6deg);
+    transform: translateY(-6px) rotate(-10deg) scale(1.05);
     background: var(--primary);
     color: #fff;
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
 }
 
 .section-head h2 {
@@ -674,10 +898,12 @@ button {
 }
 
 .accent {
-    background: var(--gradient);
+    background: var(--gradient-animated);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease infinite;
 }
 
 .section-sub {
@@ -705,18 +931,42 @@ button {
     border-radius: var(--radius);
     padding: clamp(24px, 3vw, 32px) clamp(18px, 2.5vw, 20px);
     transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.08), transparent);
+    transition: left 0.6s var(--ease);
+}
+
+.about-card:hover::before {
+    left: 100%;
 }
 
 .about-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-hover);
+    transform: translateY(-6px);
+    border-color: var(--primary-line);
     background: var(--surface-hover);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
 }
 
 .about-icon {
     font-size: 1.6rem;
     color: var(--primary);
     margin-bottom: var(--space-sm);
+    display: inline-block;
+    transition: transform 0.3s var(--ease);
+}
+
+.about-card:hover .about-icon {
+    transform: scale(1.15) rotate(-8deg);
 }
 
 .about-card h3 {
@@ -766,12 +1016,14 @@ button {
     border-radius: var(--radius);
     padding: clamp(24px, 3vw, 32px) clamp(18px, 2.5vw, 20px);
     transition: all var(--transition);
+    position: relative;
 }
 
 .skill-card:hover {
-    border-color: var(--border-hover);
+    border-color: var(--primary-line);
     background: var(--surface-hover);
-    transform: translateY(-4px);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
 }
 
 .skill-head {
@@ -791,6 +1043,14 @@ button {
     color: var(--primary);
     font-size: 1rem;
     flex-shrink: 0;
+    transition: all var(--transition);
+}
+
+.skill-card:hover .skill-head i {
+    background: var(--primary);
+    color: #fff;
+    transform: rotate(-8deg) scale(1.1);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
 }
 
 .skill-head h3 {
@@ -817,10 +1077,13 @@ button {
 }
 
 .tags span:hover {
-    color: var(--primary);
-    border-color: var(--primary-line);
-    background: var(--primary-soft);
-    transform: translateY(-2px);
+    color: #fff;
+    border-color: var(--primary);
+    background: var(--gradient-animated);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 18px rgba(59, 130, 246, 0.35);
 }
 
 
@@ -835,11 +1098,14 @@ button {
     border-radius: var(--radius-lg);
     padding: clamp(24px, 3.5vw, 40px);
     transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
 }
 
 .project-card:hover {
     border-color: var(--border-hover);
     box-shadow: var(--shadow);
+    transform: translateY(-4px);
 }
 
 .project-card+.project-card {
@@ -849,11 +1115,25 @@ button {
 .project-card.featured {
     border-color: var(--primary-line);
     box-shadow: 0 8px 40px rgba(59, 130, 246, 0.12);
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-hover) 100%);
+}
+
+.project-card.featured::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-animated);
+    background-size: 200% 100%;
+    animation: gradientShift 3s linear infinite;
 }
 
 .project-card.featured:hover {
     border-color: var(--primary);
-    box-shadow: 0 16px 60px rgba(59, 130, 246, 0.22);
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.25);
+    transform: translateY(-6px);
 }
 
 .project-info h3 {
@@ -862,6 +1142,11 @@ button {
     margin-bottom: var(--space-sm);
     line-height: 1.4;
     color: var(--text);
+    transition: color var(--transition);
+}
+
+.project-card:hover .project-info h3 {
+    color: var(--primary);
 }
 
 .project-info p {
@@ -887,6 +1172,11 @@ button {
     letter-spacing: 0.3px;
     margin-bottom: var(--space-md);
     border: 1px solid var(--primary-line);
+    transition: all var(--transition);
+}
+
+.project-card:hover .project-badge {
+    transform: scale(1.05);
 }
 
 .project-tech {
@@ -904,6 +1194,14 @@ button {
     border: 1px solid var(--border);
     color: var(--text-muted);
     font-family: 'JetBrains Mono', monospace;
+    transition: all var(--transition);
+}
+
+.project-tech span:hover {
+    color: var(--primary);
+    border-color: var(--primary-line);
+    background: var(--primary-soft);
+    transform: translateY(-2px);
 }
 
 
@@ -919,7 +1217,9 @@ button {
     margin: 0 auto var(--space-md);
     padding: 8px 18px;
     border-radius: var(--radius-full);
-    background: var(--gradient);
+    background: var(--gradient-animated);
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
     color: #fff;
     font-size: clamp(0.72rem, 1.3vw, 0.85rem);
     font-weight: 600;
@@ -931,6 +1231,7 @@ button {
 
 .thesis-label i {
     font-size: 1rem;
+    animation: iconBounce 2s ease-in-out infinite;
 }
 
 .thesis-badge {
@@ -945,7 +1246,7 @@ button {
 
 
 /* ============================================================
-   PROJECT BADGE VARIANTS
+   BADGE VARIANTS
    ============================================================ */
 
 .badge-green {
@@ -980,6 +1281,7 @@ button {
     background: var(--bg-alt);
     border: 1px solid var(--border);
     border-radius: var(--radius);
+    transition: all var(--transition);
 }
 
 .highlight {
@@ -987,6 +1289,11 @@ button {
     align-items: flex-start;
     gap: 10px;
     min-width: 0;
+    transition: transform var(--transition);
+}
+
+.highlight:hover {
+    transform: translateX(4px);
 }
 
 .highlight i {
@@ -999,6 +1306,13 @@ button {
     background: var(--primary-soft);
     color: var(--primary);
     font-size: 0.9rem;
+    transition: all var(--transition);
+}
+
+.highlight:hover i {
+    background: var(--primary);
+    color: #fff;
+    transform: scale(1.1) rotate(-6deg);
 }
 
 .highlight>div {
@@ -1053,9 +1367,10 @@ button {
 }
 
 .mini-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-hover);
+    transform: translateY(-6px);
+    border-color: var(--primary-line);
     background: var(--surface-hover);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
 }
 
 .mini-card i {
@@ -1068,6 +1383,13 @@ button {
     color: var(--primary);
     font-size: 1.05rem;
     margin-bottom: var(--space-sm);
+    transition: all var(--transition);
+}
+
+.mini-card:hover i {
+    background: var(--primary);
+    color: #fff;
+    transform: rotate(-8deg) scale(1.1);
 }
 
 .mini-card h4 {
@@ -1106,12 +1428,15 @@ button {
     padding: var(--space-md) var(--space-sm);
     text-align: center;
     transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
 }
 
 .flow-step:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-hover);
+    transform: translateY(-6px) scale(1.03);
+    border-color: var(--primary-line);
     background: var(--surface-hover);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2);
 }
 
 .flow-icon {
@@ -1121,9 +1446,17 @@ button {
     height: 46px;
     margin: 0 auto var(--space-sm);
     border-radius: var(--radius-sm);
-    background: var(--gradient);
+    background: var(--gradient-animated);
+    background-size: 200% 200%;
     color: #fff;
     font-size: 1.1rem;
+    transition: all var(--transition);
+}
+
+.flow-step:hover .flow-icon {
+    animation: gradientShift 3s ease infinite;
+    transform: rotate(-8deg) scale(1.1);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
 }
 
 .flow-step h4 {
@@ -1145,6 +1478,13 @@ button {
     color: var(--text-muted);
     font-size: 0.9rem;
     opacity: 0.5;
+    transition: all var(--transition);
+}
+
+.flow-arrow:hover {
+    opacity: 1;
+    color: var(--primary);
+    transform: translateX(4px) scale(1.2);
 }
 
 .quote {
@@ -1160,6 +1500,13 @@ button {
     border-left: 3px solid var(--primary);
     color: var(--text-soft);
     line-height: 1.75;
+    transition: all var(--transition);
+}
+
+.quote:hover {
+    border-left-color: var(--secondary);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+    transform: translateX(4px);
 }
 
 
@@ -1180,12 +1527,33 @@ button {
     padding: clamp(24px, 3vw, 32px) clamp(18px, 2.5vw, 20px);
     text-align: center;
     transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: var(--gradient-animated);
+    background-size: 200% 100%;
+    transition: width 0.4s var(--ease);
+}
+
+.contact-card:hover::before {
+    width: 100%;
+    animation: gradientShift 2s linear infinite;
 }
 
 .contact-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-hover);
+    transform: translateY(-6px);
+    border-color: var(--primary-line);
     background: var(--surface-hover);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
 }
 
 .contact-card i {
@@ -1198,6 +1566,14 @@ button {
     background: var(--primary-soft);
     color: var(--primary);
     font-size: 1.15rem;
+    transition: all var(--transition);
+}
+
+.contact-card:hover i {
+    background: var(--primary);
+    color: #fff;
+    transform: scale(1.1) rotate(-6deg);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
 }
 
 .contact-card h4 {
@@ -1252,7 +1628,7 @@ button {
 
 .footer-socials a:hover {
     color: var(--primary);
-    transform: translateY(-2px);
+    transform: translateY(-4px) scale(1.2);
 }
 
 
@@ -1276,7 +1652,9 @@ button {
     transform: translateY(16px);
     transition: all var(--transition);
     z-index: 999;
-    background: var(--gradient);
+    background: var(--gradient-animated);
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
     color: #fff;
     box-shadow: var(--shadow-glow);
     border: none;
@@ -1299,25 +1677,25 @@ button {
 
 .scroll-down-btn:hover,
 .scroll-top:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 44px rgba(59, 130, 246, 0.45);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 16px 44px rgba(59, 130, 246, 0.5);
 }
 
 .scroll-down-btn:active,
 .scroll-top:active {
-    transform: translateY(-1px) scale(0.96);
+    transform: translateY(-1px) scale(0.95);
     box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
 }
 
 
 /* ============================================================
-   REVEAL ANIMATION
+   REVEAL ANIMATION — Enhanced
    ============================================================ */
 
 .reveal {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    transform: translateY(40px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
 }
 
 .reveal.active {
@@ -1325,9 +1703,37 @@ button {
     transform: translateY(0);
 }
 
+.reveal.active>* {
+    animation: fadeInUp 0.6s var(--ease) backwards;
+}
+
+.reveal.active>*:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.reveal.active>*:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.reveal.active>*:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.reveal.active>*:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.reveal.active>*:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.reveal.active>*:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
 
 /* ============================================================
-   RESPONSIVE — LARGE DESKTOP (1440px+)
+   RESPONSIVE — LARGE DESKTOP
    ============================================================ */
 
 @media (min-width: 1440px) {
@@ -1409,6 +1815,9 @@ button {
         padding: 14px 16px;
         font-size: 0.95rem;
         justify-content: flex-start;
+    }
+    .nav-link.active::after {
+        display: none;
     }
 }
 
@@ -1615,8 +2024,9 @@ button {
     *,
     *::before,
     *::after {
-        animation: none !important;
-        transition: none !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
     .reveal {
@@ -1670,6 +2080,7 @@ button:focus-visible {
     background: var(--border-hover);
     border-radius: var(--radius-full);
     border: 2px solid var(--scrollbar-track);
+    transition: background 0.3s var(--ease);
 }
 
 ::-webkit-scrollbar-thumb:hover {
