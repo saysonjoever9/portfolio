@@ -4,57 +4,38 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-
-    <!-- ⭐ GOOGLE SEARCH CONSOLE VERIFICATION -->
-    <!-- I-paste dinhi ang imong verification code gikan sa Search Console -->
     <meta name="google-site-verification" content="o4Kx3nv6QbTnX-3uEJTYt46DykIvtn0xxZeIbYy1yAg" />
-    <!-- ⭐ SEO TITLE (with Software Engineer) -->
+
     <title>Joever L. Sayson | Software Engineer & AI Developer | General Santos City</title>
-
-    <!-- ⭐ SEO DESCRIPTION -->
-    <meta name="description" content="Engr. Joever L. Sayson — Software Engineer, AI & Machine Learning Developer, Full-Stack Web Developer, and Hardware-Software Integrator based in General Santos City, Philippines. View portfolio, projects, and experience."
-    />
-
-    <!-- ⭐ SEO KEYWORDS -->
-    <meta name="keywords" content="Joever Sayson, Joever L. Sayson, Software Engineer Philippines, AI Developer General Santos, Full-Stack Developer, Machine Learning Engineer, Computer Engineering Graduate, Portfolio, Mindanao Medical Center" />
-
-    <!-- ⭐ AUTHOR -->
+    <meta name="description" content="Engr. Joever L. Sayson  Software Engineer, AI & Machine Learning Developer, Full-Stack Web Developer, and Hardware-Software Integrator based in General Santos City, Philippines." />
+    <meta name="keywords" content="Joever Sayson, Software Engineer Philippines, AI Developer General Santos, Full-Stack Developer, Machine Learning Engineer, Computer Engineering Graduate, Portfolio, Mindanao Medical Center" />
     <meta name="author" content="Joever L. Sayson" />
-
-    <!-- ⭐ CANONICAL URL -->
     <link rel="canonical" href="https://saysonjoever9.vercel.app/" />
 
-    <!-- ⭐ OPEN GRAPH (Facebook, LinkedIn) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://saysonjoever9.vercel.app/" />
     <meta property="og:title" content="Joever L. Sayson | Software Engineer & AI Developer" />
-    <meta property="og:description" content="Portfolio of Engr. Joever L. Sayson — Software Engineer specializing in AI, Machine Learning, Full-Stack Development, and Hardware-Software Integration." />
+    <meta property="og:description" content="Portfolio of Engr. Joever L. Sayson  AI, Machine Learning, Full-Stack Development, and Hardware-Software Integration." />
     <meta property="og:image" content="https://saysonjoever9.vercel.app/image/profile.png" />
     <meta property="og:site_name" content="Joever L. Sayson Portfolio" />
 
-    <!-- ⭐ TWITTER CARD -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Joever L. Sayson | Software Engineer & AI Developer" />
-    <meta name="twitter:description" content="AI & Machine Learning Developer | Full-Stack & Mobile Developer | Hardware-Software Integration" />
+    <meta name="twitter:description" content="AI & ML Developer | Full-Stack & Mobile Developer | Hardware-Software Integration" />
     <meta name="twitter:image" content="https://saysonjoever9.vercel.app/image/profile.png" />
+    <meta name="theme-color" content="#0a0a12" />
 
-    <!-- ⭐ THEME COLOR -->
-    <meta name="theme-color" content="#3b82f6" />
-
-    <!-- Favicon — Complete Package -->
     <link rel="apple-touch-icon" sizes="180x180" href="image/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="image/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="image/favicon-16x16.png" />
     <link rel="icon" type="image/x-icon" href="image/favicon.ico" />
     <link rel="manifest" href="image/site.webmanifest" />
 
-    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <!-- Prevent theme flash on page load -->
     <script>
         (function() {
             const saved = localStorage.getItem("theme");
@@ -67,7 +48,6 @@
 
     <link rel="stylesheet" href="style.css" />
 
-    <!-- ⭐ STRUCTURED DATA (JSON-LD) para sa Google Rich Results -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -100,20 +80,11 @@
                 "@type": "EducationalOrganization",
                 "name": "Computer Engineering Graduate"
             },
-            "sameAs": [
-                "https://github.com/saysonjoever9",
-                "https://saysonjoever9.vercel.app"
-            ],
+            "sameAs": ["https://github.com/saysonjoever9", "https://saysonjoever9.vercel.app"],
             "knowsAbout": [
-                "Software Engineering",
-                "Artificial Intelligence",
-                "Machine Learning",
-                "Deep Learning",
-                "Computer Vision",
-                "Full-Stack Development",
-                "Mobile Development",
-                "Hardware-Software Integration",
-                "Healthcare IT"
+                "Software Engineering", "Artificial Intelligence", "Machine Learning",
+                "Deep Learning", "Computer Vision", "Full-Stack Development",
+                "Mobile Development", "Hardware-Software Integration", "Healthcare IT"
             ]
         }
     </script>
@@ -121,10 +92,19 @@
 
 <body>
 
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- CURSOR GLOW (desktop) -->
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+    <!-- NOISE OVERLAY -->
+    <div class="noise" aria-hidden="true"></div>
+
     <!-- ================= NAVBAR ================= -->
     <header class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#home" class="logo">
+            <a href="#home" class="logo" aria-label="Home">
                 <img src="image/logo-js.svg" alt="JS Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
                 <span class="logo-mark" style="display:none;">JS</span>
                 <span class="logo-text">Joever<span>.dev</span></span>
@@ -135,12 +115,11 @@
                     <i class="fa-solid fa-arrow-left"></i>
                     <span>Back</span>
                 </button>
-
                 <a href="#home" class="nav-link active"><i class="fa-solid fa-house"></i><span>Home</span></a>
                 <a href="#about" class="nav-link"><i class="fa-solid fa-user"></i><span>About</span></a>
                 <a href="#experience" class="nav-link"><i class="fa-solid fa-briefcase"></i><span>Experience</span></a>
                 <a href="#skills" class="nav-link"><i class="fa-solid fa-code"></i><span>Skills</span></a>
-                <a href="#project" class="nav-link"><i class="fa-solid fa-diagram-project"></i><span>Project</span></a>
+                <a href="#project" class="nav-link"><i class="fa-solid fa-diagram-project"></i><span>Projects</span></a>
                 <a href="#approach" class="nav-link"><i class="fa-solid fa-compass-drafting"></i><span>Approach</span></a>
                 <a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
             </nav>
@@ -156,29 +135,35 @@
         </div>
     </header>
 
-    <!-- Mobile menu overlay -->
     <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
     <!-- ================= HERO ================= -->
     <section class="hero" id="home">
-        <div class="hero-bg"></div>
+        <div class="hero-bg" aria-hidden="true">
+            <div class="aurora aurora-1"></div>
+            <div class="aurora aurora-2"></div>
+            <div class="aurora aurora-3"></div>
+            <div class="grid-overlay"></div>
+        </div>
 
         <div class="hero-content">
             <div class="hero-text">
-                <p class="hero-greeting">👋 Hello World, I'm</p>
-                <h1 class="hero-name">Engr. Joever L. Sayson</h1>
-                <p class="hero-title">Software Engineer</p>
+                <p class="hero-greeting reveal-fade">👋 Hello World, I'm</p>
+                <h1 class="hero-name">
+                    <span class="split-text" data-text="Engr. Joever L. Sayson">Engr. Joever L. Sayson</span>
+                </h1>
+                <p class="hero-title reveal-fade">Software Engineer</p>
                 <h2 class="hero-role">
                     <span id="typed"></span><span class="cursor">|</span>
                 </h2>
-                <p class="hero-desc">
+                <p class="hero-desc reveal-fade">
                     <strong>Software Engineer</strong> from General Santos City, Philippines, specializing in
                     <strong>AI & Machine Learning</strong>, <strong>Full-Stack Development</strong>,
                     <strong>Mobile Apps</strong>, and
-                    <strong>Hardware–Software Integration</strong>.
+                    <strong>Hardware Software Integration</strong>.
                 </p>
 
-                <div class="hero-cta">
+                <div class="hero-cta reveal-fade">
                     <a href="#project" class="btn btn-primary">
                         <i class="fa-solid fa-rocket"></i> View My Work
                     </a>
@@ -187,23 +172,18 @@
                     </a>
                 </div>
 
-                <div class="hero-socials">
-                    <a href="https://github.com/saysonjoever9" target="_blank" rel="noopener" aria-label="GitHub">
-                        <i class="fa-brands fa-github"></i>
-                    </a>
-                    <a href="https://saysonjoever9.vercel.app" target="_blank" rel="noopener" aria-label="Vercel">
-                        <i class="fa-solid fa-cloud"></i>
-                    </a>
-                    <a href="mailto:saysonjoever9@gmail.com" aria-label="Email">
-                        <i class="fa-solid fa-envelope"></i>
-                    </a>
+                <div class="hero-socials reveal-fade">
+                    <a href="https://github.com/saysonjoever9" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://saysonjoever9.vercel.app" target="_blank" rel="noopener" aria-label="Vercel"><i class="fa-solid fa-cloud"></i></a>
+                    <a href="mailto:saysonjoever9@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
 
             <div class="hero-image">
                 <div class="image-frame">
-                    <img src="image/profile.png" alt="Joever L. Sayson — Software Engineer" />
+                    <img src="image/profile.png" alt="Joever L. Sayson  Software Engineer" loading="eager" />
                     <div class="glow-ring"></div>
+                    <div class="orbit-ring"></div>
                 </div>
             </div>
         </div>
@@ -223,33 +203,27 @@
             </div>
 
             <div class="about-grid">
-                <div class="about-card reveal">
+                <div class="about-card reveal tilt">
                     <i class="fa-solid fa-brain about-icon"></i>
                     <h3>AI & Machine Learning</h3>
                     <p>CNN, computer vision, image classification, deep learning, and intelligent automation for real-world problems.</p>
                 </div>
-                <div class="about-card reveal">
+                <div class="about-card reveal tilt">
                     <i class="fa-solid fa-laptop-code about-icon"></i>
                     <h3>Full-Stack & Mobile</h3>
                     <p>Web, desktop, backend, and mobile apps using Python, Laravel, React, React Native, and modern databases.</p>
                 </div>
-                <div class="about-card reveal">
+                <div class="about-card reveal tilt">
                     <i class="fa-solid fa-microchip about-icon"></i>
                     <h3>Hardware Integration</h3>
-                    <p>Arduino, Raspberry Pi, sensors, actuators, and IoT — connecting software decisions to physical actions.</p>
+                    <p>Arduino, Raspberry Pi, sensors, actuators, and IoT connecting software decisions to physical actions.</p>
                 </div>
             </div>
 
             <div class="about-text reveal">
-                <p>
-                    I'm a <strong>Software Engineer</strong> and <strong>Computer Engineering graduate</strong> from
-                    <strong>General Santos City, Philippines</strong>. My work focuses on developing practical technology solutions that combine <strong>AI models, modern software
-                    architectures, mobile applications, databases, embedded systems, and intelligent
-                    automation</strong> to address real-world problems.
-                </p>
-                <p>
-                    Instead of building isolated applications, I aim to build <strong>complete systems</strong> where AI analyzes data, software makes decisions, databases manage information, apps present results, and hardware performs physical actions.
-                </p>
+                <p>I'm a <strong>Software Engineer</strong> and <strong>Computer Engineering graduate</strong> from
+                    <strong>General Santos City, Philippines</strong>. My work focuses on developing practical technology solutions that combine <strong>AI models, modern software architectures, mobile applications, databases, embedded systems, and intelligent automation</strong>                    to address real-world problems.</p>
+                <p>Instead of building isolated applications, I aim to build <strong>complete systems</strong> where AI analyzes data, software makes decisions, databases manage information, apps present results, and hardware performs physical actions.</p>
             </div>
         </div>
     </section>
@@ -269,35 +243,22 @@
                         <i class="fa-solid fa-briefcase"></i> Full-Time · Healthcare IT
                     </span>
                     <h3>Medical Records System Management</h3>
-                    <p>
-                        Currently working at <strong>Mindanao Medical Center, Inc.</strong> in <strong>General Santos City</strong>, managing and maintaining the hospital's <strong>Medical Records Management System</strong>. Responsible for ensuring accurate
-                        patient data entry, system reliability, and secure handling of sensitive medical information.
-                    </p>
-                    <p>
-                        My role involves bridging <strong>healthcare operations</strong> and <strong>software systems</strong> ensuring that patient records are accurate, accessible, and compliant with data privacy standards.
-                    </p>
+                    <p>Currently working at <strong>Mindanao Medical Center, Inc.</strong> in <strong>General Santos City</strong>, managing and maintaining the hospital's <strong>Medical Records Management System</strong>. Responsible for ensuring accurate
+                        patient data entry, system reliability, and secure handling of sensitive medical information.</p>
+                    <p>My role involves bridging <strong>healthcare operations</strong> and <strong>software systems</strong>, ensuring that patient records are accurate, accessible, and compliant with data privacy standards.</p>
 
                     <div class="project-highlights">
                         <div class="highlight">
                             <i class="fa-solid fa-hospital"></i>
-                            <div>
-                                <strong>Company</strong>
-                                <span>Mindanao Medical Center, Inc.</span>
-                            </div>
+                            <div><strong>Company</strong><span>Mindanao Medical Center, Inc.</span></div>
                         </div>
                         <div class="highlight">
                             <i class="fa-solid fa-location-dot"></i>
-                            <div>
-                                <strong>Location</strong>
-                                <span>General Santos City, PH</span>
-                            </div>
+                            <div><strong>Location</strong><span>General Santos City, PH</span></div>
                         </div>
                         <div class="highlight">
                             <i class="fa-solid fa-shield-halved"></i>
-                            <div>
-                                <strong>Focus</strong>
-                                <span>Data accuracy & system reliability</span>
-                            </div>
+                            <div><strong>Focus</strong><span>Data accuracy & system reliability</span></div>
                         </div>
                     </div>
 
@@ -322,175 +283,94 @@
             </div>
 
             <div class="skills-grid">
-
-                <!-- 1. AI & MACHINE LEARNING -->
                 <div class="skill-card reveal">
-                    <div class="skill-head">
-                        <i class="fa-solid fa-brain"></i>
+                    <div class="skill-head"><i class="fa-solid fa-brain"></i>
                         <h3>AI & Machine Learning</h3>
                     </div>
                     <div class="tags">
-                        <span>CNN</span>
-                        <span>Transformer</span>
-                        <span>RNN / LSTM</span>
-                        <span>GAN</span>
-                        <span>Vision Transformer (ViT)</span>
-                        <span>YOLO</span>
-                        <span>Computer Vision</span>
-                        <span>Image Classification</span>
-                        <span>Deep Learning</span>
-                        <span>Object Detection</span>
-                        <span>Image Segmentation</span>
-                        <span>Feature Extraction</span>
-                        <span>Model Training</span>
-                        <span>Model Evaluation</span>
-                        <span>Transfer Learning</span>
-                        <span>Fine-Tuning</span>
-                        <span>Data Augmentation</span>
-                        <span>Hyperparameter Tuning</span>
-                        <span>Natural Language Processing</span>
-                        <span>Large Language Models (LLMs)</span>
-                        <span>Prompt Engineering</span>
-                        <span>Generative AI</span>
-                        <span>Plant Disease Detection</span>
-                        <span>Pest Detection</span>
-                        <span>Smart Agriculture</span>
-                        <span>Intelligent Automation</span>
+                        <span>CNN</span><span>Transformer</span><span>RNN / LSTM</span><span>GAN</span>
+                        <span>Vision Transformer (ViT)</span><span>YOLO</span><span>Computer Vision</span>
+                        <span>Image Classification</span><span>Deep Learning</span><span>Object Detection</span>
+                        <span>Image Segmentation</span><span>Feature Extraction</span><span>Model Training</span>
+                        <span>Model Evaluation</span><span>Transfer Learning</span><span>Fine-Tuning</span>
+                        <span>Data Augmentation</span><span>Hyperparameter Tuning</span>
+                        <span>Natural Language Processing</span><span>Large Language Models (LLMs)</span>
+                        <span>Prompt Engineering</span><span>Generative AI</span>
+                        <span>Plant Disease Detection</span><span>Pest Detection</span>
+                        <span>Smart Agriculture</span><span>Intelligent Automation</span>
                     </div>
                 </div>
 
-                <!-- 2. STRUCTURAL ENGINEERING -->
                 <div class="skill-card reveal">
-                    <div class="skill-head">
-                        <i class="fa-solid fa-building-columns"></i>
+                    <div class="skill-head"><i class="fa-solid fa-building-columns"></i>
                         <h3>Structural Engineering</h3>
                     </div>
                     <div class="tags">
-                        <span>Structural Analysis</span>
-                        <span>Load Calculations</span>
-                        <span>Reinforced Concrete</span>
-                        <span>Steel Structures</span>
-                        <span>Foundation Design</span>
-                        <span>Beam & Column Design</span>
-                        <span>Structural Detailing</span>
-                        <span>AutoCAD</span>
-                        <span>STAAD Pro</span>
-                        <span>ETABS</span>
-                        <span>Revit Structure</span>
-                        <span>Structural Drafting</span>
-                        <span>Site Inspection</span>
-                        <span>Construction Estimation</span>
-                        <span>Material Testing</span>
-                        <span>Project Supervision</span>
+                        <span>Structural Analysis</span><span>Load Calculations</span>
+                        <span>Reinforced Concrete</span><span>Steel Structures</span>
+                        <span>Foundation Design</span><span>Beam & Column Design</span>
+                        <span>Structural Detailing</span><span>AutoCAD</span><span>STAAD Pro</span>
+                        <span>ETABS</span><span>Revit Structure</span><span>Structural Drafting</span>
+                        <span>Site Inspection</span><span>Construction Estimation</span>
+                        <span>Material Testing</span><span>Project Supervision</span>
                     </div>
                 </div>
 
-                <!-- 3. FULL-STACK & SOFTWARE -->
                 <div class="skill-card reveal">
-                    <div class="skill-head">
-                        <i class="fa-solid fa-laptop-code"></i>
+                    <div class="skill-head"><i class="fa-solid fa-laptop-code"></i>
                         <h3>Full-Stack & Software</h3>
                     </div>
                     <div class="tags">
-                        <span>Python</span>
-                        <span>C</span>
-                        <span>C++</span>
-                        <span>C#</span>
-                        <span>PHP</span>
-                        <span>JavaScript</span>
-                        <span>Java</span>
-                        <span>Laravel</span>
-                        <span>React</span>
-                        <span>React Native</span>
-                        <span>Flask</span>
-                        <span>HTML & CSS</span>
-                        <span>REST API</span>
-                        <span>SQL</span>
-                        <span>PostgreSQL</span>
-                        <span>MySQL</span>
-                        <span>Supabase</span>
-                        <span>Firebase</span>
-                        <span>SQLite</span>
-                        <span>Vercel Functions</span>
-                        <span>API Integration</span>
-                        <span>Authentication (JWT)</span>
-                        <span>Row Level Security</span>
-                        <span>Postman / API Testing</span>
-                        <span>Google Cloud Vision API</span>
-                        <span>Roboflow Inference</span>
-                        <span>Hugging Face API</span>
-                        <span>NVIDIA NIM</span>
-                        <span>Vision-Language Models (VLM)</span>
+                        <span>Python</span><span>C</span><span>C++</span><span>C#</span><span>PHP</span>
+                        <span>JavaScript</span><span>Java</span><span>Laravel</span><span>React</span>
+                        <span>React Native</span><span>Flask</span><span>HTML & CSS</span>
+                        <span>REST API</span><span>SQL</span><span>PostgreSQL</span><span>MySQL</span>
+                        <span>Supabase</span><span>Firebase</span><span>SQLite</span>
+                        <span>Vercel Functions</span><span>API Integration</span>
+                        <span>Authentication (JWT)</span><span>Row Level Security</span>
+                        <span>Postman / API Testing</span><span>Google Cloud Vision API</span>
+                        <span>Roboflow Inference</span><span>Hugging Face API</span>
+                        <span>NVIDIA NIM</span><span>Vision-Language Models (VLM)</span>
                         <span>OCR & Object Detection</span>
-
                     </div>
                 </div>
 
-                <!-- 4. HARDWARE & EMBEDDED -->
                 <div class="skill-card reveal">
-                    <div class="skill-head">
-                        <i class="fa-solid fa-microchip"></i>
+                    <div class="skill-head"><i class="fa-solid fa-microchip"></i>
                         <h3>Hardware & Embedded</h3>
                     </div>
                     <div class="tags">
-                        <span>Arduino</span>
-                        <span>Raspberry Pi</span>
-                        <span>Sensors</span>
-                        <span>Actuators</span>
-                        <span>Motor Control</span>
-                        <span>Automated Pumps</span>
-                        <span>Ultrasonic Sensors</span>
-                        <span>Embedded Programming</span>
-                        <span>Hardware–Software Integration</span>
-                        <span>IoT</span>
-                        <span>Circuit Design</span>
-                        <span>PCB Basics</span>
+                        <span>Arduino</span><span>Raspberry Pi</span><span>Sensors</span>
+                        <span>Actuators</span><span>Motor Control</span><span>Automated Pumps</span>
+                        <span>Ultrasonic Sensors</span><span>Embedded Programming</span>
+                        <span>Hardware Software Integration</span><span>IoT</span>
+                        <span>Circuit Design</span><span>PCB Basics</span>
                     </div>
                 </div>
 
-                <!-- 5. TOOLS & PLATFORMS -->
                 <div class="skill-card reveal">
-                    <div class="skill-head">
-                        <i class="fa-solid fa-toolbox"></i>
+                    <div class="skill-head"><i class="fa-solid fa-toolbox"></i>
                         <h3>Tools & Platforms</h3>
                     </div>
                     <div class="tags">
-                        <span>TensorFlow</span>
-                        <span>Keras</span>
-                        <span>OpenCV</span>
-                        <span>DeepSeek</span>
-                        <span>Antigravity</span>
-                        <span>Git</span>
-                        <span>GitHub</span>
-                        <span>VS Code</span>
-                        <span>Vercel</span>
-                        <span>API Testing</span>
-                        <span>Postman</span>
-                        <span>Figma</span>
+                        <span>TensorFlow</span><span>Keras</span><span>OpenCV</span>
+                        <span>DeepSeek</span><span>Antigravity</span><span>Git</span><span>GitHub</span>
+                        <span>VS Code</span><span>Vercel</span><span>API Testing</span>
+                        <span>Postman</span><span>Figma</span>
                     </div>
                 </div>
 
-                <!-- 6. ENGINEERING & DESIGN -->
                 <div class="skill-card reveal">
-                    <div class="skill-head">
-                        <i class="fa-solid fa-compass-drafting"></i>
+                    <div class="skill-head"><i class="fa-solid fa-compass-drafting"></i>
                         <h3>Engineering & Design</h3>
                     </div>
                     <div class="tags">
-                        <span>Engineering Drawing</span>
-                        <span>3D Modeling</span>
-                        <span>AutoCAD</span>
-                        <span>SketchUp</span>
-                        <span>SolidWorks</span>
-                        <span>Fusion 360</span>
-                        <span>Arduino IDE</span>
-                        <span>Proteus</span>
-                        <span>Multisim</span>
-                        <span>Circuit Simulation</span>
-                        <span>System Design</span>
+                        <span>Engineering Drawing</span><span>3D Modeling</span>
+                        <span>AutoCAD</span><span>SketchUp</span><span>SolidWorks</span>
+                        <span>Fusion 360</span><span>Arduino IDE</span><span>Proteus</span>
+                        <span>Multisim</span><span>Circuit Simulation</span><span>System Design</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -504,47 +384,33 @@
                 <p class="section-sub">Real-world AI, IoT, and software solutions I've built.</p>
             </div>
 
-            <!-- 1. THESIS -->
             <div class="thesis-label reveal">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <span>Thesis Project</span>
             </div>
 
-            <div class="project-card featured reveal">
+            <div class="project-card featured tilt reveal">
                 <div class="project-info">
                     <span class="project-badge thesis-badge">
                         <i class="fa-solid fa-graduation-cap"></i> Thesis · AI + IoT + Smart Agriculture
                     </span>
                     <h3>Pest and Disease Monitoring System for Banana Lakatan Farming Using CNN Algorithm</h3>
-                    <p>
-                        An agricultural AI system designed to help farmers identify banana pests and diseases through image classification. It applies <strong>Convolutional Neural
-                        Networks (CNNs)</strong>, computer vision, and image processing for faster and more consistent crop monitoring.
-                    </p>
-                    <p>
-                        The system is connected to a <strong>hardware-based automated spraying</strong> approach — creating a fully integrated <strong>AI + IoT + Smart Agriculture</strong> solution.
-                    </p>
+                    <p>An agricultural AI system designed to help farmers identify banana pests and diseases through image classification. It applies <strong>Convolutional Neural Networks (CNNs)</strong>, computer vision, and image processing for faster
+                        and more consistent crop monitoring.</p>
+                    <p>The system is connected to a <strong>hardware-based automated spraying</strong> approach creating a fully integrated <strong>AI + IoT + Smart Agriculture</strong> solution.</p>
 
                     <div class="project-highlights">
                         <div class="highlight">
                             <i class="fa-solid fa-bullseye"></i>
-                            <div>
-                                <strong>Goal</strong>
-                                <span>Faster, consistent banana crop monitoring</span>
-                            </div>
+                            <div><strong>Goal</strong><span>Faster, consistent banana crop monitoring</span></div>
                         </div>
                         <div class="highlight">
                             <i class="fa-solid fa-microchip"></i>
-                            <div>
-                                <strong>Integration</strong>
-                                <span>AI vision → decision → automated spraying</span>
-                            </div>
+                            <div><strong>Integration</strong><span>AI vision → decision → automated spraying</span></div>
                         </div>
                         <div class="highlight">
                             <i class="fa-solid fa-users"></i>
-                            <div>
-                                <strong>Beneficiaries</strong>
-                                <span>Lakatan banana farmers</span>
-                            </div>
+                            <div><strong>Beneficiaries</strong><span>Lakatan banana farmers</span></div>
                         </div>
                     </div>
 
@@ -556,43 +422,28 @@
                 </div>
             </div>
 
-            <!-- 2. PLANTDOC -->
-            <div class="project-card reveal">
+            <div class="project-card tilt reveal">
                 <div class="project-info">
                     <span class="project-badge badge-green">
                         <i class="fa-solid fa-seedling"></i> AI · Computer Vision · Deep Learning
                     </span>
-                    <h3>PlantDoc — Plant Disease Detection System</h3>
-                    <p>
-                        A deep-learning system capable of detecting <strong>33 types of plant diseases</strong> across a wide variety of plants. Unlike single-crop solutions, PlantDoc is designed to be <strong>crop-agnostic</strong> — users can upload
-                        any leaf image and receive a diagnosis with confidence scores.
-                    </p>
-                    <p>
-                        Built with <strong>CNN-based image classification</strong> and exploring
-                        <strong>transformer-based vision approaches</strong> for improved accuracy on complex, real-world leaf images.
-                    </p>
+                    <h3>PlantDoc Plant Disease Detection System</h3>
+                    <p>A deep-learning system capable of detecting <strong>33 types of plant diseases</strong> across a wide variety of plants. Unlike single-crop solutions, PlantDoc is designed to be <strong>crop-agnostic</strong> users can upload any leaf
+                        image and receive a diagnosis with confidence scores.</p>
+                    <p>Built with <strong>CNN-based image classification</strong> and exploring <strong>transformer-based vision approaches</strong> for improved accuracy on complex, real-world leaf images.</p>
 
                     <div class="project-highlights">
                         <div class="highlight">
                             <i class="fa-solid fa-vial-circle-check"></i>
-                            <div>
-                                <strong>Coverage</strong>
-                                <span>33 disease types detected</span>
-                            </div>
+                            <div><strong>Coverage</strong><span>33 disease types detected</span></div>
                         </div>
                         <div class="highlight">
                             <i class="fa-solid fa-seedling"></i>
-                            <div>
-                                <strong>Scope</strong>
-                                <span>Works across multiple plant species</span>
-                            </div>
+                            <div><strong>Scope</strong><span>Works across multiple plant species</span></div>
                         </div>
                         <div class="highlight">
                             <i class="fa-solid fa-brain"></i>
-                            <div>
-                                <strong>Models</strong>
-                                <span>CNN + transformer vision</span>
-                            </div>
+                            <div><strong>Models</strong><span>CNN + transformer vision</span></div>
                         </div>
                     </div>
 
@@ -604,42 +455,28 @@
                 </div>
             </div>
 
-            <!-- 3. STOCK MANAGEMENT -->
-            <div class="project-card reveal">
+            <div class="project-card tilt reveal">
                 <div class="project-info">
                     <span class="project-badge badge-orange">
                         <i class="fa-solid fa-cash-register"></i> Full-Stack · POS · Inventory
                     </span>
                     <h3>Stock Management & Sales System for Electronics Shop</h3>
-                    <p>
-                        A complete <strong>inventory and point-of-sale (POS)</strong> system built for an electronics/sensors shop. It tracks <strong>stock levels, sales, and product
-                        categories</strong> including electronic components like sensors, microcontrollers, modules, and development boards.
-                    </p>
-                    <p>
-                        Features <strong>real-time stock updates</strong>, low-stock alerts, sales reports, receipt generation, and role-based access for admin and cashier users.
-                    </p>
+                    <p>A complete <strong>inventory and point-of-sale (POS)</strong> system built for an electronics/sensors shop. It tracks <strong>stock levels, sales, and product categories</strong> including electronic components like sensors, microcontrollers,
+                        modules, and development boards.</p>
+                    <p>Features <strong>real-time stock updates</strong>, low-stock alerts, sales reports, receipt generation, and role-based access for admin and cashier users.</p>
 
                     <div class="project-highlights">
                         <div class="highlight">
                             <i class="fa-solid fa-cubes"></i>
-                            <div>
-                                <strong>Inventory</strong>
-                                <span>Live stock tracking & alerts</span>
-                            </div>
+                            <div><strong>Inventory</strong><span>Live stock tracking & alerts</span></div>
                         </div>
                         <div class="highlight">
                             <i class="fa-solid fa-receipt"></i>
-                            <div>
-                                <strong>Sales / POS</strong>
-                                <span>Cart, checkout, receipts, reports</span>
-                            </div>
+                            <div><strong>Sales / POS</strong><span>Cart, checkout, receipts, reports</span></div>
                         </div>
                         <div class="highlight">
                             <i class="fa-solid fa-user-shield"></i>
-                            <div>
-                                <strong>Roles</strong>
-                                <span>Admin & cashier access control</span>
-                            </div>
+                            <div><strong>Roles</strong><span>Admin & cashier access control</span></div>
                         </div>
                     </div>
 
@@ -651,42 +488,28 @@
                 </div>
             </div>
 
-            <!-- 4. E-COMMERCE -->
-            <div class="project-card reveal">
+            <div class="project-card tilt reveal">
                 <div class="project-info">
                     <span class="project-badge badge-pink">
                         <i class="fa-solid fa-store"></i> E-Commerce · Web App
                     </span>
                     <h3>Electronics Product Store & Product Management System</h3>
-                    <p>
-                        A modern <strong>e-commerce / product catalog</strong> system for selling
-                        <strong>electronics and sensor components</strong> online. Includes a customer-facing storefront with search, filters, cart, and checkout plus an admin dashboard for managing products, categories, and orders.
-                    </p>
-                    <p>
-                        Built with a <strong>REST API backend</strong> and a responsive front-end, with support for product images, stock sync with the Stock Management System, and customer order tracking.
-                    </p>
+                    <p>A modern <strong>e-commerce / product catalog</strong> system for selling <strong>electronics and sensor components</strong> online. Includes a customer-facing storefront with search, filters, cart, and checkout plus an admin dashboard
+                        for managing products, categories, and orders.</p>
+                    <p>Built with a <strong>REST API backend</strong> and a responsive front-end, with support for product images, stock sync with the Stock Management System, and customer order tracking.</p>
 
                     <div class="project-highlights">
                         <div class="highlight">
                             <i class="fa-solid fa-magnifying-glass"></i>
-                            <div>
-                                <strong>Storefront</strong>
-                                <span>Search, filter, cart, checkout</span>
-                            </div>
+                            <div><strong>Storefront</strong><span>Search, filter, cart, checkout</span></div>
                         </div>
                         <div class="highlight">
                             <i class="fa-solid fa-sliders"></i>
-                            <div>
-                                <strong>Admin Panel</strong>
-                                <span>Product & order management</span>
-                            </div>
+                            <div><strong>Admin Panel</strong><span>Product & order management</span></div>
                         </div>
                         <div class="highlight">
                             <i class="fa-solid fa-link"></i>
-                            <div>
-                                <strong>Integration</strong>
-                                <span>Syncs with stock management</span>
-                            </div>
+                            <div><strong>Integration</strong><span>Syncs with stock management</span></div>
                         </div>
                     </div>
 
@@ -697,21 +520,20 @@
                 </div>
             </div>
 
-            <!-- OTHER INTERESTS -->
             <div class="other-projects reveal">
                 <h3 class="mini-title">Other Interests</h3>
                 <div class="mini-grid">
-                    <div class="mini-card">
+                    <div class="mini-card tilt">
                         <i class="fa-solid fa-leaf"></i>
                         <h4>Plant Disease Detection</h4>
                         <p>Deep-learning models that analyze plant images and identify diseases with transformer-based vision approaches.</p>
                     </div>
-                    <div class="mini-card">
+                    <div class="mini-card tilt">
                         <i class="fa-solid fa-robot"></i>
                         <h4>Intelligent Automation</h4>
                         <p>Automated systems combining AI decision-making with embedded hardware control.</p>
                     </div>
-                    <div class="mini-card">
+                    <div class="mini-card tilt">
                         <i class="fa-solid fa-mobile-screen"></i>
                         <h4>Mobile & Web Apps</h4>
                         <p>Cross-platform apps built with React Native, Laravel, and modern REST APIs.</p>
@@ -727,7 +549,7 @@
             <div class="section-head reveal">
                 <span class="section-icon"><i class="fa-solid fa-compass-drafting"></i></span>
                 <h2>My Engineering <span class="accent">Approach</span></h2>
-                <p class="section-sub">I build complete systems — not isolated apps.</p>
+                <p class="section-sub">I build complete systems not isolated apps.</p>
             </div>
 
             <div class="approach-flow">
@@ -736,38 +558,38 @@
                     <h4>AI Layer</h4>
                     <p>Analyzes data, classifies images, makes predictions.</p>
                 </div>
-                <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="flow-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
 
                 <div class="flow-step reveal">
                     <div class="flow-icon"><i class="fa-solid fa-gears"></i></div>
                     <h4>Software Layer</h4>
                     <p>Makes decisions, handles logic, manages workflows.</p>
                 </div>
-                <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="flow-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
 
                 <div class="flow-step reveal">
                     <div class="flow-icon"><i class="fa-solid fa-database"></i></div>
                     <h4>Data Layer</h4>
                     <p>Stores and manages information securely.</p>
                 </div>
-                <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="flow-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
 
                 <div class="flow-step reveal">
                     <div class="flow-icon"><i class="fa-solid fa-mobile-screen"></i></div>
                     <h4>Interface Layer</h4>
                     <p>Presents results via web or mobile apps.</p>
                 </div>
-                <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="flow-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
 
                 <div class="flow-step reveal">
                     <div class="flow-icon"><i class="fa-solid fa-microchip"></i></div>
                     <h4>Hardware Layer</h4>
-                    <p>Performs physical actions — sensing, spraying, control.</p>
+                    <p>Performs physical actions sensing, spraying, control.</p>
                 </div>
             </div>
 
             <blockquote class="quote reveal">
-                "Building technology that does more than compute — technology that can see, analyze, decide, and act."
+                "Building technology that does more than compute technology that can see, analyze, decide, and act."
             </blockquote>
         </div>
     </section>
@@ -782,25 +604,22 @@
             </div>
 
             <div class="contact-grid">
-                <a href="mailto:saysonjoever9@gmail.com" class="contact-card reveal">
+                <a href="mailto:saysonjoever9@gmail.com" class="contact-card reveal tilt">
                     <i class="fa-solid fa-envelope"></i>
                     <h4>Email</h4>
                     <p>saysonjoever9@gmail.com</p>
                 </a>
-
-                <a href="https://github.com/saysonjoever9" target="_blank" rel="noopener" class="contact-card reveal">
+                <a href="https://github.com/saysonjoever9" target="_blank" rel="noopener" class="contact-card reveal tilt">
                     <i class="fa-brands fa-github"></i>
                     <h4>GitHub</h4>
                     <p>github.com/saysonjoever9</p>
                 </a>
-
-                <a href="https://saysonjoever9.vercel.app" target="_blank" rel="noopener" class="contact-card reveal">
+                <a href="https://saysonjoever9.vercel.app" target="_blank" rel="noopener" class="contact-card reveal tilt">
                     <i class="fa-solid fa-cloud"></i>
                     <h4>Vercel</h4>
                     <p>saysonjoever9.vercel.app</p>
                 </a>
-
-                <div class="contact-card reveal">
+                <div class="contact-card reveal tilt">
                     <i class="fa-solid fa-location-dot"></i>
                     <h4>Location</h4>
                     <p>General Santos City, PH</p>
@@ -812,7 +631,7 @@
     <!-- ================= FOOTER ================= -->
     <footer class="footer">
         <div class="container footer-inner">
-            <p>© 2026 Joever L. Sayson — Software Engineer</p>
+            <p><span id="year"></span> Joever L. Sayson Software Engineer</p>
             <div class="footer-socials">
                 <a href="https://github.com/saysonjoever9" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
                 <a href="https://saysonjoever9.vercel.app" target="_blank" rel="noopener" aria-label="Vercel"><i class="fa-solid fa-cloud"></i></a>
@@ -821,11 +640,9 @@
         </div>
     </footer>
 
-    <!-- ================= FLOATING SCROLL BUTTONS ================= -->
     <button class="scroll-down-btn" id="scrollDown" aria-label="Scroll down">
         <i class="fa-solid fa-arrow-down"></i>
     </button>
-
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
