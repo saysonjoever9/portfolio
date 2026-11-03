@@ -1,5 +1,6 @@
 /* ============================================================
-   JOEVER L. SAYSON — PORTFOLIO v3 (Vanilla JS)
+   JOEVER L. SAYSON — PORTFOLIO (Minimal)
+   Vanilla JS · No dependencies
    ============================================================ */
 
 (function () {
@@ -24,7 +25,7 @@
       const span = document.createElement("span");
       span.className = "letter";
       span.textContent = ch === " " ? "\u00A0" : ch;
-      span.style.animationDelay = `${0.2 + i * 0.03}s`;
+      span.style.animationDelay = `${0.15 + i * 0.025}s`;
       el.appendChild(span);
     });
   }
@@ -259,20 +260,20 @@
   }
 
   /* ============================================================
-         7. 3D TILT
+         7. 3D TILT (subtle)
          ============================================================ */
   function initTilt() {
     if (!isFinePointer || prefersReducedMotion) return;
 
     const cards = document.querySelectorAll(".tilt");
-    const MAX = 6;
+    const MAX = 4;
 
     cards.forEach((card) => {
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(900px) rotateX(${-y * MAX}deg) rotateY(${x * MAX}deg) translateY(-6px)`;
+        card.style.transform = `perspective(900px) rotateX(${-y * MAX}deg) rotateY(${x * MAX}deg) translateY(-3px)`;
       });
       card.addEventListener("mouseleave", () => {
         card.style.transform = "";
@@ -350,15 +351,11 @@
     const qaSection = document.getElementById("qa");
     if (!qaSection) return;
 
-    // Log evaluated sites count for future analytics hooks
+    // Analytics hooks (optional)
     const qaCards = qaSection.querySelectorAll(".project-card");
-    const reportCount = qaSection.querySelectorAll(".qa-details").length;
-
-    // Mark section for styling hooks (e.g. custom counters)
     qaSection.dataset.evaluatedSites = qaCards.length;
-    qaSection.dataset.fullReports = reportCount;
 
-    // Keyboard focus ring on <details> summary
+    // Focus ring on <details> summary
     qaSection.querySelectorAll(".qa-details summary").forEach((summary) => {
       summary.addEventListener("focus", () => {
         summary.classList.add("is-focused");
@@ -367,27 +364,6 @@
         summary.classList.remove("is-focused");
       });
     });
-
-    // Optional: auto-expand first report when QA section scrolls into view
-    // Comment out this block if you don't want auto-expand.
-    const firstReport = qaSection.querySelector(".qa-details");
-    if (!firstReport || prefersReducedMotion) return;
-
-    let expanded = false;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !expanded) {
-            expanded = true;
-            firstReport.open = true;
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.4 },
-    );
-
-    observer.observe(firstReport);
   }
 
   /* ============================================================
