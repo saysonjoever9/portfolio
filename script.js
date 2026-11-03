@@ -1,5 +1,5 @@
 /* ============================================================
-   JOEVER L. SAYSON — PORTFOLIO v2 (Vanilla JS)
+   JOEVER L. SAYSON — PORTFOLIO v3 (Vanilla JS)
    ============================================================ */
 
 (function () {
@@ -13,8 +13,8 @@
   ).matches;
 
   /* ============================================================
-       1. SPLIT TEXT
-       ============================================================ */
+         1. SPLIT TEXT
+         ============================================================ */
   function initSplitText() {
     const el = document.querySelector(".split-text");
     if (!el) return;
@@ -30,8 +30,8 @@
   }
 
   /* ============================================================
-       2. TYPEWRITER
-       ============================================================ */
+         2. TYPEWRITER
+         ============================================================ */
   function initTypewriter() {
     const typedEl = document.getElementById("typed");
     if (!typedEl) return;
@@ -40,6 +40,7 @@
       "AI & Machine Learning Developer",
       "Full-Stack Web Developer",
       "Mobile App Developer",
+      "QA Evaluator",
       "Hardware–Software Integrator",
       "Computer Engineering Graduate",
     ];
@@ -78,8 +79,8 @@
   }
 
   /* ============================================================
-       3. THEME
-       ============================================================ */
+         3. THEME
+         ============================================================ */
   function initTheme() {
     const toggle = document.getElementById("themeToggle");
     const icon = toggle ? toggle.querySelector("i") : null;
@@ -121,8 +122,8 @@
   }
 
   /* ============================================================
-       4. NAV
-       ============================================================ */
+         4. NAV
+         ============================================================ */
   function initNav() {
     const navbar = document.getElementById("navbar");
     const progress = document.getElementById("scrollProgress");
@@ -173,8 +174,8 @@
   }
 
   /* ============================================================
-       5. MOBILE MENU
-       ============================================================ */
+         5. MOBILE MENU
+         ============================================================ */
   function initMenu() {
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
@@ -231,8 +232,8 @@
   }
 
   /* ============================================================
-       6. REVEAL ON SCROLL
-       ============================================================ */
+         6. REVEAL ON SCROLL
+         ============================================================ */
   function initReveal() {
     const els = document.querySelectorAll(".reveal");
     if (!els.length) return;
@@ -258,8 +259,8 @@
   }
 
   /* ============================================================
-       7. 3D TILT
-       ============================================================ */
+         7. 3D TILT
+         ============================================================ */
   function initTilt() {
     if (!isFinePointer || prefersReducedMotion) return;
 
@@ -280,8 +281,8 @@
   }
 
   /* ============================================================
-       8. CURSOR GLOW
-       ============================================================ */
+         8. CURSOR GLOW
+         ============================================================ */
   function initCursorGlow() {
     const glow = document.getElementById("cursorGlow");
     if (!glow || !isFinePointer || prefersReducedMotion) return;
@@ -307,8 +308,8 @@
   }
 
   /* ============================================================
-       9. SCROLL BUTTONS
-       ============================================================ */
+         9. SCROLL BUTTONS
+         ============================================================ */
   function initScrollButtons() {
     const top = document.getElementById("scrollTop");
     const down = document.getElementById("scrollDown");
@@ -343,16 +344,63 @@
   }
 
   /* ============================================================
-       10. FOOTER YEAR
-       ============================================================ */
+         10. QA EVALUATOR
+         ============================================================ */
+  function initQA() {
+    const qaSection = document.getElementById("qa");
+    if (!qaSection) return;
+
+    // Log evaluated sites count for future analytics hooks
+    const qaCards = qaSection.querySelectorAll(".project-card");
+    const reportCount = qaSection.querySelectorAll(".qa-details").length;
+
+    // Mark section for styling hooks (e.g. custom counters)
+    qaSection.dataset.evaluatedSites = qaCards.length;
+    qaSection.dataset.fullReports = reportCount;
+
+    // Keyboard focus ring on <details> summary
+    qaSection.querySelectorAll(".qa-details summary").forEach((summary) => {
+      summary.addEventListener("focus", () => {
+        summary.classList.add("is-focused");
+      });
+      summary.addEventListener("blur", () => {
+        summary.classList.remove("is-focused");
+      });
+    });
+
+    // Optional: auto-expand first report when QA section scrolls into view
+    // Comment out this block if you don't want auto-expand.
+    const firstReport = qaSection.querySelector(".qa-details");
+    if (!firstReport || prefersReducedMotion) return;
+
+    let expanded = false;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !expanded) {
+            expanded = true;
+            firstReport.open = true;
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.4 },
+    );
+
+    observer.observe(firstReport);
+  }
+
+  /* ============================================================
+         11. FOOTER YEAR
+         ============================================================ */
   function initYear() {
     const el = document.getElementById("year");
     if (el) el.textContent = new Date().getFullYear();
   }
 
   /* ============================================================
-       BOOT
-       ============================================================ */
+         BOOT
+         ============================================================ */
   const boot = () => {
     initSplitText();
     initTypewriter();
@@ -363,6 +411,7 @@
     initTilt();
     initCursorGlow();
     initScrollButtons();
+    initQA();
     initYear();
   };
 
