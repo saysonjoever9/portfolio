@@ -14,8 +14,8 @@
   ).matches;
 
   /* ============================================================
-           1. SPLIT TEXT
-           ============================================================ */
+             1. SPLIT TEXT
+             ============================================================ */
   function initSplitText() {
     const el = document.querySelector(".split-text");
     if (!el) return;
@@ -31,8 +31,8 @@
   }
 
   /* ============================================================
-           2. TYPEWRITER
-           ============================================================ */
+             2. TYPEWRITER
+             ============================================================ */
   function initTypewriter() {
     const typedEl = document.getElementById("typed");
     if (!typedEl) return;
@@ -80,8 +80,8 @@
   }
 
   /* ============================================================
-           3. THEME
-           ============================================================ */
+             3. THEME
+             ============================================================ */
   function initTheme() {
     const toggle = document.getElementById("themeToggle");
     const icon = toggle ? toggle.querySelector("i") : null;
@@ -123,8 +123,8 @@
   }
 
   /* ============================================================
-           4. NAV
-           ============================================================ */
+             4. NAV
+             ============================================================ */
   function initNav() {
     const navbar = document.getElementById("navbar");
     const progress = document.getElementById("scrollProgress");
@@ -175,8 +175,8 @@
   }
 
   /* ============================================================
-           5. MOBILE MENU
-           ============================================================ */
+             5. MOBILE MENU
+             ============================================================ */
   function initMenu() {
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
@@ -233,8 +233,8 @@
   }
 
   /* ============================================================
-           6. REVEAL ON SCROLL
-           ============================================================ */
+             6. REVEAL ON SCROLL
+             ============================================================ */
   function initReveal() {
     const els = document.querySelectorAll(".reveal");
     if (!els.length) return;
@@ -260,8 +260,8 @@
   }
 
   /* ============================================================
-           7. 3D TILT (subtle)
-           ============================================================ */
+             7. 3D TILT (subtle)
+             ============================================================ */
   function initTilt() {
     if (!isFinePointer || prefersReducedMotion) return;
 
@@ -282,8 +282,8 @@
   }
 
   /* ============================================================
-           8. CURSOR GLOW
-           ============================================================ */
+             8. CURSOR GLOW
+             ============================================================ */
   function initCursorGlow() {
     const glow = document.getElementById("cursorGlow");
     if (!glow || !isFinePointer || prefersReducedMotion) return;
@@ -309,8 +309,8 @@
   }
 
   /* ============================================================
-           9. SCROLL BUTTONS
-           ============================================================ */
+             9. SCROLL BUTTONS
+             ============================================================ */
   function initScrollButtons() {
     const top = document.getElementById("scrollTop");
     const down = document.getElementById("scrollDown");
@@ -345,8 +345,8 @@
   }
 
   /* ============================================================
-           10. QA EVALUATOR
-           ============================================================ */
+             10. QA EVALUATOR
+             ============================================================ */
   function initQA() {
     const qaSection = document.getElementById("qa");
     if (!qaSection) return;
@@ -367,16 +367,16 @@
   }
 
   /* ============================================================
-           11. FOOTER YEAR
-           ============================================================ */
+             11. FOOTER YEAR
+             ============================================================ */
   function initYear() {
     const el = document.getElementById("year");
     if (el) el.textContent = new Date().getFullYear();
   }
 
   /* ============================================================
-           BOOT
-           ============================================================ */
+             BOOT
+             ============================================================ */
   const boot = () => {
     initSplitText();
     initTypewriter();
