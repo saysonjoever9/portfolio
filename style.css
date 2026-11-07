@@ -450,7 +450,8 @@ button {
     max-width: var(--container-max);
     width: 100%;
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    /* Gi-adjust ang ratio gikan sa 1.2fr ngadto sa 1.1fr para hatagan og space ang text */
+    grid-template-columns: 1.1fr 1fr;
     gap: clamp(32px, 5vw, 64px);
     align-items: center;
 }
@@ -502,12 +503,15 @@ button {
 }
 
 .hero-name {
-    font-size: clamp(2rem, 5.5vw, 3.5rem);
+    /* Gi-adjust ang clamp: gigmayan ang max size para dili mo-overflow ang ngalan */
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.03em;
     margin-bottom: var(--space-sm);
     color: var(--text);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .split-text {
@@ -1105,50 +1109,7 @@ button {
 }
 
 
-/* ============ QA EVALUATOR ============ */
-
-.qa-table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-top: 16px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
-}
-
-.qa-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85rem;
-    min-width: 520px;
-}
-
-.qa-table thead th {
-    text-align: left;
-    padding: 12px 16px;
-    background: var(--surface);
-    color: var(--text);
-    font-weight: 600;
-    font-size: 0.75rem;
-    border-bottom: 1px solid var(--border);
-}
-
-.qa-table tbody td {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text-soft);
-    vertical-align: top;
-}
-
-.qa-table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-.qa-table tbody tr:hover {
-    background: var(--surface-hover);
-}
-
-
-/* ============ TESTING TOOLS (NAWALA NGA PART) ============ */
+/* ============ TESTING TOOLS ============ */
 
 .other-projects {
     margin-top: clamp(48px, 6vw, 72px);
