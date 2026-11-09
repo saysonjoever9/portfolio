@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Approach | Joever L. Sayson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+        (function() {
+            const saved = localStorage.getItem("theme");
+            const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+            if (saved === "light" || (!saved && prefersLight)) document.documentElement.setAttribute("data-theme", "light");
+        })();
+    </script>
+</head>
+
+<body class="frame-body">
+
+    <section class="section" id="approach">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="section-icon"><i class="fa-solid fa-compass-drafting"></i></span>
+                <h2>My Engineering <span class="accent">Approach</span></h2>
+                <p class="section-sub">I build complete systems not isolated apps.</p>
+            </div>
+
+            <div class="approach-flow">
+                <div class="flow-step reveal">
+                    <div class="flow-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h4>AI Layer</h4>
+                    <p>Analyzes data, classifies images, makes predictions.</p>
+                </div>
+                <div class="flow-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+
+                <div class="flow-step reveal">
+                    <div class="flow-icon"><i class="fa-solid fa-gears"></i></div>
+                    <h4>Software Layer</h4>
+                    <p>Makes decisions, handles logic, manages workflows.</p>
+                </div>
+                <div class="flow-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+
+                <div class="flow-step reveal">
+                    <div class="flow-icon"><i class="fa-solid fa-database"></i></div>
+                    <h4>Data Layer</h4>
+                    <p>Stores and manages information securely.</p>
+                </div>
+                <div class="flow-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+
+                <div class="flow-step reveal">
+                    <div class="flow-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <h4>Interface Layer</h4>
+                    <p>Presents results via web or mobile apps.</p>
+                </div>
+                <div class="flow-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+
+                <div class="flow-step reveal">
+                    <div class="flow-icon"><i class="fa-solid fa-microchip"></i></div>
+                    <h4>Hardware Layer</h4>
+                    <p>Performs physical actions sensing, spraying, control.</p>
+                </div>
+            </div>
+
+            <blockquote class="quote reveal">
+                "Building technology that does more than compute technology that can see, analyze, decide, and act."
+            </blockquote>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

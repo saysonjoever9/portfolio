@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Home | Joever L. Sayson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+        (function() {
+            const saved = localStorage.getItem("theme");
+            const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+            if (saved === "light" || (!saved && prefersLight)) document.documentElement.setAttribute("data-theme", "light");
+        })();
+    </script>
+</head>
+
+<body class="frame-body">
+
+    <section class="hero" id="home">
+        <div class="hero-bg" aria-hidden="true">
+            <div class="grid-overlay"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-greeting reveal-fade"> Hello World, I'm</p>
+                <h1 class="hero-name">
+                    <span class="split-text" data-text="Engr. Joever L. Sayson">Engr. Joever L. Sayson</span>
+                </h1>
+                <p class="hero-title reveal-fade">Software Engineer</p>
+                <h2 class="hero-role">
+                    <span id="typed"></span><span class="cursor">|</span>
+                </h2>
+                <p class="hero-desc reveal-fade">
+                    Engineer | AI & Machine Learning Developer | Full-Stack & Systems Developer From General Santos City, Philippines with additional expertise in QA Evaluation,Mobile Apps and Hardware-Software Integrations</span>
+                </p>
+
+                <div class="hero-cta reveal-fade">
+                    <a href="projects.html" class="btn btn-primary" data-frame-link="projects.html"><i class="fa-solid fa-rocket"></i> View My Work</a>
+                    <a href="contact.html" class="btn btn-outline" data-frame-link="contact.html"><i class="fa-solid fa-paper-plane"></i> Contact Me</a>
+                </div>
+
+                <div class="hero-socials reveal-fade">
+                    <!-- GitHub -->
+                    <a href="https://github.com/saysonjoever9" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+
+                    <!-- Facebook -->
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/lance.sayson.58" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <!-- Vercel -->
+                    <a href="https://saysonjoever9.vercel.app" target="_blank" rel="noopener" aria-label="Vercel" title="Vercel">
+                        <i class="fa-solid fa-cloud"></i>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:saysonjoever9@gmail.com" aria-label="Email" title="Email">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+
+                    <!-- CV / Resume -->
+                    <a href="image/JOEVER_LOBO_SAYSON_CV.pdf" target="_blank" rel="noopener" aria-label="Download CV" title="Download CV">
+                        <i class="fa-solid fa-address-card"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <!-- TIBUOK PICTURE NA GYUD NI -->
+                <div class="portrait-card">
+                    <img src="image/profile.png" alt="Joever L. Sayson — Software Engineer" loading="eager" />
+                </div>
+            </div>
+        </div>
+
+        <a href="about.html" class="scroll-down" data-frame-link="about.html" aria-label="Scroll down">
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

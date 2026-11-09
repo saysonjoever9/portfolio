@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Contact | Joever L. Sayson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+        (function() {
+            const saved = localStorage.getItem("theme");
+            const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+            if (saved === "light" || (!saved && prefersLight)) document.documentElement.setAttribute("data-theme", "light");
+        })();
+    </script>
+</head>
+
+<body class="frame-body">
+
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="section-icon"><i class="fa-solid fa-envelope"></i></span>
+                <h2>Get in <span class="accent">Touch</span></h2>
+                <p class="section-sub">Let's build something intelligent together.</p>
+            </div>
+
+            <div class="contact-grid">
+                <a href="mailto:saysonjoever9@gmail.com" class="contact-card reveal tilt">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p>saysonjoever9@gmail.com</p>
+                </a>
+                <a href="https://github.com/saysonjoever9" target="_blank" rel="noopener" class="contact-card reveal tilt">
+                    <i class="fa-brands fa-github"></i>
+                    <h4>GitHub</h4>
+                    <p>github.com/saysonjoever9</p>
+                </a>
+                <a href="https://saysonjoever9.vercel.app" target="_blank" rel="noopener" class="contact-card reveal tilt">
+                    <i class="fa-solid fa-cloud"></i>
+                    <h4>Vercel</h4>
+                    <p>saysonjoever9.vercel.app</p>
+                </a>
+                <div class="contact-card reveal tilt">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h4>Location</h4>
+                    <p>General Santos City, PH</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

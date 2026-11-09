@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Projects | Joever L. Sayson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+        (function() {
+            const saved = localStorage.getItem("theme");
+            const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+            if (saved === "light" || (!saved && prefersLight)) document.documentElement.setAttribute("data-theme", "light");
+        })();
+    </script>
+</head>
+
+<body class="frame-body">
+
+    <section class="section" id="project">
+        <div class="container">
+
+            <!-- Section Header -->
+            <div class="section-head reveal">
+                <span class="section-icon"><i class="fa-solid fa-diagram-project"></i></span>
+                <h2>My <span class="accent">Projects</span></h2>
+                <p class="section-sub">Real-world AI, IoT, and software solutions I've built.</p>
+            </div>
+
+            <!-- Thesis Label -->
+            <div class="thesis-label reveal">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Thesis Project</span>
+            </div>
+
+            <!-- Project 1: Thesis -->
+            <div class="project-card featured tilt reveal">
+                <div class="project-info">
+                    <span class="project-badge badge-green">
+                        <i class="fa-solid fa-graduation-cap"></i> Thesis · AI + IoT + Smart Agriculture
+                    </span>
+                    <h3>Pest and Disease Monitoring System for Banana Lakatan Farming Using CNN Algorithm</h3>
+
+                    <p>An agricultural AI system designed to help farmers identify banana pests and diseases through image classification. It applies Convolutional Neural Networks (CNNs), computer vision, and image processing for faster and more consistent
+                        crop monitoring.</p>
+
+                    <p>The system is connected to a hardware-based automated spraying approach creating a fully integrated AI + IoT + Smart Agriculture solution.</p>
+
+                    <div class="project-tech">
+                        <span>Python</span><span>TensorFlow</span><span>Keras</span>
+                        <span>OpenCV</span><span>CNN</span><span>Arduino</span>
+                        <span>Raspberry Pi</span><span>IoT</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: PlantDoc -->
+            <div class="project-card tilt reveal">
+                <div class="project-info">
+                    <span class="project-badge badge-green">
+                        <i class="fa-solid fa-seedling"></i> AI · Computer Vision · Deep Learning
+                    </span>
+                    <h3>PlantDoc Plant Disease Detection System</h3>
+
+                    <p>A deep-learning system capable of detecting 33 types of plant diseases across a wide variety of plants. Unlike single-crop solutions, PlantDoc is designed to be crop-agnostic users can upload any leaf image and receive a diagnosis
+                        with confidence scores.</p>
+
+                    <p>Built with CNN-based image classification and exploring transformer-based vision approaches for improved accuracy on complex, real-world leaf images.</p>
+
+                    <div class="project-tech">
+                        <span>Python</span><span>TensorFlow</span><span>Keras</span>
+                        <span>OpenCV</span><span>CNN</span><span>Transfer Learning</span>
+                        <span>Flask</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: Stock Management -->
+            <div class="project-card tilt reveal">
+                <div class="project-info">
+                    <span class="project-badge badge-green">
+                        <i class="fa-solid fa-cash-register"></i> Full-Stack · POS · Inventory
+                    </span>
+                    <h3>Stock Management & Sales System for Electronics Shop</h3>
+
+                    <p>A complete inventory and point-of-sale (POS) system built for an electronics/sensors shop. It tracks stock levels, sales, and product categories> including electronic components like sensors, microcontrollers, modules, and development
+                        boards.
+                    </p>
+
+                    <p>Features real-time stock updates, low-stock alerts, sales reports, receipt generation, and role-based access for admin and cashier users.</p>
+
+                    <div class="project-tech">
+                        <span>PHP</span><span>Laravel</span><span>MySQL</span>
+                        <span>JavaScript</span><span>HTML & CSS</span><span>Bootstrap</span>
+                        <span>Chart.js</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4: E-Commerce -->
+            <div class="project-card tilt reveal">
+                <div class="project-info">
+                    <span class="project-badge badge-green">
+                        <i class="fa-solid fa-store"></i> E-Commerce · Web App
+                    </span>
+                    <h3>Electronics Product Store & Product Management System</h3>
+
+                    <p>A modern e-commerce / product catalog system for selling electronics and sensor components online. Includes a customer-facing storefront with search, filters, cart, and checkout plus an admin dashboard for managing products, categories,
+                        and orders.</p>
+
+                    <p>Built with a REST API backend and a responsive front-end, with support for product images, stock sync with the Stock Management System, and customer order tracking.</p>
+
+                    <div class="project-tech">
+                        <span>React</span><span>Laravel</span><span>REST API</span>
+                        <span>MySQL</span><span>JavaScript</span><span>Tailwind CSS</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

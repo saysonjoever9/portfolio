@@ -1,397 +1,428 @@
 /* ============================================================
-   JOEVER L. SAYSON — PORTFOLIO (Minimal)
-   Vanilla JS · No dependencies
+   JOEVER L. SAYSON — PORTFOLIO SCRIPT
+   Handles: sidebar iframe navigation, theme toggle, mobile menu,
+            typing effect, reveal animations, cursor glow, tilt.
    ============================================================ */
 
 (function () {
   "use strict";
 
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-  const isFinePointer = window.matchMedia(
-    "(hover: hover) and (pointer: fine)",
-  ).matches;
+  /* ---------- Detect if we're the SHELL (index.html) or a FRAME PAGE ---------- */
+  const IS_SHELL = !!document.getElementById("content-frame");
 
   /* ============================================================
-               1. SPLIT TEXT
-               ============================================================ */
-  function initSplitText() {
-    const el = document.querySelector(".split-text");
-    if (!el) return;
-    const text = el.dataset.text || el.textContent;
-    el.textContent = "";
-    Array.from(text).forEach((ch, i) => {
-      const span = document.createElement("span");
-      span.className = "letter";
-      span.textContent = ch === " " ? "\u00A0" : ch;
-      span.style.animationDelay = `${0.15 + i * 0.025}s`;
-      el.appendChild(span);
+             SHELL LOGIC (index.html)
+             ============================================================ */
+  if (IS_SHELL) {
+    const frame = document.getElementById("content-frame");
+    const navLinks = document.querySelectorAll("[data-frame-link]");
+    const sidebar = document.getElementById("sidebar");
+    const navOverlay = document.getElementById("navOverlay");
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileClose = document.getElementById("mobileClose");
+    const themeToggle = document.getElementById("themeToggle");
+    const themeToggleMobile = document.getElementById("themeToggleMobile");
+    const cursorGlow = document.getElementById("cursorGlow");
+
+    /* ---- Track current page for active nav ---- */
+    let currentPage = "home.html";
+
+    function setActiveLink(page) {
+      document.querySelectorAll(".nav-link").forEach((link) => {
+        const target = link.getAttribute("data-frame-link");
+        link.classList.toggle("active", target === page);
+      });
+    }
+
+    /* ---- Load a page inside iframe ---- */
+    function loadPage(page, pushState = true) {
+      if (!page) return;
+      currentPage = page;
+
+      // Fade effect
+      frame.style.opacity = "0";
+      frame.style.transition = "opacity 0.25s ease";
+
+      setTimeout(() => {
+        frame.src = page;
+        if (pushState) {
+          history.pushState({ page }, "", "#" + page.replace(".html", ""));
+        }
+      }, 180);
+
+      frame.addEventListener("load", function onLoad() {
+        frame.style.opacity = "1";
+        frame.removeEventListener("load", onLoad);
+      });
+
+      setActiveLink(page);
+      closeMobileMenu();
+    }
+
+    /* ---- Nav link clicks ---- */
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const page = link.getAttribute("data-frame-link");
+        loadPage(page);
+      });
     });
+
+    /* ---- Listen to messages from iframe pages ---- */
+    window.addEventListener("message", (event) => {
+      const data = event.data;
+      if (!data || typeof data !== "object") return;
+
+      if (data.type === "navigate" && data.page) {
+        loadPage(data.page);
+      }
+
+      if (data.type === "theme-change" && data.theme) {
+        applyTheme(data.theme, false);
+      }
+
+      if (data.type === "frame-ready") {
+        // Sync theme into iframe
+        const theme =
+          document.documentElement.getAttribute("data-theme") || "dark";
+        frame.contentWindow.postMessage({ type: "theme-sync", theme }, "*");
+      }
+
+      // Update sidebar active state if user clicked a link inside the iframe
+      if (data.type === "page-loaded" && data.page) {
+        setActiveLink(data.page);
+      }
+    });
+
+    /* ---- Theme toggle ---- */
+    function applyTheme(theme, broadcast = true) {
+      if (theme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+      localStorage.setItem("theme", theme);
+
+      // Update icons and text dynamically
+      const isLight = theme === "light";
+      const iconClass = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
+      const textLabel = isLight ? "Light Mode" : "Dark Mode";
+
+      document.querySelectorAll(".theme-toggle i").forEach((icon) => {
+        icon.className = iconClass;
+      });
+
+      const sidebarText = document.querySelector(
+        ".sidebar-bottom .theme-toggle span",
+      );
+      if (sidebarText) sidebarText.textContent = textLabel;
+
+      // Broadcast to iframe
+      if (broadcast && frame.contentWindow) {
+        frame.contentWindow.postMessage({ type: "theme-sync", theme }, "*");
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme");
+      const next = current === "light" ? "dark" : "light";
+      applyTheme(next);
+
+      // Spin animation
+      document.querySelectorAll(".theme-toggle").forEach((btn) => {
+        btn.classList.add("rotating");
+        setTimeout(() => btn.classList.remove("rotating"), 500);
+      });
+    }
+
+    if (themeToggle) themeToggle.addEventListener("click", toggleTheme);
+    if (themeToggleMobile)
+      themeToggleMobile.addEventListener("click", toggleTheme);
+
+    /* ---- Initialize theme icons on load ---- */
+    (function initTheme() {
+      const isLight =
+        document.documentElement.getAttribute("data-theme") === "light";
+      const iconClass = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
+      const textLabel = isLight ? "Light Mode" : "Dark Mode";
+
+      document.querySelectorAll(".theme-toggle i").forEach((icon) => {
+        icon.className = iconClass;
+      });
+
+      const sidebarText = document.querySelector(
+        ".sidebar-bottom .theme-toggle span",
+      );
+      if (sidebarText) sidebarText.textContent = textLabel;
+    })();
+
+    /* ---- Mobile sidebar ---- */
+    function openMobileMenu() {
+      if (sidebar) sidebar.classList.add("open");
+      if (navOverlay) navOverlay.classList.add("active");
+      if (menuToggle) menuToggle.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMobileMenu() {
+      if (sidebar) sidebar.classList.remove("open");
+      if (navOverlay) navOverlay.classList.remove("active");
+      if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    }
+
+    if (menuToggle) menuToggle.addEventListener("click", openMobileMenu);
+    if (mobileClose) mobileClose.addEventListener("click", closeMobileMenu);
+    if (navOverlay) navOverlay.addEventListener("click", closeMobileMenu);
+
+    /* ---- Browser back/forward ---- */
+    window.addEventListener("popstate", (e) => {
+      const page = (e.state && e.state.page) || "home.html";
+      loadPage(page, false);
+    });
+
+    /* ---- Init from hash ---- */
+    (function initFromHash() {
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        const page = hash + ".html";
+        const validPages = [
+          "home",
+          "about",
+          "experience",
+          "skills",
+          "projects",
+          "research",
+          "qa",
+          "approach",
+          "contact",
+        ];
+        if (validPages.includes(hash)) {
+          loadPage(page, false);
+          return;
+        }
+      }
+      setActiveLink("home.html");
+    })();
+
+    /* ---- Cursor glow ---- */
+    if (cursorGlow) {
+      let mouseX = 0,
+        mouseY = 0;
+      let glowX = 0,
+        glowY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animateGlow() {
+        glowX += (mouseX - glowX) * 0.12;
+        glowY += (mouseY - glowY) * 0.12;
+        cursorGlow.style.left = glowX + "px";
+        cursorGlow.style.top = glowY + "px";
+        requestAnimationFrame(animateGlow);
+      }
+      animateGlow();
+
+      if ("ontouchstart" in window) {
+        cursorGlow.style.display = "none";
+      }
+    }
+
+    return; // stop here for shell
   }
 
   /* ============================================================
-               2. TYPEWRITER
-               ============================================================ */
-  function initTypewriter() {
-    const typedEl = document.getElementById("typed");
-    if (!typedEl) return;
+             FRAME PAGE LOGIC (home.html, about.html, etc.)
+             ============================================================ */
 
+  /* ---- Notify parent that frame is ready ---- */
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "frame-ready" }, "*");
+
+    // Tell parent which page just loaded so sidebar can highlight correctly
+    const currentPath =
+      window.location.pathname.split("/").pop() || "home.html";
+    window.parent.postMessage({ type: "page-loaded", page: currentPath }, "*");
+  }
+
+  /* ---- Listen for theme sync from parent ---- */
+  window.addEventListener("message", (event) => {
+    const data = event.data;
+    if (!data || typeof data !== "object") return;
+
+    if (data.type === "theme-sync" && data.theme) {
+      if (data.theme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+      localStorage.setItem("theme", data.theme);
+    }
+  });
+
+  /* ---- Intercept internal links -> tell parent to navigate ---- */
+  document.querySelectorAll("[data-frame-link]").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const page = link.getAttribute("data-frame-link");
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: "navigate", page }, "*");
+      } else {
+        window.location.href = page;
+      }
+    });
+  });
+
+  /* ---- Also intercept any .html links ---- */
+  document.querySelectorAll('a[href$=".html"]').forEach((link) => {
+    if (link.hasAttribute("data-frame-link")) return;
+    link.addEventListener("click", (e) => {
+      if (link.target === "_blank") return;
+      e.preventDefault();
+      const page = link.getAttribute("href");
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: "navigate", page }, "*");
+      } else {
+        window.location.href = page;
+      }
+    });
+  });
+
+  /* ---- Typing effect (hero page only) ---- */
+  const typedEl = document.getElementById("typed");
+  if (typedEl) {
     const roles = [
       "AI & Machine Learning Developer",
       "Full-Stack Web Developer",
       "Mobile App Developer",
       "QA Evaluator",
-      "Hardware–Software Integrator",
-      "Computer Engineering Graduate",
+      "Hardware-Software Integrator",
     ];
-
     let roleIndex = 0;
     let charIndex = 0;
-    let deleting = false;
-    let timeoutId;
+    let isDeleting = false;
+    const typeSpeed = 70;
+    const deleteSpeed = 40;
+    const pauseEnd = 1800;
 
-    const tick = () => {
+    function typeLoop() {
       const current = roles[roleIndex];
-
-      if (!deleting) {
-        typedEl.textContent = current.slice(0, ++charIndex);
+      if (!isDeleting) {
+        typedEl.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
         if (charIndex === current.length) {
-          deleting = true;
-          timeoutId = setTimeout(tick, 1600);
+          isDeleting = true;
+          setTimeout(typeLoop, pauseEnd);
           return;
         }
+        setTimeout(typeLoop, typeSpeed);
       } else {
-        typedEl.textContent = current.slice(0, --charIndex);
+        typedEl.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
         if (charIndex === 0) {
-          deleting = false;
+          isDeleting = false;
           roleIndex = (roleIndex + 1) % roles.length;
+          setTimeout(typeLoop, 400);
+          return;
         }
+        setTimeout(typeLoop, deleteSpeed);
       }
-      timeoutId = setTimeout(tick, deleting ? 40 : 90);
-    };
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) clearTimeout(timeoutId);
-      else tick();
-    });
-
-    tick();
-  }
-
-  /* ============================================================
-               3. THEME
-               ============================================================ */
-  function initTheme() {
-    const toggle = document.getElementById("themeToggle");
-    const icon = toggle ? toggle.querySelector("i") : null;
-    const root = document.documentElement;
-
-    const syncIcon = () => {
-      if (!icon) return;
-      const isLight = root.getAttribute("data-theme") === "light";
-      icon.classList.toggle("fa-moon", !isLight);
-      icon.classList.toggle("fa-sun", isLight);
-    };
-
-    syncIcon();
-
-    if (toggle) {
-      toggle.addEventListener("click", () => {
-        const isLight = root.getAttribute("data-theme") === "light";
-        const next = isLight ? "dark" : "light";
-        toggle.classList.add("rotating");
-
-        setTimeout(() => {
-          if (next === "light") root.setAttribute("data-theme", "light");
-          else root.removeAttribute("data-theme");
-          localStorage.setItem("theme", next);
-          syncIcon();
-          toggle.classList.remove("rotating");
-        }, 200);
-      });
     }
-
-    window
-      .matchMedia("(prefers-color-scheme: light)")
-      .addEventListener("change", (e) => {
-        if (localStorage.getItem("theme")) return;
-        if (e.matches) root.setAttribute("data-theme", "light");
-        else root.removeAttribute("data-theme");
-        syncIcon();
-      });
+    typeLoop();
   }
 
-  /* ============================================================
-               4. NAV
-               ============================================================ */
-  function initNav() {
-    const navbar = document.getElementById("navbar");
-    const progress = document.getElementById("scrollProgress");
-    const sections = document.querySelectorAll("section[id]");
-    const links = document.querySelectorAll(".nav-link");
-
-    let ticking = false;
-
-    const update = () => {
-      const y = window.scrollY;
-
-      if (navbar) navbar.classList.toggle("scrolled", y > 40);
-
-      if (progress) {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = max > 0 ? (y / max) * 100 : 0;
-        progress.style.width = `${pct}%`;
-      }
-
-      const scrollPos = y + 120;
-      sections.forEach((sec) => {
-        const top = sec.offsetTop;
-        const height = sec.offsetHeight;
-        const id = sec.getAttribute("id");
-        const link = document.querySelector(`.nav-link[href="#${id}"]`);
-        if (!link) return;
-        if (scrollPos >= top && scrollPos < top + height) {
-          links.forEach((l) => l.classList.remove("active"));
-          link.classList.add("active");
-        }
-      });
-
-      ticking = false;
-    };
-
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          requestAnimationFrame(update);
-          ticking = true;
-        }
-      },
-      { passive: true },
-    );
-
-    update();
-  }
-
-  /* ============================================================
-               5. MOBILE MENU
-               ============================================================ */
-  function initMenu() {
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-    const navClose = document.getElementById("navClose");
-    const navOverlay = document.getElementById("navOverlay");
-
-    if (!menuToggle || !navLinks) return;
-
-    const icon = menuToggle.querySelector("i");
-
-    const open = () => {
-      navLinks.classList.add("open");
-      if (navOverlay) navOverlay.classList.add("active");
-      menuToggle.setAttribute("aria-expanded", "true");
-      if (icon) {
-        icon.classList.remove("fa-bars");
-        icon.classList.add("fa-xmark");
-      }
-      document.body.classList.add("no-scroll");
-    };
-
-    const close = () => {
-      navLinks.classList.remove("open");
-      if (navOverlay) navOverlay.classList.remove("active");
-      menuToggle.setAttribute("aria-expanded", "false");
-      if (icon) {
-        icon.classList.remove("fa-xmark");
-        icon.classList.add("fa-bars");
-      }
-      document.body.classList.remove("no-scroll");
-    };
-
-    const toggle = () => {
-      if (navLinks.classList.contains("open")) close();
-      else open();
-    };
-
-    menuToggle.addEventListener("click", toggle);
-    if (navClose) navClose.addEventListener("click", close);
-    if (navOverlay) navOverlay.addEventListener("click", close);
-
-    document.querySelectorAll(".nav-link").forEach((l) => {
-      l.addEventListener("click", close);
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && navLinks.classList.contains("open")) close();
-    });
-
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 968 && navLinks.classList.contains("open"))
-        close();
-    });
-  }
-
-  /* ============================================================
-               6. REVEAL ON SCROLL
-               ============================================================ */
-  function initReveal() {
-    const els = document.querySelectorAll(".reveal");
-    if (!els.length) return;
-
-    if (prefersReducedMotion) {
-      els.forEach((el) => el.classList.add("active"));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
-    );
-
-    els.forEach((el) => observer.observe(el));
-  }
-
-  /* ============================================================
-               7. 3D TILT (subtle)
-               ============================================================ */
-  function initTilt() {
-    if (!isFinePointer || prefersReducedMotion) return;
-
-    const cards = document.querySelectorAll(".tilt");
-    const MAX = 4;
-
-    cards.forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(900px) rotateX(${-y * MAX}deg) rotateY(${x * MAX}deg) translateY(-3px)`;
-      });
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "";
-      });
-    });
-  }
-
-  /* ============================================================
-               8. CURSOR GLOW
-               ============================================================ */
-  function initCursorGlow() {
-    const glow = document.getElementById("cursorGlow");
-    if (!glow || !isFinePointer || prefersReducedMotion) return;
-
-    let raf = null;
-    let mx = 0;
-    let my = 0;
-
-    window.addEventListener(
-      "mousemove",
-      (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        if (!raf) {
-          raf = requestAnimationFrame(() => {
-            glow.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-            raf = null;
+  /* ---- Reveal on scroll ---- */
+  const revealEls = document.querySelectorAll(".reveal");
+  if (revealEls.length) {
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
           });
-        }
-      },
-      { passive: true },
-    );
-  }
-
-  /* ============================================================
-               9. SCROLL BUTTONS
-               ============================================================ */
-  function initScrollButtons() {
-    const top = document.getElementById("scrollTop");
-    const down = document.getElementById("scrollDown");
-
-    window.addEventListener(
-      "scroll",
-      () => {
-        const y = window.scrollY;
-        if (top) top.classList.toggle("visible", y > 400);
-        if (down) down.classList.toggle("visible", y < 200);
-      },
-      { passive: true },
-    );
-
-    if (top) {
-      top.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    }
-
-    if (down) {
-      down.addEventListener("click", () => {
-        const next = document.getElementById("about");
-        if (next) next.scrollIntoView({ behavior: "smooth" });
-        else
-          window.scrollBy({
-            top: window.innerHeight * 0.9,
-            behavior: "smooth",
-          });
-      });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: "0px 0px -40px 0px",
+        },
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add("active"));
     }
   }
 
-  /* ============================================================
-               10. QA EVALUATOR
-               ============================================================ */
-  function initQA() {
-    const qaSection = document.getElementById("qa");
-    if (!qaSection) return;
-
-    const qaCards = qaSection.querySelectorAll(".project-card");
-    qaSection.dataset.evaluatedSites = qaCards.length;
-
-    qaSection.querySelectorAll(".qa-details summary").forEach((summary) => {
-      summary.addEventListener("focus", () => {
-        summary.classList.add("is-focused");
+  /* ---- Tilt effect (Generic for .tilt elements) ---- */
+  const tiltEls = document.querySelectorAll(".tilt");
+  if (tiltEls.length && window.matchMedia("(hover: hover)").matches) {
+    tiltEls.forEach((el) => {
+      el.addEventListener("mousemove", (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -3;
+        const rotateY = ((x - centerX) / centerX) * 3;
+        el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       });
-      summary.addEventListener("blur", () => {
-        summary.classList.remove("is-focused");
+
+      el.addEventListener("mouseleave", () => {
+        el.style.transform = "";
       });
     });
   }
 
-  /* ============================================================
-               11. FOOTER YEAR
-               ============================================================ */
-  function initYear() {
-    const el = document.getElementById("year");
-    if (el) el.textContent = new Date().getFullYear();
-  }
+  /* ---- Fade-in on first load (hero) ---- */
+  window.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".reveal-fade").forEach((el, i) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(16px)";
+      el.style.transition = "opacity 0.7s ease, transform 0.7s ease";
+      setTimeout(
+        () => {
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0)";
+        },
+        100 + i * 120,
+      );
+    });
 
-  /* ============================================================
-               BOOT
-               ============================================================ */
-  const boot = () => {
-    initSplitText();
-    initTypewriter();
-    initTheme();
-    initNav();
-    initMenu();
-    initReveal();
-    initTilt();
-    initCursorGlow();
-    initScrollButtons();
-    initQA();
-    initYear();
-  };
+    /* ============================================================
+           3D PARALLAX TILT EFFECT (Hero Image)
+           ============================================================ */
+    const heroContent = document.querySelector(".hero-content");
+    const heroCard = document.querySelector(".hero-image-card");
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot, { once: true });
-  } else {
-    boot();
-  }
+    // Only run if elements exist and device supports hover (desktop)
+    if (
+      heroContent &&
+      heroCard &&
+      window.matchMedia("(hover: hover)").matches
+    ) {
+      // We apply the 3D rotation to the heroCard when moving mouse over heroContent
+      heroContent.addEventListener("mousemove", (e) => {
+        // Calculate mouse position relative to the center of the container
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
+
+        // Override the floating animation temporarily with the 3D tilt
+        heroCard.style.animation = "none";
+        heroCard.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+
+      // Reset when mouse leaves
+      heroContent.addEventListener("mouseleave", () => {
+        heroCard.style.transform = "";
+        // Re-apply the CSS animation for floating
+        heroCard.style.animation = "floatImage 6s ease-in-out infinite";
+      });
+    }
+  });
 })();

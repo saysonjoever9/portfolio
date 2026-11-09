@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>About | Joever L. Sayson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+        (function() {
+            const saved = localStorage.getItem("theme");
+            const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+            if (saved === "light" || (!saved && prefersLight)) document.documentElement.setAttribute("data-theme", "light");
+        })();
+    </script>
+</head>
+
+<body class="frame-body">
+
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="section-icon"><i class="fa-solid fa-user"></i></span>
+                <h2>About <span class="accent">Me</span></h2>
+                <p class="section-sub">A developer who builds systems that see, analyze, decide, and act.</p>
+            </div>
+
+            <div class="about-grid">
+                <!-- Card 1: AI & ML -->
+                <div class="about-card reveal tilt">
+                    <i class="fa-solid fa-brain about-icon"></i>
+                    <h3>AI & Machine Learning</h3>
+                    <p>CNN, computer vision, image classification, deep learning, and intelligent automation for real-world problems.</p>
+                </div>
+
+                <!-- Card 2: Full-Stack -->
+                <div class="about-card reveal tilt">
+                    <i class="fa-solid fa-laptop-code about-icon"></i>
+                    <h3>Full-Stack & Mobile</h3>
+                    <p>Web, desktop, backend, and mobile apps using Python, Laravel, React, React Native, and modern databases.</p>
+                </div>
+
+                <!-- Card 3: Hardware -->
+                <div class="about-card reveal tilt">
+                    <i class="fa-solid fa-microchip about-icon"></i>
+                    <h3>Hardware Integration</h3>
+                    <p>Arduino, Raspberry Pi, sensors, actuators, and IoT connecting software decisions to physical actions.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- UPDATED TEXT SUMMARY -->
+        <div class="about-text reveal">
+            <p>I am a >Software Engineer and Computer Engineering graduate from General Santos City, Philippines. With over 2+ years of freelance experience, I specialize in building practical, end-to-end technology solutions that merge modern software architectures,
+                embedded hardware, and intelligent automation.</p>
+
+            <p>AI is not just a subject I study, AI tools are deeply integrated into my development workflow, allowing me to accelerate coding, optimize system design, and build smarter applications. Instead of creating isolated apps, I engineer complete
+                systems where AI analyzes data, software makes decisions, databases manage information, and hardware executes physical actions. By leveraging both traditional engineering and cutting-edge AI tools, I develop robust, future-ready solutions
+                for real-world problems.</p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

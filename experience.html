@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Experience | Joever L. Sayson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+        (function() {
+            const saved = localStorage.getItem("theme");
+            const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+            if (saved === "light" || (!saved && prefersLight)) document.documentElement.setAttribute("data-theme", "light");
+        })();
+    </script>
+</head>
+
+<body class="frame-body">
+
+    <section class="section" id="experience">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="section-icon"><i class="fa-solid fa-briefcase"></i></span>
+                <h2>Work <span class="accent">Experience</span></h2>
+                <p class="section-sub">Where I apply my skills in real-world systems.</p>
+            </div>
+
+            <div class="project-card featured reveal">
+                <div class="project-info">
+                    <span class="project-badge badge-green">
+                        <i class="fa-solid fa-briefcase"></i> Full-Time · Healthcare IT
+                    </span>
+                    <h3>Medical Records System Management</h3>
+                    <p>Currently working at <strong>Mindanao Medical Center, Inc.</strong> in General Santos City, managing and maintaining the hospital's Medical Records Management System.</p>
+                    <p><strong>Key Responsibilities:</strong> Medical records system management and maintenance, patient information encoding and data validation, database accuracy and record consistency, user assistance and technical troubleshooting, data
+                        privacy, confidentiality, and access control, and system reliability and operational support.</p>
+
+                    <div class="project-highlights">
+                        <div class="highlight">
+                            <i class="fa-solid fa-hospital"></i>
+                            <div><strong>Company</strong><span>Mindanao Medical Center, Inc.</span></div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div><strong>Location</strong><span>General Santos City, PH</span></div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <div><strong>Focus</strong><span>Data accuracy & system reliability</span></div>
+                        </div>
+                    </div>
+
+                    <div class="project-tech">
+                        <span>Medical Records System</span>
+                        <span>Data Management</span>
+                        <span>Healthcare IT</span>
+                        <span>Patient Data Privacy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

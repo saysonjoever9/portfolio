@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Research | Joever L. Sayson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+        (function() {
+            const saved = localStorage.getItem("theme");
+            const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+            if (saved === "light" || (!saved && prefersLight)) document.documentElement.setAttribute("data-theme", "light");
+        })();
+    </script>
+</head>
+
+<body class="frame-body">
+
+    <section class="section" id="research">
+        <div class="container">
+
+            <!-- Section Header -->
+            <div class="section-head reveal">
+                <span class="section-icon"><i class="fa-solid fa-flask"></i></span>
+                <h2>Research & <span class="accent">Achievements</span></h2>
+                <p class="section-sub">Published work and competition awards that demonstrate applied engineering.</p>
+            </div>
+
+            <!-- Research Publication Card -->
+            <div class="project-card featured tilt reveal">
+                <div class="project-info">
+                    <span class="project-badge badge-green">
+                        <i class="fa-solid fa-book-open"></i> Research Publication · 2026
+                    </span>
+                    <h3>Pest and Disease Monitoring System for Banana Lakatan Farming Using CNN Algorithm</h3>
+
+                    <p>Published in the American Journal of Agricultural Science, Engineering, and Technology This research explores the application of Convolutional Neural Networks to agricultural monitoring, combining image classification with IoT-based
+                        automated spraying to create an integrated smart agriculture solution.</p>
+
+                    <div class="project-highlights">
+                        <div class="highlight">
+                            <i class="fa-solid fa-scroll"></i>
+                            <div>
+                                <strong>Journal</strong>
+                                <span>American Journal of Agricultural Science, Engineering, and Technology</span>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <div>
+                                <strong>Volume & Year</strong>
+                                <span>Vol. 10, No. 2 (2026)</span>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fa-solid fa-microchip"></i>
+                            <div>
+                                <strong>Tech Stack</strong>
+                                <span>CNN, Computer Vision, IoT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-tech">
+                        <span>CNN</span><span>Computer Vision</span><span>Smart Agriculture</span><span>IoT Integration</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competition Award Card -->
+            <div class="project-card tilt reveal">
+                <div class="project-info">
+                    <span class="project-badge badge-green">
+                        <i class="fa-solid fa-trophy"></i> 1st Place · Regional Competition · 2026
+                    </span>
+                    <h3>R12 ICpEP.SE SUMBOT Champion</h3>
+
+                    <p>Won 1st Place in the regional Sumobot competition. Demonstrated practical skills in robotics, embedded systems programming, and hardware integration under pressure.</p>
+
+                    <div class="project-highlights">
+                        <div class="highlight">
+                            <i class="fa-solid fa-medal"></i>
+                            <div>
+                                <strong>Achievement</strong>
+                                <span>1st Place Champion</span>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <div>
+                                <strong>Region</strong>
+                                <span>Region 12 (SOCCSKSARGEN)</span>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fa-solid fa-microchip"></i>
+                            <div>
+                                <strong>Skills Applied</strong>
+                                <span>Robotics, Embedded Systems, Hardware Integration</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-tech">
+                        <span>Robotics</span><span>Embedded Systems</span><span>Hardware</span><span>Programming</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
