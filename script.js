@@ -11,8 +11,8 @@
   const IS_SHELL = !!document.getElementById("content-frame");
 
   /* ============================================================
-             SHELL LOGIC (index.html)
-             ============================================================ */
+               SHELL LOGIC (index.html)
+               ============================================================ */
   if (IS_SHELL) {
     const frame = document.getElementById("content-frame");
     const navLinks = document.querySelectorAll("[data-frame-link]");
@@ -235,8 +235,8 @@
   }
 
   /* ============================================================
-             FRAME PAGE LOGIC (home.html, about.html, etc.)
-             ============================================================ */
+               FRAME PAGE LOGIC (home.html, about.html, etc.)
+               ============================================================ */
 
   /* ---- Notify parent that frame is ready ---- */
   if (window.parent && window.parent !== window) {
@@ -395,10 +395,10 @@
     });
 
     /* ============================================================
-           3D PARALLAX TILT EFFECT (Hero Image)
-           ============================================================ */
+               3D PARALLAX TILT EFFECT (Hero Image)
+               ============================================================ */
     const heroContent = document.querySelector(".hero-content");
-    const heroCard = document.querySelector(".hero-image-card");
+    const heroCard = document.getElementById("heroCard"); // Gigamit ang getElementById
 
     // Only run if elements exist and device supports hover (desktop)
     if (
