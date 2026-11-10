@@ -431,10 +431,6 @@ button {
 
 /* ============ 5. ICON BUTTONS ============ */
 
-
-/* KINI ANG MAG-FIX SA "X" BUTTON. 
-   Gi-set nato sila tanan og display: none sa default (Desktop) */
-
 .theme-toggle,
 .menu-toggle,
 .mobile-close {
@@ -809,17 +805,12 @@ button {
     object-fit: cover;
     object-position: center 5%;
     transform: scale(1.1);
-    /* Idugang kini para mo-zoom in og 10% */
     transition: transform 0.5s var(--ease-out);
 }
-
-
-/* Importante: I-override ang hover effect kay basin mobalik sa scale 1 */
 
 @media (hover: hover) {
     .hero-image:hover .image-frame img {
         transform: scale(1.15);
-        /* Mas dako gamay kung i-hover */
     }
 }
 
@@ -944,6 +935,19 @@ button {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     gap: 24px;
     margin-bottom: 40px;
+}
+
+
+/* KINI ANG MAGHIMO SA SKILLS NGA 2 COLUMNS SA DESKTOP */
+
+.skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 1024px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .about-card,
@@ -1083,7 +1087,9 @@ button {
     justify-content: center;
     width: clamp(50px, 10vw, 64px);
     height: clamp(50px, 10vw, 64px);
-    background: var(--bg-alt);
+    /* KINI ANG MAG-FIX: Giputli nato ang background og mas hayag2x gamay 
+       aron makita ang mga puti/itom nga icons */
+    background: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 12px;
@@ -1093,12 +1099,28 @@ button {
     flex-shrink: 0;
 }
 
+
+/* Sa light mode, ibalik sa normal nga background */
+
+[data-theme="light"] .skill-img-item {
+    background: var(--bg-alt);
+}
+
 .skill-img-item img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    /* Tangtanga nang invert o filter nga makausab sa kolor */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     transition: all 0.3s var(--ease-out);
+}
+
+
+/* Kadtong mga icon nga puti daan (sama sa GitHub, Next.js, Express)
+   atong butangan og gamay nga drop shadow aron makita bisan asa */
+
+[data-theme="dark"] .skill-img-item img {
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.1));
 }
 
 .fallback-icon {
@@ -1602,9 +1624,6 @@ button {
     }
 }
 
-
-/* Mobile — Sidebar becomes drawer */
-
 @media (max-width: 768px) {
      :root {
         --header-height: 60px;
@@ -1709,9 +1728,6 @@ button {
         margin-top: 20px;
         padding-top: 16px;
     }
-    /* =========================================
-       KINI ANG MAGPAKITA SA MGA BUTTON SA MOBILE
-       ========================================= */
     /* Ipakita ang Theme & Menu toggle sa Mobile Header */
     .mobile-actions .theme-toggle,
     .mobile-actions .menu-toggle {

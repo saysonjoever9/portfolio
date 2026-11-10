@@ -1,7 +1,8 @@
 /* ============================================================
    JOEVER L. SAYSON — PORTFOLIO SCRIPT
    Handles: sidebar iframe navigation, theme toggle, mobile menu,
-            typing effect, reveal animations, cursor glow, tilt.
+            typing effect, reveal animations, cursor glow, tilt,
+            3D particle network animation.
    ============================================================ */
 
 (function () {
@@ -11,8 +12,8 @@
   const IS_SHELL = !!document.getElementById("content-frame");
 
   /* ============================================================
-               SHELL LOGIC (index.html)
-               ============================================================ */
+                 SHELL LOGIC (index.html)
+                 ============================================================ */
   if (IS_SHELL) {
     const frame = document.getElementById("content-frame");
     const navLinks = document.querySelectorAll("[data-frame-link]");
@@ -235,8 +236,8 @@
   }
 
   /* ============================================================
-               FRAME PAGE LOGIC (home.html, about.html, etc.)
-               ============================================================ */
+                 FRAME PAGE LOGIC (home.html, about.html, etc.)
+                 ============================================================ */
 
   /* ---- Notify parent that frame is ready ---- */
   if (window.parent && window.parent !== window) {
@@ -395,8 +396,8 @@
     });
 
     /* ============================================================
-               3D PARALLAX TILT EFFECT (Hero Image)
-               ============================================================ */
+                   3D PARALLAX TILT EFFECT (Hero Image)
+                   ============================================================ */
     const heroContent = document.querySelector(".hero-content");
     const heroCard = document.getElementById("heroCard"); // Gigamit ang getElementById
 
@@ -425,4 +426,120 @@
       });
     }
   });
+
+  /* ============================================================
+                 3D ANIMATED PARTICLE NETWORK (Hero Background)
+                 ============================================================ */
+  // Kini nga code mo-detect kung naa ba tay <canvas id="hero-canvas">
+  const canvas = document.getElementById("hero-canvas");
+
+  if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let width, height;
+    let particles = [];
+    let animationFrameId;
+
+    // I-adjust ang gidaghanon sa particles (mas gamay kung mobile)
+    const particleCount = window.innerWidth < 768 ? 30 : 80;
+    const maxDistance = 150; // Distansya kung asa magkadugtong ang linya
+
+    function resize() {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    }
+
+    window.addEventListener("resize", () => {
+      resize();
+      // Kung mag-usab ang screen size, i-reset ang particles
+      initParticles();
+    });
+
+    resize();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.8; // Speed sa X axis
+        this.vy = (Math.random() - 0.5) * 0.8; // Speed sa Y axis
+        this.radius = Math.random() * 2 + 1;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Bounce off walls (mobalik kung maigo ang kilid)
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        // Gikuha ang kolor gikan sa imong CSS variables (--primary)
+        const primaryColor =
+          getComputedStyle(document.documentElement)
+            .getPropertyValue("--primary")
+            .trim() || "#06b6d4";
+        ctx.fillStyle = primaryColor;
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      const primaryColor =
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--primary")
+          .trim() || "#06b6d4";
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          // Kung duol ra sila, magdibuho og linya
+          if (distance < maxDistance) {
+            ctx.beginPath();
+            const opacity = 1 - distance / maxDistance;
+            ctx.strokeStyle = primaryColor;
+            ctx.globalAlpha = opacity * 0.5; // Opacity nagdepende sa kalay-on
+            ctx.lineWidth = 1;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    // I-check kung ang user gusto og reduced motion (accessibility)
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      initParticles();
+      animate();
+
+      // Kung mag-ilis ang theme (Light/Dark), i-refresh ang particles para makuha ang bag-ong kolor
+      window.addEventListener("message", (event) => {
+        if (event.data && event.data.type === "theme-sync") {
+          setTimeout(() => {
+            // Dili na nato i-reset ang position, kuan lang mag-update ang kolor sa sunod nga frame
+          }, 100);
+        }
+      });
+    }
+  }
 })();
