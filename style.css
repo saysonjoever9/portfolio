@@ -1196,6 +1196,17 @@ button {
     background: color-mix(in srgb, var(--badge) 10%, transparent);
 }
 
+
+/* NEW: Warning Badge for Localhost Systems */
+
+.badge-warning {
+    --badge: var(--orange);
+    background: rgba(251, 146, 60, 0.15);
+    /* Orange tint */
+    color: #fbbf24;
+    border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
 .badge-violet {
     --badge: var(--violet);
 }
@@ -1281,7 +1292,7 @@ button {
 
 .project-highlights {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
     gap: 16px;
     margin-block: 24px;
 }
@@ -1331,6 +1342,105 @@ button {
     margin-bottom: 24px;
     max-width: 100%;
     flex-wrap: wrap;
+}
+
+
+/* ============ 12.1. NEW QA STYLES ============ */
+
+
+/* Privacy Note at the bottom of localhost cards */
+
+.privacy-note {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    color: #94a3b8;
+    /* Muted text */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-style: italic;
+}
+
+.privacy-note i {
+    color: #fbbf24;
+}
+
+
+/* Make Project Cards clickable links */
+
+a.project-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    /* Ensures the whole block is clickable */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* Hover effect for clickable cards */
+
+a.project-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(59, 130, 246, 0.5);
+    /* Blue glow border */
+}
+
+
+/* External Link Icon next to the H3 */
+
+.link-icon {
+    font-size: 0.8em;
+    margin-left: 8px;
+    color: #3b82f6;
+    /* Blue accent color */
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+a.project-link:hover .link-icon {
+    opacity: 1;
+    transform: translate(2px, -2px);
+}
+
+
+/* Style for the QuizArena Image Preview */
+
+.project-preview {
+    margin: 1.5rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    max-width: 100%;
+    background: #0f172a;
+}
+
+.project-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.project-preview:hover img {
+    transform: scale(1.02);
+}
+
+.preview-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    font-family: 'JetBrains Mono', monospace;
 }
 
 
