@@ -8,7 +8,6 @@
 :root {
     color-scheme: dark;
     --primary-rgb: 6, 182, 212;
-    /* Color */
     --bg: #030305;
     --bg-alt: #0a0a0f;
     --surface: rgba(18, 18, 26, 0.4);
@@ -25,34 +24,27 @@
     --gradient: linear-gradient(135deg, #06b6d4, #6366f1);
     --header-bg: rgba(3, 3, 5, 0.8);
     --drawer-bg: #050508;
-    /* Status colors */
     --green: #34d399;
     --orange: #fb923c;
     --pink: #f472b6;
     --violet: #a78bfa;
-    /* Radii */
     --radius-sm: 10px;
     --radius: 16px;
     --radius-lg: 24px;
     --radius-full: 999px;
-    /* Shadows */
     --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
     --shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
     --shadow-glow: 0 12px 40px rgba(var(--primary-rgb), 0.15);
-    /* Motion */
     --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --transition: color 0.3s var(--ease-out), background-color 0.3s var(--ease-out), border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), transform 0.3s var(--ease-out);
-    /* Type */
     --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-    /* Layout */
     --sidebar-width: 280px;
     --header-height: 70px;
     --container-max: 1140px;
     --container-pad: clamp(20px, 4vw, 32px);
     --section-pad-y: clamp(64px, 8vw, 100px);
-    /* Z-index */
     --z-base: 1;
     --z-header: 1001;
     --z-overlay: 1000;
@@ -937,9 +929,6 @@ button {
     margin-bottom: 40px;
 }
 
-
-/* KINI ANG MAGHIMO SA SKILLS NGA 2 COLUMNS SA DESKTOP */
-
 .skills-grid {
     grid-template-columns: repeat(2, 1fr);
 }
@@ -1072,87 +1061,106 @@ button {
     transition: var(--transition);
 }
 
+
+/* FIX: Grid sa mga skills */
+
 .skill-images-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: clamp(12px, 2.5vw, 20px);
-    align-items: center;
+    gap: 16px;
+    align-items: flex-start;
     margin-top: 10px;
-    min-height: 64px;
 }
+
+
+/* FIX: Box sa icon ug text */
 
 .skill-img-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: clamp(50px, 10vw, 64px);
-    height: clamp(50px, 10vw, 64px);
-    /* KINI ANG MAG-FIX: Giputli nato ang background og mas hayag2x gamay 
-       aron makita ang mga puti/itom nga icons */
-    background: rgba(255, 255, 255, 0.08);
+    gap: 8px;
+    width: clamp(75px, 12vw, 90px);
+    padding: 12px 6px;
+    background: var(--bg-alt);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 12px;
     transition: all 0.3s var(--ease-out);
     cursor: pointer;
     position: relative;
     flex-shrink: 0;
 }
 
-
-/* Sa light mode, ibalik sa normal nga background */
-
-[data-theme="light"] .skill-img-item {
-    background: var(--bg-alt);
+[data-theme="dark"] .skill-img-item {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .skill-img-item img {
-    width: 100%;
-    height: 100%;
+    width: 38px;
+    height: 38px;
     object-fit: contain;
-    /* Tangtanga nang invert o filter nga makausab sa kolor */
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     transition: all 0.3s var(--ease-out);
 }
-
-
-/* Kadtong mga icon nga puti daan (sama sa GitHub, Next.js, Express)
-   atong butangan og gamay nga drop shadow aron makita bisan asa */
 
 [data-theme="dark"] .skill-img-item img {
     filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.1));
 }
 
 .fallback-icon {
-    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+    font-size: 1.8rem;
+    height: 38px;
+    display: flex;
+    align-items: center;
     color: var(--primary);
     transition: all 0.3s var(--ease-out);
 }
 
-.skill-img-item::after {
-    content: attr(title);
-    position: absolute;
-    bottom: -32px;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: var(--surface-solid);
-    color: var(--text);
+
+/* FIX: High Contrast Text Badge */
+
+.exp-text {
+    font-family: var(--font-mono);
     font-size: 0.75rem;
-    padding: 5px 12px;
+    font-weight: 800;
+    color: #065f46;
+    background: #d1fae5;
+    padding: 4px 8px;
     border-radius: 6px;
-    border: 1px solid var(--border);
     white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s var(--ease-out);
-    pointer-events: none;
-    z-index: 10;
-    box-shadow: var(--shadow-sm);
-    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
+    max-width: 65px;
+    margin-top: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-[data-theme="light"] .skill-img-item img {
-    filter: brightness(0.95);
+[data-theme="dark"] .exp-text {
+    color: #34d399;
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    box-shadow: none;
+}
+
+
+/* Hover Effects sa mga Box */
+
+.skill-img-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-line);
+    background: var(--surface-hover);
+    box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.2);
+}
+
+.skill-img-item:hover img {
+    transform: scale(1.1);
+}
+
+.skill-img-item:hover .fallback-icon {
+    transform: scale(1.1);
+    color: var(--text);
 }
 
 
@@ -1196,13 +1204,9 @@ button {
     background: color-mix(in srgb, var(--badge) 10%, transparent);
 }
 
-
-/* NEW: Warning Badge for Localhost Systems */
-
 .badge-warning {
     --badge: var(--orange);
     background: rgba(251, 146, 60, 0.15);
-    /* Orange tint */
     color: #fbbf24;
     border: 1px solid rgba(251, 146, 60, 0.3);
 }
@@ -1347,16 +1351,12 @@ button {
 
 /* ============ 12.1. NEW QA STYLES ============ */
 
-
-/* Privacy Note at the bottom of localhost cards */
-
 .privacy-note {
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px dashed rgba(255, 255, 255, 0.1);
     font-size: 0.85rem;
     color: #94a3b8;
-    /* Muted text */
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1367,35 +1367,23 @@ button {
     color: #fbbf24;
 }
 
-
-/* Make Project Cards clickable links */
-
 a.project-link {
     text-decoration: none;
     color: inherit;
     display: block;
-    /* Ensures the whole block is clickable */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-
-/* Hover effect for clickable cards */
 
 a.project-link:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     border-color: rgba(59, 130, 246, 0.5);
-    /* Blue glow border */
 }
-
-
-/* External Link Icon next to the H3 */
 
 .link-icon {
     font-size: 0.8em;
     margin-left: 8px;
     color: #3b82f6;
-    /* Blue accent color */
     opacity: 0.7;
     transition: opacity 0.2s;
 }
@@ -1404,9 +1392,6 @@ a.project-link:hover .link-icon {
     opacity: 1;
     transform: translate(2px, -2px);
 }
-
-
-/* Style for the QuizArena Image Preview */
 
 .project-preview {
     margin: 1.5rem 0;
@@ -1651,24 +1636,6 @@ a.project-link:hover .link-icon {
         background: var(--primary-soft);
         transform: translateY(-2px);
     }
-    .skill-img-item:hover {
-        transform: translateY(-5px) scale(1.05);
-        border-color: var(--primary-line);
-        background: var(--surface-hover);
-        box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.2);
-    }
-    .skill-img-item:hover img {
-        transform: scale(1.1);
-    }
-    .skill-img-item:hover .fallback-icon {
-        transform: scale(1.15);
-        color: var(--text);
-    }
-    .skill-img-item:hover::after {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0);
-    }
     .highlight:hover {
         background: var(--surface-hover);
         border-color: var(--primary-line);
@@ -1838,12 +1805,10 @@ a.project-link:hover .link-icon {
         margin-top: 20px;
         padding-top: 16px;
     }
-    /* Ipakita ang Theme & Menu toggle sa Mobile Header */
     .mobile-actions .theme-toggle,
     .mobile-actions .menu-toggle {
         display: grid;
     }
-    /* Ipakita ang X (Close) button sa sulod sa Mobile Drawer */
     .sidebar .mobile-close {
         display: grid;
         position: absolute;
@@ -1856,7 +1821,6 @@ a.project-link:hover .link-icon {
         color: var(--text-soft);
         z-index: 10;
     }
-    /* Tagoa ang Light Mode button sa ilawom sa sidebar sa mobile */
     .sidebar .sidebar-bottom {
         display: none;
     }
@@ -1934,17 +1898,22 @@ a.project-link:hover .link-icon {
     .mobile-logo .logo-text {
         font-size: 0.95rem;
     }
+    /* Mobile skills box adjust */
     .skill-img-item {
-        width: 48px;
-        height: 48px;
-        padding: 8px;
+        width: 70px;
+        padding: 10px 4px;
+    }
+    .skill-img-item img {
+        width: 32px;
+        height: 32px;
     }
     .skill-images-grid {
-        gap: 10px;
-        min-height: 48px;
+        gap: 12px;
     }
-    .fallback-icon {
-        font-size: 1.2rem;
+    .exp-text {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+        max-width: 58px;
     }
 }
 
