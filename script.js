@@ -12,8 +12,8 @@
   const IS_SHELL = !!document.getElementById("content-frame");
 
   /* ============================================================
-                 SHELL LOGIC (index.html)
-                 ============================================================ */
+                   SHELL LOGIC (index.html)
+                   ============================================================ */
   if (IS_SHELL) {
     const frame = document.getElementById("content-frame");
     const navLinks = document.querySelectorAll("[data-frame-link]");
@@ -31,7 +31,13 @@
     function setActiveLink(page) {
       document.querySelectorAll(".nav-link").forEach((link) => {
         const target = link.getAttribute("data-frame-link");
-        link.classList.toggle("active", target === page);
+        const isActive = target === page;
+        link.classList.toggle("active", isActive);
+        if (isActive) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
+        }
       });
     }
 
@@ -40,7 +46,6 @@
       if (!page) return;
       currentPage = page;
 
-      // Fade effect
       frame.style.opacity = "0";
       frame.style.transition = "opacity 0.25s ease";
 
@@ -83,13 +88,11 @@
       }
 
       if (data.type === "frame-ready") {
-        // Sync theme into iframe
         const theme =
           document.documentElement.getAttribute("data-theme") || "dark";
         frame.contentWindow.postMessage({ type: "theme-sync", theme }, "*");
       }
 
-      // Update sidebar active state if user clicked a link inside the iframe
       if (data.type === "page-loaded" && data.page) {
         setActiveLink(data.page);
       }
@@ -104,7 +107,6 @@
       }
       localStorage.setItem("theme", theme);
 
-      // Update icons and text dynamically
       const isLight = theme === "light";
       const iconClass = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
       const textLabel = isLight ? "Light Mode" : "Dark Mode";
@@ -118,7 +120,6 @@
       );
       if (sidebarText) sidebarText.textContent = textLabel;
 
-      // Broadcast to iframe
       if (broadcast && frame.contentWindow) {
         frame.contentWindow.postMessage({ type: "theme-sync", theme }, "*");
       }
@@ -129,7 +130,6 @@
       const next = current === "light" ? "dark" : "light";
       applyTheme(next);
 
-      // Spin animation
       document.querySelectorAll(".theme-toggle").forEach((btn) => {
         btn.classList.add("rotating");
         setTimeout(() => btn.classList.remove("rotating"), 500);
@@ -236,14 +236,13 @@
   }
 
   /* ============================================================
-                 FRAME PAGE LOGIC (home.html, about.html, etc.)
-                 ============================================================ */
+                   FRAME PAGE LOGIC (home.html, about.html, etc.)
+                   ============================================================ */
 
   /* ---- Notify parent that frame is ready ---- */
   if (window.parent && window.parent !== window) {
     window.parent.postMessage({ type: "frame-ready" }, "*");
 
-    // Tell parent which page just loaded so sidebar can highlight correctly
     const currentPath =
       window.location.pathname.split("/").pop() || "home.html";
     window.parent.postMessage({ type: "page-loaded", page: currentPath }, "*");
@@ -380,7 +379,7 @@
     });
   }
 
-  /* ---- Fade-in on first load (hero) ---- */
+  /* ---- Fade-in on first load + 3D hero tilt ---- */
   window.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".reveal-fade").forEach((el, i) => {
       el.style.opacity = "0";
@@ -395,151 +394,145 @@
       );
     });
 
-    /* ============================================================
-                   3D PARALLAX TILT EFFECT (Hero Image)
-                   ============================================================ */
     const heroContent = document.querySelector(".hero-content");
-    const heroCard = document.getElementById("heroCard"); // Gigamit ang getElementById
+    const heroCard = document.getElementById("heroCard");
 
-    // Only run if elements exist and device supports hover (desktop)
     if (
       heroContent &&
       heroCard &&
       window.matchMedia("(hover: hover)").matches
     ) {
-      // We apply the 3D rotation to the heroCard when moving mouse over heroContent
       heroContent.addEventListener("mousemove", (e) => {
-        // Calculate mouse position relative to the center of the container
         const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
         const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
 
-        // Override the floating animation temporarily with the 3D tilt
         heroCard.style.animation = "none";
         heroCard.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) scale3d(1.02, 1.02, 1.02)`;
       });
 
-      // Reset when mouse leaves
       heroContent.addEventListener("mouseleave", () => {
         heroCard.style.transform = "";
-        // Re-apply the CSS animation for floating
         heroCard.style.animation = "floatImage 6s ease-in-out infinite";
       });
     }
   });
 
   /* ============================================================
-                 3D ANIMATED PARTICLE NETWORK (Hero Background)
-                 ============================================================ */
-  // Kini nga code mo-detect kung naa ba tay <canvas id="hero-canvas">
+       3D ANIMATED PARTICLE NETWORK (Hero Background)
+       ============================================================ */
   const canvas = document.getElementById("hero-canvas");
 
-  if (canvas) {
+  if (
+    canvas &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
     const ctx = canvas.getContext("2d");
-    let width, height;
+    let width = 0,
+      height = 0;
     let particles = [];
-    let animationFrameId;
+    let rafId = null;
 
-    // I-adjust ang gidaghanon sa particles (mas gamay kung mobile)
-    const particleCount = window.innerWidth < 768 ? 30 : 80;
-    const maxDistance = 150; // Distansya kung asa magkadugtong ang linya
+    const isMobile = window.innerWidth < 768;
+    const PARTICLE_COUNT = isMobile ? 28 : 70;
+    const MAX_DISTANCE = isMobile ? 110 : 150;
+    const SPEED = 0.45;
 
-    function resize() {
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
+    function getPrimaryColor() {
+      return (
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--primary")
+          .trim() || "#06b6d4"
+      );
     }
 
-    window.addEventListener("resize", () => {
-      resize();
-      // Kung mag-usab ang screen size, i-reset ang particles
-      initParticles();
-    });
-
-    resize();
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = canvas.offsetWidth;
+      height = canvas.offsetHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
 
     class Particle {
       constructor() {
+        this.reset();
+      }
+      reset() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.8; // Speed sa X axis
-        this.vy = (Math.random() - 0.5) * 0.8; // Speed sa Y axis
-        this.radius = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * SPEED;
+        this.vy = (Math.random() - 0.5) * SPEED;
+        this.r = Math.random() * 1.6 + 0.8;
       }
-
       update() {
         this.x += this.vx;
         this.y += this.vy;
-
-        // Bounce off walls (mobalik kung maigo ang kilid)
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
       }
-
-      draw() {
+      draw(color) {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        // Gikuha ang kolor gikan sa imong CSS variables (--primary)
-        const primaryColor =
-          getComputedStyle(document.documentElement)
-            .getPropertyValue("--primary")
-            .trim() || "#06b6d4";
-        ctx.fillStyle = primaryColor;
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = color;
         ctx.fill();
       }
     }
 
-    function initParticles() {
-      particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
+    function init() {
+      resize();
+      particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
     }
 
     function animate() {
       ctx.clearRect(0, 0, width, height);
-      const primaryColor =
-        getComputedStyle(document.documentElement)
-          .getPropertyValue("--primary")
-          .trim() || "#06b6d4";
+      const color = getPrimaryColor();
 
       for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
+        const p = particles[i];
+        p.update();
+        p.draw(color);
 
         for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const dist = Math.hypot(dx, dy);
 
-          // Kung duol ra sila, magdibuho og linya
-          if (distance < maxDistance) {
+          if (dist < MAX_DISTANCE) {
             ctx.beginPath();
-            const opacity = 1 - distance / maxDistance;
-            ctx.strokeStyle = primaryColor;
-            ctx.globalAlpha = opacity * 0.5; // Opacity nagdepende sa kalay-on
-            ctx.lineWidth = 1;
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = color;
+            ctx.globalAlpha = (1 - dist / MAX_DISTANCE) * 0.45;
+            ctx.lineWidth = 0.8;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
             ctx.stroke();
-            ctx.globalAlpha = 1;
           }
         }
       }
-      animationFrameId = requestAnimationFrame(animate);
+      ctx.globalAlpha = 1;
+      rafId = requestAnimationFrame(animate);
     }
 
-    // I-check kung ang user gusto og reduced motion (accessibility)
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      initParticles();
-      animate();
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        cancelAnimationFrame(rafId);
+        init();
+        animate();
+      }, 200);
+    });
 
-      // Kung mag-ilis ang theme (Light/Dark), i-refresh ang particles para makuha ang bag-ong kolor
-      window.addEventListener("message", (event) => {
-        if (event.data && event.data.type === "theme-sync") {
-          setTimeout(() => {
-            // Dili na nato i-reset ang position, kuan lang mag-update ang kolor sa sunod nga frame
-          }, 100);
-        }
-      });
-    }
+    init();
+    animate();
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+      } else {
+        animate();
+      }
+    });
   }
 })();

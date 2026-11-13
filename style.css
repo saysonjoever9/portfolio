@@ -1,5 +1,6 @@
 /* ============================================================
    JOEVER L. SAYSON — PORTFOLIO (Complete & Clean Responsive)
+   Clean polish layer integrated — production ready.
    ============================================================ */
 
 
@@ -119,7 +120,7 @@ body.frame-body {
     min-height: 100vh;
     min-height: 100dvh;
     overflow-x: hidden;
-    background: transparent !important;
+    background: var(--bg) !important;
 }
 
 h1,
@@ -169,6 +170,21 @@ button {
     outline: 2px solid var(--primary);
     outline-offset: 3px;
     border-radius: var(--radius-sm);
+}
+
+
+/* Accessibility helpers */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 
@@ -385,6 +401,11 @@ button {
     box-shadow: 0 0 12px var(--primary);
 }
 
+[data-theme="light"] .nav-link.active {
+    background: linear-gradient(90deg, rgba(8, 145, 178, 0.14) 0%, rgba(8, 145, 178, 0.04) 100%);
+    color: var(--primary);
+}
+
 .sidebar-bottom {
     margin-top: auto;
     padding-top: 24px;
@@ -511,6 +532,10 @@ button {
     position: relative;
 }
 
+.frame-body .section:first-of-type {
+    padding-top: clamp(40px, 6vw, 64px);
+}
+
 .section-head {
     text-align: center;
     max-width: 680px;
@@ -574,6 +599,20 @@ button {
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
+}
+
+#hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+[data-theme="light"] #hero-canvas {
+    opacity: 0.15;
 }
 
 .grid-overlay {
@@ -651,6 +690,17 @@ button {
     margin-bottom: 16px;
     color: var(--text);
     word-wrap: break-word;
+    background: linear-gradient(135deg, var(--text) 0%, var(--text) 55%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .hero-name {
+    background: linear-gradient(135deg, var(--text) 0%, var(--text) 60%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .accent-text {
@@ -666,12 +716,21 @@ button {
     font-weight: 600;
     margin-bottom: 24px;
     line-height: 1.5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 10px;
+}
+
+.hero-role {
+    display: inline-block;
 }
 
 .hero-title .divider {
     color: var(--primary);
     opacity: 0.5;
     margin: 0 8px;
+    font-weight: 400;
 }
 
 .hero-desc {
@@ -1061,19 +1120,13 @@ button {
     transition: var(--transition);
 }
 
-
-/* FIX: Grid sa mga skills */
-
 .skill-images-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 12px;
     align-items: flex-start;
     margin-top: 10px;
 }
-
-
-/* FIX: Box sa icon ug text */
 
 .skill-img-item {
     display: flex;
@@ -1117,9 +1170,6 @@ button {
     transition: all 0.3s var(--ease-out);
 }
 
-
-/* FIX: High Contrast Text Badge */
-
 .exp-text {
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -1144,8 +1194,11 @@ button {
     box-shadow: none;
 }
 
-
-/* Hover Effects sa mga Box */
+[data-theme="light"] .exp-text {
+    color: #065f46;
+    background: #d1fae5;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
 
 .skill-img-item:hover {
     transform: translateY(-4px);
@@ -1161,6 +1214,52 @@ button {
 .skill-img-item:hover .fallback-icon {
     transform: scale(1.1);
     color: var(--text);
+}
+
+
+/* Cleaner exp-stat badge */
+
+.exp-stat {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 12px;
+    margin: 0 auto 32px !important;
+    padding: 14px 22px !important;
+    border-radius: var(--radius-full) !important;
+    background: var(--primary-soft) !important;
+    border: 1px solid var(--primary-line) !important;
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.08);
+}
+
+.exp-stat span:first-child {
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary) !important;
+    line-height: 1;
+}
+
+.exp-stat span:last-child {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-soft);
+}
+
+#skills .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#skills .skills-grid {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+@media (max-width: 900px) {
+    #skills .skills-grid {
+        grid-template-columns: 1fr !important;
+    }
 }
 
 
@@ -1202,6 +1301,8 @@ button {
     color: var(--badge);
     border: 1px solid color-mix(in srgb, var(--badge) 25%, transparent);
     background: color-mix(in srgb, var(--badge) 10%, transparent);
+    line-height: 1.4;
+    white-space: normal;
 }
 
 .badge-warning {
@@ -1209,6 +1310,12 @@ button {
     background: rgba(251, 146, 60, 0.15);
     color: #fbbf24;
     border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
+[data-theme="light"] .badge-warning {
+    background: rgba(251, 146, 60, 0.12);
+    color: #c2410c;
+    border-color: rgba(251, 146, 60, 0.35);
 }
 
 .badge-violet {
@@ -1294,6 +1401,15 @@ button {
     max-width: 75ch;
 }
 
+.project-card .project-info>p:first-of-type {
+    color: var(--text-soft);
+}
+
+.project-card .project-info>p strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
 .project-highlights {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
@@ -1349,7 +1465,7 @@ button {
 }
 
 
-/* ============ 12.1. NEW QA STYLES ============ */
+/* ============ 12.1. QA STYLES ============ */
 
 .privacy-note {
     margin-top: 1rem;
@@ -1365,6 +1481,15 @@ button {
 
 .privacy-note i {
     color: #fbbf24;
+}
+
+[data-theme="light"] .privacy-note {
+    color: #64748b;
+    border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .privacy-note i {
+    color: #d97706;
 }
 
 a.project-link {
@@ -1648,7 +1773,56 @@ a.project-link:hover .link-icon {
 }
 
 
-/* ============ 17. RESPONSIVE (COMPLETE) ============ */
+/* ============ 17. CONTACT CARDS ============ */
+
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.contact-card i {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+    padding: 10px;
+    background: var(--primary-soft);
+    border-radius: var(--radius);
+    display: inline-block;
+}
+
+.contact-card p {
+    font-family: var(--font-mono);
+    font-size: 0.82rem !important;
+    word-break: break-all;
+}
+
+
+/* ============ 18. SCROLLBAR (FRAME PAGES) ============ */
+
+.frame-body::-webkit-scrollbar {
+    width: 10px;
+}
+
+.frame-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.frame-body::-webkit-scrollbar-thumb {
+    background: var(--border-hover);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+.frame-body::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+    background-clip: content-box;
+}
+
+
+/* ============ 19. RESPONSIVE (COMPLETE) ============ */
 
 @media (max-width: 1200px) {
      :root {
@@ -1722,8 +1896,16 @@ a.project-link:hover .link-icon {
         transform: translateX(0);
         box-shadow: 8px 0 40px rgba(0, 0, 0, 0.5);
     }
-    .sidebar-bottom {
-        margin-top: 16px;
+    /* Sidebar bottom theme toggle visible on mobile drawer */
+    .sidebar .sidebar-bottom {
+        display: block !important;
+        margin-top: auto;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+    }
+    .sidebar .sidebar-bottom .theme-toggle {
+        display: flex !important;
+        width: 100%;
     }
     .main-content {
         margin-left: 0;
@@ -1821,9 +2003,6 @@ a.project-link:hover .link-icon {
         color: var(--text-soft);
         z-index: 10;
     }
-    .sidebar .sidebar-bottom {
-        display: none;
-    }
 }
 
 @media (max-width: 480px) {
@@ -1898,7 +2077,6 @@ a.project-link:hover .link-icon {
     .mobile-logo .logo-text {
         font-size: 0.95rem;
     }
-    /* Mobile skills box adjust */
     .skill-img-item {
         width: 70px;
         padding: 10px 4px;
@@ -1948,6 +2126,9 @@ a.project-link:hover .link-icon {
     .reveal {
         opacity: 1;
         transform: none;
+    }
+    #hero-canvas {
+        display: none;
     }
 }
 
