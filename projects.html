@@ -5,9 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Projects | Joever L. Sayson</title>
+    <meta name="description" content="Engineering case studies: AI, IoT, smart agriculture, full-stack systems, and hardware integration by Joever L. Sayson." />
+    <link rel="icon" type="image/svg+xml" href="image/logo-js.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
     <script>
@@ -23,104 +25,272 @@
 
     <section class="section" id="project">
         <div class="container">
-
-            <!-- Section Header -->
             <div class="section-head reveal">
                 <span class="section-icon"><i class="fa-solid fa-diagram-project"></i></span>
-                <h2>My <span class="accent">Projects</span></h2>
-                <p class="section-sub">Real-world AI, IoT, and software solutions I've built.</p>
+                <h2>Engineering <span class="accent">Case Studies</span></h2>
+                <p class="section-sub">The problem, the solution, my contribution, and the evidence — not just the interface.</p>
             </div>
 
-            <!-- Thesis Label -->
-            <div class="thesis-label reveal">
-                <i class="fa-solid fa-graduation-cap"></i>
-                <span>Thesis Project</span>
-            </div>
-
-            <!-- Project 1: Thesis -->
-            <div class="project-card featured tilt reveal">
+            <!-- ============ CASE STUDY 01: Thesis / AgriGuard ============ -->
+            <article class="project-card featured case-study tilt reveal" aria-labelledby="cs1-title">
                 <div class="project-info">
-                    <span class="project-badge badge-green">
-                        <i class="fa-solid fa-graduation-cap"></i> Thesis · AI + IoT + Smart Agriculture
-                    </span>
-                    <h3>Pest and Disease Monitoring System for Banana Lakatan Farming Using CNN Algorithm</h3>
+                    <div class="case-meta">
+                        <span class="project-badge badge-green"><i class="fa-solid fa-graduation-cap"></i> Thesis · AI + IoT</span>
+                        <span class="project-badge badge-violet"><i class="fa-solid fa-book-open"></i> Published Research</span>
+                        <span class="project-badge"><i class="fa-solid fa-award"></i> Real Prototype</span>
+                    </div>
 
-                    <p>An agricultural AI system designed to help farmers identify banana pests and diseases through image classification. It applies Convolutional Neural Networks (CNNs), computer vision, and image processing for faster and more consistent
-                        crop monitoring.</p>
+                    <h3 id="cs1-title">AgriGuard — Pest &amp; Disease Monitoring for Banana Lakatan Farming</h3>
 
-                    <p>The system is connected to a hardware-based automated spraying approach creating a fully integrated AI + IoT + Smart Agriculture solution.</p>
+                    <div class="case-section">
+                        <span class="case-label">01 · Problem</span>
+                        <div class="case-body">
+                            Manual agricultural inspection is slow, inconsistent, and dependent on individual expertise. Early pest and disease detection in banana Lakatan farming is critical to yield — but human inspectors cannot scale across large plantations.
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">02 · Solution</span>
+                        <div class="case-body">
+                            An integrated monitoring system combining <strong>CNN-based image classification</strong>, computer vision, embedded sensors, and an automated spraying mechanism — turning visual detection into a physical response without manual
+                            intervention.
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">03 · My Engineering Contribution</span>
+                        <div class="case-body">
+                            <ul>
+                                <li>Trained and evaluated a CNN image-classification model for banana pest and disease detection.</li>
+                                <li>Experimented with ViT and YOLO-based vision approaches for detection robustness.</li>
+                                <li>Integrated sensors and actuators with Arduino and Raspberry Pi.</li>
+                                <li>Built the hardware-to-software communication layer and automated spraying control.</li>
+                                <li>Developed the monitoring dashboard and database integration.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">04 · System Architecture</span>
+                        <div class="arch-diagram" aria-label="System architecture">
+                            <div class="arch-node">
+                                <i class="fa-solid fa-camera"></i>
+                                <div><strong>Camera / Sensors</strong><span>Image &amp; field data capture</span></div>
+                            </div>
+                            <div class="arch-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="arch-node">
+                                <i class="fa-solid fa-brain"></i>
+                                <div><strong>CNN Model</strong><span>Classification &amp; inference</span></div>
+                            </div>
+                            <div class="arch-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="arch-node">
+                                <i class="fa-solid fa-gears"></i>
+                                <div><strong>Decision Layer</strong><span>Spray / no-spray logic</span></div>
+                            </div>
+                            <div class="arch-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="arch-node">
+                                <i class="fa-solid fa-microchip"></i>
+                                <div><strong>Actuators</strong><span>Automated spraying</span></div>
+                            </div>
+                            <div class="arch-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="arch-node">
+                                <i class="fa-solid fa-chart-line"></i>
+                                <div><strong>Dashboard</strong><span>Monitoring &amp; records</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">05 · Evidence</span>
+                        <div class="case-body">
+                            <div class="evidence-grid">
+                                <div class="metric-card">
+                                    <span class="metric-value">Published</span>
+                                    <span class="metric-label">American Journal of Agricultural Science, Engineering &amp; Technology (2026)</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-value">CNN</span>
+                                    <span class="metric-label">Image classification core model</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-value">IoT</span>
+                                    <span class="metric-label">End-to-end hardware integration</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-value">Prototype</span>
+                                    <span class="metric-label">Working physical system</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="project-tech">
-                        <span>Python</span><span>TensorFlow</span><span>Keras</span>
-                        <span>OpenCV</span><span>CNN</span><span>Arduino</span>
-                        <span>Raspberry Pi</span><span>IoT</span>
+                        <span>Python</span><span>TensorFlow</span><span>Keras</span><span>OpenCV</span>
+                        <span>CNN</span><span>Arduino</span><span>Raspberry Pi</span><span>IoT</span>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <!-- Project 2: PlantDoc -->
-            <div class="project-card tilt reveal">
+            <!-- ============ CASE STUDY 02: PlantDoc ============ -->
+            <article class="project-card case-study tilt reveal" aria-labelledby="cs2-title">
                 <div class="project-info">
-                    <span class="project-badge badge-green">
-                        <i class="fa-solid fa-seedling"></i> AI · Computer Vision · Deep Learning
-                    </span>
-                    <h3>PlantDoc Plant Disease Detection System</h3>
+                    <div class="case-meta">
+                        <span class="project-badge badge-green"><i class="fa-solid fa-seedling"></i> AI · Computer Vision</span>
+                        <span class="project-badge"><i class="fa-solid fa-layer-group"></i> Transfer Learning</span>
+                    </div>
 
-                    <p>A deep-learning system capable of detecting 33 types of plant diseases across a wide variety of plants. Unlike single-crop solutions, PlantDoc is designed to be crop-agnostic users can upload any leaf image and receive a diagnosis
-                        with confidence scores.</p>
+                    <h3 id="cs2-title">PlantDoc — Crop-Agnostic Plant Disease Detection</h3>
 
-                    <p>Built with CNN-based image classification and exploring transformer-based vision approaches for improved accuracy on complex, real-world leaf images.</p>
+                    <div class="case-section">
+                        <span class="case-label">01 · Problem</span>
+                        <div class="case-body">
+                            Most plant-disease models are single-crop. Farmers with mixed crops need a tool that can diagnose any leaf — without retraining a model for every species.
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">02 · Solution</span>
+                        <div class="case-body">
+                            A deep-learning system capable of detecting <strong>33 disease types across multiple plants</strong>. Users upload any leaf image and receive a diagnosis with confidence scores. CNN-based classification with transfer learning,
+                            and exploration of vision-transformer approaches for complex real-world leaf images.
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">03 · My Engineering Contribution</span>
+                        <div class="case-body">
+                            <ul>
+                                <li>Built the image pipeline (OpenCV) for real-world leaf normalization.</li>
+                                <li>Applied transfer learning to a pre-trained CNN backbone.</li>
+                                <li>Developed a Flask inference server and upload interface.</li>
+                                <li>Evaluated model accuracy and failure modes on complex leaf images.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">04 · Evidence</span>
+                        <div class="case-body">
+                            <div class="evidence-grid">
+                                <div class="metric-card"><span class="metric-value">33</span><span class="metric-label">Disease classes supported</span></div>
+                                <div class="metric-card"><span class="metric-value">CNN</span><span class="metric-label">Base architecture with transfer learning</span></div>
+                                <div class="metric-card"><span class="metric-value">Flask</span><span class="metric-label">Deployed inference API</span></div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="project-tech">
-                        <span>Python</span><span>TensorFlow</span><span>Keras</span>
-                        <span>OpenCV</span><span>CNN</span><span>Transfer Learning</span>
-                        <span>Flask</span>
+                        <span>Python</span><span>TensorFlow</span><span>Keras</span><span>OpenCV</span>
+                        <span>CNN</span><span>Transfer Learning</span><span>Flask</span>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <!-- Project 3: Stock Management -->
-            <div class="project-card tilt reveal">
+            <!-- ============ CASE STUDY 03: Stock Management ============ -->
+            <article class="project-card case-study tilt reveal" aria-labelledby="cs3-title">
                 <div class="project-info">
-                    <span class="project-badge badge-green">
-                        <i class="fa-solid fa-cash-register"></i> Full-Stack · POS · Inventory
-                    </span>
-                    <h3>Stock Management & Sales System for Electronics Shop</h3>
+                    <div class="case-meta">
+                        <span class="project-badge badge-green"><i class="fa-solid fa-cash-register"></i> Full-Stack · POS</span>
+                        <span class="project-badge"><i class="fa-solid fa-store"></i> Real Business</span>
+                    </div>
 
-                    <p>A complete inventory and point-of-sale (POS) system built for an electronics/sensors shop. It tracks stock levels, sales, and product categories> including electronic components like sensors, microcontrollers, modules, and development
-                        boards.
-                    </p>
+                    <h3 id="cs3-title">Stock Management &amp; Sales System for an Electronics Shop</h3>
 
-                    <p>Features real-time stock updates, low-stock alerts, sales reports, receipt generation, and role-based access for admin and cashier users.</p>
+                    <div class="case-section">
+                        <span class="case-label">01 · Problem</span>
+                        <div class="case-body">
+                            A local electronics and sensors shop tracked inventory manually. Stockouts, mismatched sales records, and lack of role separation were causing losses and slow customer service.
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">02 · Solution</span>
+                        <div class="case-body">
+                            A complete inventory and point-of-sale system with <strong>real-time stock updates, low-stock alerts, sales reports, receipt generation, and role-based access</strong> for admin and cashier users.
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">03 · My Engineering Contribution</span>
+                        <div class="case-body">
+                            <ul>
+                                <li>Designed the relational database schema for products, categories, sales, and users.</li>
+                                <li>Built the Laravel backend with role-based access control.</li>
+                                <li>Implemented real-time stock deduction and low-stock alert logic.</li>
+                                <li>Developed sales reporting and receipt generation.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">04 · Evidence</span>
+                        <div class="case-body">
+                            <div class="evidence-grid">
+                                <div class="metric-card"><span class="metric-value">RBAC</span><span class="metric-label">Admin / cashier separation</span></div>
+                                <div class="metric-card"><span class="metric-value">Real-time</span><span class="metric-label">Stock deduction &amp; alerts</span></div>
+                                <div class="metric-card"><span class="metric-value">Reports</span><span class="metric-label">Sales &amp; inventory analytics</span></div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="project-tech">
-                        <span>PHP</span><span>Laravel</span><span>MySQL</span>
-                        <span>JavaScript</span><span>HTML & CSS</span><span>Bootstrap</span>
-                        <span>Chart.js</span>
+                        <span>PHP</span><span>Laravel</span><span>MySQL</span><span>JavaScript</span>
+                        <span>Bootstrap</span><span>Chart.js</span>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <!-- Project 4: E-Commerce -->
-            <div class="project-card tilt reveal">
+            <!-- ============ CASE STUDY 04: E-Commerce ============ -->
+            <article class="project-card case-study tilt reveal" aria-labelledby="cs4-title">
                 <div class="project-info">
-                    <span class="project-badge badge-green">
-                        <i class="fa-solid fa-store"></i> E-Commerce · Web App
-                    </span>
-                    <h3>Electronics Product Store & Product Management System</h3>
+                    <div class="case-meta">
+                        <span class="project-badge badge-green"><i class="fa-solid fa-store"></i> E-Commerce · Web App</span>
+                    </div>
 
-                    <p>A modern e-commerce / product catalog system for selling electronics and sensor components online. Includes a customer-facing storefront with search, filters, cart, and checkout plus an admin dashboard for managing products, categories,
-                        and orders.</p>
+                    <h3 id="cs4-title">Electronics Product Store &amp; Management System</h3>
 
-                    <p>Built with a REST API backend and a responsive front-end, with support for product images, stock sync with the Stock Management System, and customer order tracking.</p>
+                    <div class="case-section">
+                        <span class="case-label">01 · Problem</span>
+                        <div class="case-body">
+                            The shop needed an online storefront to reach customers beyond walk-ins, while keeping product stock synced with the in-store POS.
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">02 · Solution</span>
+                        <div class="case-body">
+                            A modern e-commerce catalog with <strong>customer storefront, search &amp; filters, cart, checkout, and an admin dashboard</strong> for managing products, categories, and orders — with stock sync to the POS system.
+                        </div>
+                    </div>
+
+                    <div class="case-section">
+                        <span class="case-label">03 · My Engineering Contribution</span>
+                        <div class="case-body">
+                            <ul>
+                                <li>Built the REST API backend in Laravel.</li>
+                                <li>Developed the React front-end with responsive product catalog.</li>
+                                <li>Implemented stock synchronization between store and POS.</li>
+                                <li>Added customer order tracking and admin order management.</li>
+                            </ul>
+                        </div>
+                    </div>
 
                     <div class="project-tech">
-                        <span>React</span><span>Laravel</span><span>REST API</span>
-                        <span>MySQL</span><span>JavaScript</span><span>Tailwind CSS</span>
+                        <span>React</span><span>Laravel</span><span>REST API</span><span>MySQL</span>
+                        <span>JavaScript</span><span>Tailwind CSS</span>
                     </div>
                 </div>
-            </div>
+            </article>
 
+            <div class="contact-band reveal">
+                <div>
+                    <h3>Need the full technical breakdown?</h3>
+                    <p>Each case study can be expanded into a detailed report with architecture diagrams, test results, and model metrics on request.</p>
+                </div>
+                <div class="contact-band-actions">
+                    <a href="contact.html" class="btn btn-primary" data-frame-link="contact.html"><i class="fa-solid fa-envelope"></i> Request Details</a>
+                </div>
+            </div>
         </div>
     </section>
 

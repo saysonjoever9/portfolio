@@ -5,20 +5,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="google-site-verification" content="o4Kx3nv6QbTnX-3uEJTYt46DykIvtn0xxZeIbYy1yAg" />
-    <title>Joever L. Sayson | Software Engineer & AI Developer</title>
-    <meta name="description" content="Engr. Joever L. Sayson — Software Engineer, AI & Machine Learning Developer, Full-Stack Web Developer, QA Evaluator, and Hardware-Software Integrator based in General Santos City, Philippines." />
+
+    <title>Joever L. Sayson Software Engineer | AI, Full-Stack & Embedded Systems</title>
+    <meta name="description" content="Software Engineer specializing in AI & Machine Learning, full-stack application development, system architecture, and hardware-software integration. Based in General Santos City, Philippines." />
+    <meta name="author" content="Joever L. Sayson" />
+    <meta name="theme-color" content="#030305" />
+    <link rel="canonical" href="https://saysonjoever9.vercel.app/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Joever L. Sayson — Software Engineer | AI & Systems" />
+    <meta property="og:description" content="I design, build, and integrate intelligent software systems — AI, full-stack, and embedded." />
+    <meta property="og:url" content="https://saysonjoever9.vercel.app/" />
+    <meta property="og:image" content="https://saysonjoever9.vercel.app/image/og-cover.jpg" />
+    <meta property="og:site_name" content="Joever L. Sayson" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Joever L. Sayson — Software Engineer" />
+    <meta name="twitter:description" content="AI, full-stack, and embedded systems engineer building complete intelligent solutions." />
+    <meta name="twitter:image" content="https://saysonjoever9.vercel.app/image/og-cover.jpg" />
+
     <link rel="icon" type="image/svg+xml" href="image/logo-js.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
     <script>
         (function() {
-            const saved = localStorage.getItem("theme");
-            const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-            if (saved === "light" || (!saved && prefersLight)) {
-                document.documentElement.setAttribute("data-theme", "light");
-            }
+            try {
+                const saved = localStorage.getItem("theme");
+                const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+                if (saved === "light" || (!saved && prefersLight)) {
+                    document.documentElement.setAttribute("data-theme", "light");
+                }
+            } catch (e) {}
         })();
     </script>
     <link rel="stylesheet" href="style.css" />
@@ -26,22 +48,26 @@
 
 <body>
 
+    <a class="skip-link" href="#content-frame">Skip to content</a>
     <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
+    <!-- Mobile header -->
     <header class="mobile-header" id="mobileHeader">
         <a href="home.html" class="mobile-logo" data-frame-link="home.html" aria-label="Home">
             <span class="logo-circle">JS</span>
+            <span class="logo-text">Joever<span>.dev</span></span>
         </a>
         <div class="mobile-actions">
             <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle theme">
-                <i class="fa-solid fa-moon"></i>
-            </button>
+        <i class="fa-solid fa-moon"></i>
+      </button>
             <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+        <i class="fa-solid fa-bars"></i>
+      </button>
         </div>
     </header>
 
+    <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
         <a href="home.html" class="logo" data-frame-link="home.html" aria-label="Home">
             <img src="image/logo-js.svg" alt="JS Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
@@ -50,10 +76,10 @@
         </a>
 
         <button class="mobile-close" id="mobileClose" aria-label="Close menu">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
+      <i class="fa-solid fa-xmark"></i>
+    </button>
 
-        <nav class="side-links" id="sideLinks">
+        <nav class="side-links" id="sideLinks" aria-label="Primary">
             <a href="home.html" class="nav-link active" data-frame-link="home.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
             <a href="about.html" class="nav-link" data-frame-link="about.html"><i class="fa-solid fa-user"></i><span>About</span></a>
             <a href="experience.html" class="nav-link" data-frame-link="experience.html"><i class="fa-solid fa-briefcase"></i><span>Experience</span></a>
@@ -68,16 +94,16 @@
 
         <div class="sidebar-bottom">
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
-                <i class="fa-solid fa-moon"></i>
-                <span>Dark Mode</span>
-            </button>
+        <i class="fa-solid fa-moon"></i>
+        <span>Dark Mode</span>
+      </button>
         </div>
     </aside>
 
     <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
 
     <main class="main-content">
-        <iframe id="content-frame" src="home.html" title="Portfolio Content" loading="eager"></iframe>
+        <iframe id="content-frame" src="home.html" title="Portfolio Content" loading="eager" allow="clipboard-write"></iframe>
     </main>
 
     <script src="script.js"></script>

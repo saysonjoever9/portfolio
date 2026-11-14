@@ -8,8 +8,8 @@
   const IS_SHELL = !!document.getElementById("content-frame");
 
   /* ============================================================
-                       SHELL LOGIC (index.html)
-                       ============================================================ */
+                         SHELL LOGIC (index.html)
+                         ============================================================ */
   if (IS_SHELL) {
     const frame = document.getElementById("content-frame");
     const navLinks = document.querySelectorAll("[data-frame-link]");
@@ -163,29 +163,101 @@
       loadPage(page, false);
     });
 
+    /* ============================================================
+           ADDITIONS FOR 10/10 UPGRADE — insert inside the IS_SHELL block
+           ============================================================ */
+
+    // Robust hash router with 404 fallback
     (function initFromHash() {
-      const hash = window.location.hash.replace("#", "");
-      if (hash) {
-        const page = hash + ".html";
-        const validPages = [
-          "home",
-          "about",
-          "experience",
-          "skills",
-          "projects",
-          "research",
-          "certificates",
-          "qa",
-          "approach",
-          "contact",
-        ];
-        if (validPages.includes(hash)) {
-          loadPage(page, false);
-          return;
-        }
+      const VALID = [
+        "home",
+        "about",
+        "experience",
+        "skills",
+        "projects",
+        "research",
+        "certificates",
+        "qa",
+        "approach",
+        "contact",
+      ];
+      const hash = window.location.hash.replace("#", "").trim();
+      if (hash && VALID.includes(hash)) {
+        loadPage(hash + ".html", false);
+        return;
+      }
+      if (hash && !VALID.includes(hash)) {
+        // Unknown hash → redirect to home but keep URL clean
+        history.replaceState({ page: "home.html" }, "", "#home");
       }
       setActiveLink("home.html");
     })();
+
+    // Stagger architecture-diagram nodes on first paint of a case-study page
+    function staggerArchNodes() {
+      document.querySelectorAll(".arch-diagram").forEach((diagram) => {
+        const nodes = diagram.querySelectorAll(".arch-node");
+        nodes.forEach((node, i) => {
+          node.style.opacity = "0";
+          node.style.transform = "translateY(10px)";
+          setTimeout(
+            () => {
+              node.style.transition =
+                "opacity .5s cubic-bezier(0.16,1,0.3,1), transform .5s cubic-bezier(0.16,1,0.3,1)";
+              node.style.opacity = "1";
+              node.style.transform = "none";
+            },
+            80 + i * 60,
+          );
+        });
+      });
+    }
+
+    // Highlight findings-table rows on hover (pointer devices)
+    function initFindingsTables() {
+      document.querySelectorAll(".findings-table tbody tr").forEach((row) => {
+        row.addEventListener(
+          "mouseenter",
+          () => (row.style.background = "var(--surface-hover)"),
+        );
+        row.addEventListener("mouseleave", () => (row.style.background = ""));
+      });
+    }
+
+    // Run on every frame load
+    frame.addEventListener("load", () => {
+      try {
+        const doc = frame.contentDocument;
+        if (!doc) return;
+        // Inject stagger + findings init into the iframe doc
+        const arch = doc.querySelectorAll(".arch-diagram");
+        arch.forEach((diagram) => {
+          const nodes = diagram.querySelectorAll(".arch-node");
+          nodes.forEach((node, i) => {
+            node.style.opacity = "0";
+            node.style.transform = "translateY(10px)";
+            setTimeout(
+              () => {
+                node.style.transition =
+                  "opacity .5s cubic-bezier(0.16,1,0.3,1), transform .5s cubic-bezier(0.16,1,0.3,1)";
+                node.style.opacity = "1";
+                node.style.transform = "none";
+              },
+              80 + i * 60,
+            );
+          });
+        });
+        doc.querySelectorAll(".findings-table tbody tr").forEach((row) => {
+          row.addEventListener(
+            "mouseenter",
+            () => (row.style.background = "var(--surface-hover)"),
+          );
+          row.addEventListener("mouseleave", () => (row.style.background = ""));
+        });
+      } catch (e) {
+        // cross-origin or not ready — ignore
+      }
+    });
 
     if (cursorGlow) {
       let mouseX = 0,
@@ -212,8 +284,8 @@
   }
 
   /* ============================================================
-                       FRAME PAGE LOGIC
-                       ============================================================ */
+                         FRAME PAGE LOGIC
+                         ============================================================ */
 
   if (window.parent && window.parent !== window) {
     window.parent.postMessage({ type: "frame-ready" }, "*");
