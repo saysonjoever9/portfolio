@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Certificates | Joever L. Sayson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script>
+        (function() {
+            const saved = localStorage.getItem("theme");
+            const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+            if (saved === "light" || (!saved && prefersLight)) document.documentElement.setAttribute("data-theme", "light");
+        })();
+    </script>
+</head>
+
+<body class="frame-body">
+
+    <section class="section" id="certificates">
+        <div class="container">
+
+            <div class="section-head reveal">
+                <span class="section-icon"><i class="fa-solid fa-certificate"></i></span>
+                <h2>My <span class="accent">Certificates</span></h2>
+                <p class="section-sub">Professional certifications, trainings, and achievements I've earned.</p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="cert-filters reveal">
+                <button class="cert-filter active" data-filter="all">All</button>
+                <button class="cert-filter" data-filter="convention">Conventions</button>
+                <button class="cert-filter" data-filter="seminar">Seminars & Tech Talks</button>
+                <button class="cert-filter" data-filter="civic">Civic</button>
+            </div>
+
+            <!-- Certificates Grid -->
+            <div class="cert-grid">
+
+                <!-- 1. 3rd Intl & 11th National Convention (Gikan sa 3rd batch sa pics) -->
+                <div class="cert-card reveal tilt" data-category="convention">
+                    <div class="cert-image-wrapper">
+                        <img src="image/1.jpg" alt="3rd Intl & 11th National Convention" class="cert-image" loading="lazy" />
+                        <div class="cert-overlay">
+                            <button class="cert-zoom-btn" aria-label="View certificate"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-badge badge-green"><i class="fa-solid fa-globe"></i> International</span>
+                        <h3>3rd International & 11th National Convention</h3>
+                        <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> ICpEP</p>
+                        <p class="cert-date"><i class="fa-solid fa-calendar"></i> September 2023</p>
+                    </div>
+                </div>
+
+                <!-- 2. NSTP-CWTS Completion (Gikan sa 2nd batch) -->
+                <div class="cert-card reveal tilt" data-category="civic">
+                    <div class="cert-image-wrapper">
+                        <img src="image/2.jpg" alt="NSTP-CWTS Completion" class="cert-image" loading="lazy" />
+                        <div class="cert-overlay">
+                            <button class="cert-zoom-btn" aria-label="View certificate"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-badge badge-green"><i class="fa-solid fa-hands-holding-child"></i> Civic Welfare</span>
+                        <h3>NSTP - Civic Welfare Training Service 1 & 2</h3>
+                        <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> Holy Trinity College</p>
+                        <p class="cert-date"><i class="fa-solid fa-calendar"></i> June 2023</p>
+                    </div>
+                </div>
+
+                <!-- 3. 8th ICpEP.se Regional Convention (Gikan sa 4th batch) -->
+                <div class="cert-card reveal tilt" data-category="convention">
+                    <div class="cert-image-wrapper">
+                        <img src="image/3.jpg" alt="8th ICpEP.se Regional Convention" class="cert-image" loading="lazy" />
+                        <div class="cert-overlay">
+                            <button class="cert-zoom-btn" aria-label="View certificate"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-badge badge-green"><i class="fa-solid fa-microchip"></i> Tech Convention</span>
+                        <h3>8th ICpEP.se Regional Convention</h3>
+                        <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> ICpEP Region XII</p>
+                        <p class="cert-date"><i class="fa-solid fa-calendar"></i> February 2024</p>
+                    </div>
+                </div>
+
+                <!-- 4. 8th ICpEP.se Latest Emerging Technologies (Gikan sa 5th batch) -->
+                <div class="cert-card reveal tilt" data-category="seminar">
+                    <div class="cert-image-wrapper">
+                        <img src="image/4.jpg" alt="Latest Emerging Technologies" class="cert-image" loading="lazy" />
+                        <div class="cert-overlay">
+                            <button class="cert-zoom-btn" aria-label="View certificate"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-badge badge-green"><i class="fa-solid fa-laptop-code"></i> Seminar</span>
+                        <h3>Latest Emerging Technologies</h3>
+                        <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> ICpEP Region XII</p>
+                        <p class="cert-date"><i class="fa-solid fa-calendar"></i> February 2024</p>
+                    </div>
+                </div>
+
+                <!-- 5. 8th ICpEP.se Artificial Intelligence (Bag-o) -->
+                <div class="cert-card reveal tilt" data-category="seminar">
+                    <div class="cert-image-wrapper">
+                        <img src="image/5.jpg" alt="Artificial Intelligence Seminar" class="cert-image" loading="lazy" />
+                        <div class="cert-overlay">
+                            <button class="cert-zoom-btn" aria-label="View certificate"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-badge badge-green"><i class="fa-solid fa-brain"></i> Seminar</span>
+                        <h3>Artificial Intelligence</h3>
+                        <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> ICpEP Region XII</p>
+                        <p class="cert-date"><i class="fa-solid fa-calendar"></i> February 2024</p>
+                    </div>
+                </div>
+
+                <!-- 6. 9th ICpEP.se Regional Convention (Gikan sa 8th batch) -->
+                <div class="cert-card reveal tilt" data-category="convention">
+                    <div class="cert-image-wrapper">
+                        <img src="image/6.jpg" alt="9th ICpEP.se Regional Convention" class="cert-image" loading="lazy" />
+                        <div class="cert-overlay">
+                            <button class="cert-zoom-btn" aria-label="View certificate"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-badge badge-green"><i class="fa-solid fa-microchip"></i> Tech Convention</span>
+                        <h3>9th ICpEP.se Regional Convention</h3>
+                        <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> ICpEP Region XII</p>
+                        <p class="cert-date"><i class="fa-solid fa-calendar"></i> February 2025</p>
+                    </div>
+                </div>
+
+                <!-- 7. 9th ICpEP.se Innovate Technology & Technopreneurship (Bag-o) -->
+                <div class="cert-card reveal tilt" data-category="seminar">
+                    <div class="cert-image-wrapper">
+                        <img src="image/7.jpg" alt="Innovate Technology & Technopreneurship" class="cert-image" loading="lazy" />
+                        <div class="cert-overlay">
+                            <button class="cert-zoom-btn" aria-label="View certificate"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-badge badge-green"><i class="fa-solid fa-lightbulb"></i> Seminar</span>
+                        <h3>Innovate Technology & Technopreneurship</h3>
+                        <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> ICpEP Region XII</p>
+                        <p class="cert-date"><i class="fa-solid fa-calendar"></i> February 2025</p>
+                    </div>
+                </div>
+
+                <!-- 8. 9th ICpEP.se Ethical AI (Gikan sa 9th batch) -->
+                <div class="cert-card reveal tilt" data-category="seminar">
+                    <div class="cert-image-wrapper">
+                        <img src="image/8.jpg" alt="Ethical AI for Sustainable Solution" class="cert-image" loading="lazy" />
+                        <div class="cert-overlay">
+                            <button class="cert-zoom-btn" aria-label="View certificate"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-badge badge-green"><i class="fa-solid fa-robot"></i> Seminar</span>
+                        <h3>Ethical AI for Sustainable Solution</h3>
+                        <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> ICpEP Region XII</p>
+                        <p class="cert-date"><i class="fa-solid fa-calendar"></i> February 2025</p>
+                    </div>
+                </div>
+
+                <!-- 9. 10th ICpEP.se Regional Convention (Gikan sa 7th batch) -->
+                <div class="cert-card reveal tilt" data-category="convention">
+                    <div class="cert-image-wrapper">
+                        <img src="image/9.jpg" alt="10th ICpEP.se Regional Convention" class="cert-image" loading="lazy" />
+                        <div class="cert-overlay">
+                            <button class="cert-zoom-btn" aria-label="View certificate"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-badge badge-green"><i class="fa-solid fa-handshake"></i> Tech Convention</span>
+                        <h3>10th ICpEP.se Regional Convention</h3>
+                        <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> ICpEP Region XII</p>
+                        <p class="cert-date"><i class="fa-solid fa-calendar"></i> February 2026</p>
+                    </div>
+                </div>
+
+                <!-- 10. 10th ICpEP.se Tech Talk I (Gikan sa 6th batch) -->
+                <div class="cert-card reveal tilt" data-category="seminar">
+                    <div class="cert-image-wrapper">
+                        <img src="image/10.jpg" alt="Tech Talk I" class="cert-image" loading="lazy" />
+                        <div class="cert-overlay">
+                            <button class="cert-zoom-btn" aria-label="View certificate"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-badge badge-green"><i class="fa-solid fa-comments"></i> Tech Talk</span>
+                        <h3>Tech Talk I</h3>
+                        <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> ICpEP Region XII</p>
+                        <p class="cert-date"><i class="fa-solid fa-calendar"></i> February 2026</p>
+                    </div>
+                </div>
+
+                <!-- 11. 10th ICpEP.se Tech Talk II (Bag-o) -->
+                <div class="cert-card reveal tilt" data-category="seminar">
+                    <div class="cert-image-wrapper">
+                        <img src="image/11.jpg" alt="Tech Talk II" class="cert-image" loading="lazy" />
+                        <div class="cert-overlay">
+                            <button class="cert-zoom-btn" aria-label="View certificate"><i class="fa-solid fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-badge badge-green"><i class="fa-solid fa-comments"></i> Tech Talk</span>
+                        <h3>Tech Talk II</h3>
+                        <p class="cert-issuer"><i class="fa-solid fa-building-columns"></i> ICpEP Region XII</p>
+                        <p class="cert-date"><i class="fa-solid fa-calendar"></i> February 2026</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="cert-lightbox" id="certLightbox" aria-hidden="true">
+        <button class="lightbox-close" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img src="" alt="Certificate Preview" class="lightbox-image" />
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
