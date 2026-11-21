@@ -464,7 +464,7 @@
                             <i class="fa-solid fa-shield-halved"></i>
                             <div>
                                 <strong>Trust &amp; Claim Verification</strong>
-                                <span>The landing page states "Every pet listed is vet-cleared and reviewed by CAVD in Butuan City." No listing index, registry search, or vet-clearance badge/verification path is exposed on the public page — the claim is currently unverifiable to a visitor.</span>
+                                <span>The landing page states "Every pet listed is vet-cleared and reviewed by CAVD in Butuan City." No listing index, registry search, or vet-clearance badge/verification path is exposed on the public page  the claim is currently unverifiable to a visitor.</span>
                             </div>
                         </div>
                         <div class="highlight">
@@ -580,7 +580,7 @@
                             <i class="fa-solid fa-shield-halved"></i>
                             <div>
                                 <strong>Security</strong>
-                                <span>Improve authentication and access control — stronger passwords, session handling, and clear role separation between registrar and student portals.</span>
+                                <span>Improve authentication and access control  stronger passwords, session handling, and clear role separation between registrar and student portals.</span>
                             </div>
                         </div>
                         <div class="highlight">
@@ -602,7 +602,69 @@
                     </div>
                 </div>
             </a>
+            <div class="project-card reveal">
+                <div class="project-info">
+                    <span class="project-badge badge-green">
+            <i class="fa-solid fa-fingerprint"></i> QA Evaluation · Attendance &amp; HR Analytics
+        </span>
+                    <span class="project-badge badge-warning" style="margin-left: 5px;">
+            <i class="fa-solid fa-lock"></i> Localhost Only
+        </span>
 
+                    <h3>INSIGHTATTEND: Employee Attendance Management System with Facial Recognition and Descriptive Analytics</h3>
+                    <p>A school-side employee attendance system using facial recognition and descriptive analytics. Evaluated for records integrity, authentication policy, and system architecture.</p>
+
+                    <div class="project-highlights">
+                        <div class="highlight">
+                            <i class="fa-solid fa-list-check"></i>
+                            <div>
+                                <strong>Scope</strong>
+                                <span>System Design · Security &amp; Policy · Authentication · Records Management · HR Workflow</span>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fa-solid fa-diagram-project"></i>
+                            <div>
+                                <strong>System Design (Positive)</strong>
+                                <span>The overall system design is good and well-aligned with the project's goal as a records system. The architecture and data flow are solid. The concern is not the design itself, but how tightly it is locked down for security and policy compliance.</span>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <div>
+                                <strong>Security &amp; Policy</strong>
+                                <span>Because this is a records-heavy school system, it must be made highly secure by default. Recommended enforcing strict access control, encrypting records at rest and in transit, logging every attendance and record change, and clearly separating the roles of employees, HR, and admins.</span>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fa-solid fa-user-lock"></i>
+                            <div>
+                                <strong>Authentication &amp; Forgot Password</strong>
+                                <span>The system should not be open to everyone, and the forgot-password flow must not be a free self-service reset. Because it is deployed in a school, account recovery should go through HR confirmation and approval before a reset is granted. HR verifies the employee's identity and authorizes the reset, which prevents unauthorized account takeover on a system that holds sensitive attendance records.</span>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fa-solid fa-user-clock"></i>
+                            <div>
+                                <strong>Deactivation for Leave (ML / Maternity)</strong>
+                                <span>Add an account deactivation feature for employees on ML (Maternity Leave) or any other approved leave. Their accounts should be deactivated while they are on leave and automatically reactivated, or cleanly restored, when they return. This preserves their records and history without allowing attendance activity during the leave period.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-tech">
+                        <span>Manual QA</span>
+                        <span>System Architecture</span>
+                        <span>Auth Security</span>
+                        <span>Records Policy</span>
+                        <span>HR Workflow</span>
+                        <span>Access Control</span>
+                    </div>
+                    <div class="privacy-note">
+                        <i class="fa-solid fa-shield"></i> This system is currently under development and is only accessible locally (clean localhost build).
+                    </div>
+                </div>
+            </div>
             <div class="other-projects reveal">
                 <h3 class="mini-title">Testing Tools &amp; Methods</h3>
                 <div class="mini-grid">
