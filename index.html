@@ -48,6 +48,14 @@
 
 <body>
 
+    <!-- LOADER LOGIC: Kung wala pa naka-agi sa loader, i-redirect didto -->
+    <script>
+        if (!sessionStorage.getItem('introSeen')) {
+            sessionStorage.setItem('introSeen', '1');
+            window.location.replace('loader.html');
+        }
+    </script>
+
     <a class="skip-link" href="#content-frame">Skip to content</a>
     <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
