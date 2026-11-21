@@ -961,9 +961,6 @@ button {
     aspect-ratio: 4 / 5;
 }
 
-
-/* Blend the white portrait background into dark mode */
-
 .image-frame {
     position: relative;
     z-index: 2;
@@ -1094,39 +1091,18 @@ button {
 
 .reveal-fade {
     animation: heroIn 0.9s var(--ease-out) both;
-    animation-delay: var(--d, 0s);
+    /* Gi-tangtang ang animation-delay (--d) */
 }
 
-.hero-text>.reveal-fade:nth-child(1) {
-    --d: 0.05s;
-}
-
-.hero-text>.reveal-fade:nth-child(2) {
-    --d: 0.15s;
-}
-
-.hero-text>.reveal-fade:nth-child(3) {
-    --d: 0.25s;
-}
-
-.hero-text>.reveal-fade:nth-child(4) {
-    --d: 0.35s;
-}
-
-.hero-text>.reveal-fade:nth-child(5) {
-    --d: 0.45s;
-}
-
-.hero-text>.reveal-fade:nth-child(6) {
-    --d: 0.55s;
-}
-
-.hero-image-wrapper.reveal-fade {
-    --d: 0.3s;
-}
-
+.hero-text>.reveal-fade:nth-child(1),
+.hero-text>.reveal-fade:nth-child(2),
+.hero-text>.reveal-fade:nth-child(3),
+.hero-text>.reveal-fade:nth-child(4),
+.hero-text>.reveal-fade:nth-child(5),
+.hero-text>.reveal-fade:nth-child(6),
+.hero-image-wrapper.reveal-fade,
 .scroll-down.reveal-fade {
-    --d: 1.1s;
+    --d: 0s;
 }
 
 @keyframes heroIn {
@@ -2199,7 +2175,8 @@ a.project-link {
 .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity .8s var(--ease-out) var(--delay, 0s), transform .8s var(--ease-out) var(--delay, 0s);
+    /* Gi-tangtang ang transition-delay (--delay) */
+    transition: opacity .4s var(--ease-out), transform .4s var(--ease-out);
 }
 
 .reveal.active {
@@ -2207,24 +2184,15 @@ a.project-link {
     transform: none;
 }
 
-.reveal:nth-child(2) {
-    --delay: .08s;
-}
 
-.reveal:nth-child(3) {
-    --delay: .16s;
-}
+/* Tangtangon nato ang staggered nth-child delays */
 
-.reveal:nth-child(4) {
-    --delay: .24s;
-}
-
-.reveal:nth-child(5) {
-    --delay: .32s;
-}
-
+.reveal:nth-child(2),
+.reveal:nth-child(3),
+.reveal:nth-child(4),
+.reveal:nth-child(5),
 .reveal:nth-child(n+6) {
-    --delay: .4s;
+    --delay: 0s;
 }
 
 @media (scripting: none) {
@@ -2759,9 +2727,6 @@ html:has(body.frame-body) {
 
 /* ============ 23. RESPONSIVE — TIERED ============ */
 
-
-/* --- Desktop shrink --- */
-
 @media (max-width: 1200px) {
      :root {
         --sidebar-width: 260px;
@@ -2807,9 +2772,6 @@ html:has(body.frame-body) {
     }
 }
 
-
-/* --- Tablet: keep side-by-side hero at 881–1024 --- */
-
 @media (min-width: 881px) and (max-width: 1024px) {
     .hero-content {
         grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
@@ -2846,9 +2808,6 @@ html:has(body.frame-body) {
         grid-template-columns: 1fr;
     }
 }
-
-
-/* --- Mobile --- */
 
 @media (max-width: 768px) {
      :root {
@@ -3061,9 +3020,6 @@ html:has(body.frame-body) {
         display: none;
     }
 }
-
-
-/* --- Small mobile --- */
 
 @media (max-width: 600px) {
     .evidence-grid {
