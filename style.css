@@ -129,7 +129,7 @@ body {
     color: var(--text);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    text-rendering: auto;
     font-optical-sizing: auto;
     overflow-wrap: break-word;
     transition: background-color .3s var(--ease-out), color .3s var(--ease-out);
@@ -494,26 +494,15 @@ button {
 }
 
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    /* PERF: backdrop-filter is expensive (re-blurs every scroll frame).
+       Kept only on the 2 fixed bars; removed from cards, overlay, buttons. */
     .mobile-header {
-        -webkit-backdrop-filter: blur(20px) saturate(150%);
-        backdrop-filter: blur(20px) saturate(150%);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
     }
     .sidebar {
-        -webkit-backdrop-filter: blur(24px) saturate(150%);
-        backdrop-filter: blur(24px) saturate(150%);
-    }
-    .nav-overlay {
-        -webkit-backdrop-filter: blur(8px);
-        backdrop-filter: blur(8px);
-    }
-    .about-card,
-    .skill-card,
-    .contact-card,
-    .project-card,
-    .mini-card,
-    .btn-outline {
-        -webkit-backdrop-filter: blur(12px);
-        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
     }
 }
 
@@ -708,8 +697,9 @@ button {
 .glow-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
     opacity: 0.4;
+    pointer-events: none;
+    contain: strict;
 }
 
 .glow-orb-1 {
@@ -717,7 +707,7 @@ button {
     left: 10%;
     width: clamp(300px, 40vw, 500px);
     aspect-ratio: 1;
-    background: rgba(var(--primary-rgb), 0.15);
+    background: radial-gradient(circle closest-side, rgba(var(--primary-rgb), 0.28), transparent);
 }
 
 .glow-orb-2 {
@@ -725,7 +715,7 @@ button {
     right: 10%;
     width: clamp(250px, 35vw, 400px);
     aspect-ratio: 1;
-    background: rgba(99, 102, 241, 0.16);
+    background: radial-gradient(circle closest-side, rgba(99, 102, 241, 0.30), transparent);
 }
 
 .hero-content {
@@ -1010,7 +1000,6 @@ button {
     z-index: 1;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(var(--primary-rgb), 0.3) 0%, rgba(99, 102, 241, 0.1) 50%, transparent 70%);
-    filter: blur(40px);
     opacity: 0.8;
     pointer-events: none;
 }
@@ -1090,8 +1079,8 @@ button {
 }
 
 .reveal-fade {
-    animation: heroIn 0.9s var(--ease-out) both;
-    /* Gi-tangtang ang animation-delay (--d) */
+    animation: heroIn .7s var(--ease-out) both;
+    will-change: opacity, transform;
 }
 
 .hero-text>.reveal-fade:nth-child(1),
@@ -1105,16 +1094,38 @@ button {
     --d: 0s;
 }
 
+.hero-text>.reveal-fade:nth-child(2) {
+    animation-delay: .06s;
+}
+
+.hero-text>.reveal-fade:nth-child(3) {
+    animation-delay: .12s;
+}
+
+.hero-text>.reveal-fade:nth-child(4) {
+    animation-delay: .18s;
+}
+
+.hero-text>.reveal-fade:nth-child(5) {
+    animation-delay: .24s;
+}
+
+.hero-text>.reveal-fade:nth-child(6) {
+    animation-delay: .30s;
+}
+
+.hero-image-wrapper.reveal-fade {
+    animation-delay: .15s;
+}
+
 @keyframes heroIn {
     from {
         opacity: 0;
-        transform: translateY(18px);
-        filter: blur(4px);
+        transform: translate3d(0, 16px, 0);
     }
     to {
         opacity: 1;
         transform: none;
-        filter: blur(0);
     }
 }
 
@@ -1250,7 +1261,7 @@ button {
 }
 
 
-/* ============ 8. SKILLS ============ */
+/* ============ 8. SKILLS (BASE) ============ */
 
 #skills .container {
     display: flex;
@@ -2174,18 +2185,14 @@ a.project-link {
 
 .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    /* Gi-tangtang ang transition-delay (--delay) */
-    transition: opacity .4s var(--ease-out), transform .4s var(--ease-out);
+    transform: translate3d(0, 20px, 0);
+    transition: opacity .5s var(--ease-out), transform .5s var(--ease-out);
 }
 
 .reveal.active {
     opacity: 1;
     transform: none;
 }
-
-
-/* Tangtangon nato ang staggered nth-child delays */
 
 .reveal:nth-child(2),
 .reveal:nth-child(3),
@@ -2401,8 +2408,6 @@ a.project-link:active .project-card {
     background: var(--header-bg);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
 }
 
 .cert-filter {
@@ -2546,8 +2551,6 @@ a.project-link:active .project-card {
     opacity: 0;
     visibility: hidden;
     transition: opacity .35s, visibility .35s;
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
 }
 
 .cert-lightbox.active {
@@ -2654,7 +2657,7 @@ html:has(body.frame-body) {
         opacity: 1;
         transform: none;
         transition: none;
-        animation: revealUp linear both;
+        animation: revealUp linear backwards;
         animation-timeline: view();
         animation-range: entry 0% entry 40%;
     }
@@ -2687,7 +2690,13 @@ html:has(body.frame-body) {
     -webkit-mask-composite: xor;
     mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
     pointer-events: none;
-    animation: spinAngle 7s linear infinite;
+    animation: spinAngle 7s linear infinite paused;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .project-card.featured:hover::after {
+        animation-play-state: running;
+    }
 }
 
 @keyframes spinAngle {
@@ -2810,6 +2819,20 @@ html:has(body.frame-body) {
 }
 
 @media (max-width: 768px) {
+    .mobile-header,
+    .sidebar {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+    .mobile-header {
+        background: var(--bg);
+    }
+    .sidebar {
+        background: var(--surface-solid);
+    }
+    .glow-orb {
+        opacity: 0.25;
+    }
      :root {
         --header-height: 60px;
         --container-pad: clamp(16px, 4vw, 24px);
@@ -3267,6 +3290,29 @@ html:has(body.frame-body) {
 }
 
 
+/* ============ 23b. POLISH (clean + smooth) ============ */
+
+
+/* Cards: calmer border/shadow transitions, no layout-affecting properties */
+
+.about-card,
+.skill-card,
+.contact-card,
+.project-card,
+.mini-card {
+    transition: transform .35s var(--ease-out), border-color .35s var(--ease-out), box-shadow .35s var(--ease-out), background-color .35s var(--ease-out);
+}
+
+
+/* Typography rhythm */
+
+h1,
+h2,
+h3 {
+    letter-spacing: -0.02em;
+}
+
+
 /* ============ 24. ACCESSIBILITY & PRINT ============ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -3384,5 +3430,269 @@ html:has(body.frame-body) {
     .findings-table td {
         color: #333;
         border-bottom-color: #ddd;
+    }
+}
+
+
+/* =========================================
+   SKILLS SECTION - PERFECT RESPONSIVE LAYOUT
+   ========================================= */
+
+.skills-rows-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 3rem;
+    width: 100%;
+    max-width: 1000px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+.skill-row-card {
+    display: flex;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.25rem 1.5rem;
+    transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out), border-color .3s var(--ease-out), background-color .3s var(--ease-out);
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.skill-row-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+    border-color: var(--border-hover);
+    background: var(--surface-hover);
+}
+
+
+/* --- LEFT SIDE (Icon & Title) --- */
+
+.skill-row-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.skill-main-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    font-size: 1.6rem;
+    color: #fff;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.skill-main-icon i {
+    display: block;
+    line-height: 1;
+}
+
+
+/* Colors */
+
+.icon-blue {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+}
+
+.icon-purple {
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    box-shadow: 0 4px 15px rgba(161, 140, 209, 0.4);
+}
+
+.icon-pink {
+    background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+    box-shadow: 0 4px 15px rgba(255, 8, 68, 0.4);
+}
+
+.icon-green {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    box-shadow: 0 4px 15px rgba(67, 233, 123, 0.4);
+}
+
+.icon-cyan {
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+    box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+}
+
+.icon-orange {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    box-shadow: 0 4px 15px rgba(246, 211, 101, 0.4);
+}
+
+.icon-yellow {
+    background: linear-gradient(135deg, #fce38a 0%, #f38181 100%);
+    box-shadow: 0 4px 15px rgba(252, 227, 138, 0.4);
+}
+
+.skill-row-left h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0;
+    color: var(--text);
+}
+
+
+/* --- VERTICAL DIVIDER --- */
+
+.skill-row-divider {
+    width: 2px;
+    height: 50px;
+    background-color: var(--border);
+    margin: 0 1.5rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+
+/* --- RIGHT SIDE (Logos) --- */
+
+.skill-row-right {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    flex: 1;
+}
+
+.skill-logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    width: 65px;
+    transition: transform 0.2s ease;
+}
+
+.skill-logo-item:hover {
+    transform: scale(1.15);
+}
+
+.skill-logo-item img {
+    width: 38px;
+    height: 38px;
+    max-width: none;
+    object-fit: contain;
+}
+
+.skill-logo-item span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-soft);
+    text-align: center;
+    line-height: 1.2;
+}
+
+
+/* Font Awesome fallback icon (CNN, YOLOv3, ESP32, IoT) sized like the logos */
+
+.skill-logo-item .skill-fallback {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    font-size: 1.6rem;
+    color: var(--primary);
+}
+
+
+/* =========================================
+   RESPONSIVE BREAKPOINTS
+   ========================================= */
+
+
+/* Tablet (Below 1024px) */
+
+@media (max-width: 1024px) {
+    .skill-row-left {
+        width: 180px;
+    }
+    .skill-row-divider {
+        margin: 0 1rem;
+    }
+    .skill-row-right {
+        gap: 1rem;
+    }
+    .skill-logo-item {
+        width: 55px;
+    }
+}
+
+
+/* Small Tablet & Landscape Phone (Below 860px) */
+
+@media (max-width: 860px) {
+    .skill-row-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.25rem;
+    }
+    .skill-row-left {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    .skill-row-divider {
+        width: 100%;
+        height: 2px;
+        margin: 0 0 1.25rem 0;
+        background: linear-gradient(90deg, var(--border), transparent);
+    }
+    .skill-row-right {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+        gap: 1rem;
+        width: 100%;
+    }
+    .skill-logo-item {
+        width: 100%;
+        max-width: 80px;
+        margin: 0 auto;
+    }
+}
+
+
+/* Mobile Phone (Below 480px) */
+
+@media (max-width: 480px) {
+    .skill-row-card {
+        padding: 1rem;
+    }
+    .skill-logo-item .skill-fallback {
+        width: 32px;
+        height: 32px;
+        font-size: 1.35rem;
+    }
+    .skill-main-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+    .skill-row-left h3 {
+        font-size: 1.05rem;
+    }
+    .skill-row-right {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 0.75rem;
+    }
+    .skill-logo-item img {
+        width: 32px;
+        height: 32px;
+    }
+    .skill-logo-item span {
+        font-size: 0.65rem;
     }
 }
