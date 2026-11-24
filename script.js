@@ -8,8 +8,8 @@
   const IS_SHELL = !!document.getElementById("content-frame");
 
   /* ============================================================
-                         SHELL LOGIC (index.html)
-                         ============================================================ */
+                             SHELL LOGIC (index.html)
+                             ============================================================ */
   if (IS_SHELL) {
     const frame = document.getElementById("content-frame");
     const navLinks = document.querySelectorAll("[data-frame-link]");
@@ -164,8 +164,8 @@
     });
 
     /* ============================================================
-           ADDITIONS FOR 10/10 UPGRADE — insert inside the IS_SHELL block
-           ============================================================ */
+                   ADDITIONS FOR 10/10 UPGRADE — insert inside the IS_SHELL block
+                   ============================================================ */
 
     // Robust hash router with 404 fallback
     (function initFromHash() {
@@ -284,8 +284,8 @@
   }
 
   /* ============================================================
-                         FRAME PAGE LOGIC
-                         ============================================================ */
+                             FRAME PAGE LOGIC
+                             ============================================================ */
 
   if (window.parent && window.parent !== window) {
     window.parent.postMessage({ type: "frame-ready" }, "*");
